@@ -6,3 +6,13 @@
 	margin-left: var(--container-ml);
 	margin-right: var(--container-mr);
 }
+
+.section {
+	padding-top: var(--section-pt);
+	padding-bottom: var(--section-pb);
+}
+
+.flex-row {
+	display: flex;
+	flex-wrap: nowrap;
+}

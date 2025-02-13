@@ -12,11 +12,18 @@
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 
+	--main-color: #646cff;
+
 	--container-mw: 1280px;
 	--container-pl: 1rem;
 	--container-pr: 1rem;
 	--container-ml: auto;
 	--container-mr: auto;
+
+	--section-pt: 2rem;
+	--section-pb: 2rem;
+
+	--header-height: 5rem;
 }
 
 *,
@@ -37,11 +44,13 @@ a:hover {
 }
 
 body {
-	margin: 0;
 	display: flex;
-	place-items: center;
-	min-width: 320px;
+	flex-direction: column;
+	background-color: var(--main-color);
+	width: 100%;
 	min-height: 100vh;
+	height: 100%;
+	padding-top: var(--header-height);
 }
 
 h1 {
