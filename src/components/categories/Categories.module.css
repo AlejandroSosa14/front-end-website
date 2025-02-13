@@ -1,0 +1,100 @@
+.categories {
+	padding: 20px;
+	text-align: center;
+}
+
+.categoriesTitle {
+	font-size: 1.8rem;
+	font-weight: 700;
+	margin-bottom: 1.2rem;
+}
+
+.categoriesCarrousel {
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+}
+
+.categoriesNavButton {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	background-color: rgba(0, 0, 0, 0.5);
+	font-size: 1.2rem;
+	color: white;
+	border: none;
+	border-radius: 10%;
+	padding: 0.6rem;
+	cursor: pointer;
+	z-index: 1;
+	transition: background-color 0.3s;
+
+	&:hover {
+		background-color: rgba(0, 0, 0, 0.8);
+	}
+}
+
+.categoriesPrevBtn {
+	left: 0;
+}
+
+.categoriesNextBtn {
+	right: 0;
+}
+
+.categoriesCards {
+	display: flex;
+	overflow: hidden;
+	gap: 15px;
+	width: 100%;
+	transition: transform 0.3s ease-in-out;
+}
+
+.categoriesCard {
+	position: relative;
+	background-color: gray;
+	border-radius: 0.6rem;
+	overflow: hidden;
+	transition: transform 0.5s ease-in-out;
+
+	&:hover .categoriesCardLink {
+		bottom: 0;
+	}
+}
+
+.categoriesCardImage {
+	height: 14rem;
+
+	& img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: center;
+	}
+}
+
+.categoriesCardContent {
+	padding: 1rem;
+}
+
+.categoriesCardLink {
+	color: #fff;
+	text-transform: uppercase;
+	text-decoration: none;
+	font-weight: 700;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	@media screen and (min-width: 1024px) {
+		width: 100%;
+		height: 100%;
+		bottom: 100%;
+		position: absolute;
+		left: 0;
+		background-color: rgba(0, 0, 0, 0.75);
+		transition: top 0.5s ease-in-out, bottom 0.5s ease-in-out;
+	}
+}
