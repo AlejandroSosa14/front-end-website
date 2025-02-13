@@ -50,6 +50,8 @@ const carsByBrand = [
 const Categories = () => {
 	const [startCardIndex, setStartCardIndex] = useState(0);
 	const [visibleCards, setVisibleCards] = useState(1);
+	const [gap, setGap] = useState(15);
+	const gapTranslate = 15;
 
 	// Función para actualizar el número de tarjetas visibles según el ancho de la pantalla
 	const updateVisibleCards = () => {
@@ -57,10 +59,13 @@ const Categories = () => {
 
 		if (width < 768) {
 			setVisibleCards(1); // Smartphones: 1 card
+			setGap(1);
 		} else if (width >= 768 && width < 1024) {
 			setVisibleCards(2); // Tablets: 2 cards
+			setGap(9);
 		} else if (width >= 1024 && width < 1280) {
 			setVisibleCards(3); // Monitores < 1280px: 3 cards
+			setGap(13);
 		} else {
 			setVisibleCards(4); // Monitores >= 1280px: 4 cards
 		}
@@ -99,8 +104,10 @@ const Categories = () => {
 							key={car.id}
 							className={styles.categoriesCard}
 							style={{
-								transform: `translateX(calc(-${startCardIndex * 100}% - (15*${startCardIndex}px)))`,
-								flex: `0 0 calc(${100 / visibleCards}% - 15px)`,
+								transform: `translateX(calc(-${
+									startCardIndex * 100
+								}% - (${gapTranslate}*${startCardIndex}px)))`,
+								flex: `0 0 calc(${100 / visibleCards}% - (${gap}px - ${visibleCards}px))`,
 							}}>
 							<div className={styles.categoriesCardImage}>
 								<img src={car.image} alt={`${car.brand} ${car.model}`} />
