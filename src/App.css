@@ -1,6 +1,18 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+.container {
+	max-width: var(--container-mw);
+	width: 100%;
+	padding-left: var(--container-pl);
+	padding-right: var(--container-pr);
+	margin-left: var(--container-ml);
+	margin-right: var(--container-mr);
+}
+
+.section {
+	padding-top: var(--section-pt);
+	padding-bottom: var(--section-pb);
+}
+
+.flex-row {
+	display: flex;
+	flex-wrap: nowrap;
 }
