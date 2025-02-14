@@ -1,7 +1,9 @@
+// import Logo from "../icons/Logo";
+
 const HeaderLogo = () => {
 	return (
 		<a href="/">
-			<h2>LogoImage</h2>
+			<img src="/public/rapidcar-logo.svg" alt="Logo rapidcar" />
 		</a>
 	);
 };

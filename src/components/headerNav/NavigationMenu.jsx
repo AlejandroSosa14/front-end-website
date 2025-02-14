@@ -2,14 +2,30 @@ import styles from "./HeaderNav.module.css";
 
 const HeaderMenu = () => {
 	return (
-		<ul className={styles.navigationMenu__list}>
-			<li>
-				<a href="#">Crear cuenta</a>
-			</li>
-			<li>
-				<a href="#">Iniciar sesión</a>
-			</li>
-		</ul>
+		<>
+			{/* Main navigation menu */}
+			<ul className={styles.navigationMenu__list}>
+				<li>
+					<a href="#">Inicio</a>
+				</li>
+				<li>
+					<a href="#">Nosotros</a>
+				</li>
+				<li>
+					<a href="#">Automóviles</a>
+				</li>
+			</ul>
+
+			{/* Call to action buttons */}
+			<div className={styles.navigationMenu__cta}>
+				<a href="#" className={`main-btn ${styles.navigationMenu__button}`}>
+					Crear cuenta
+				</a>
+				<a href="#" className={`main-btn ${styles.navigationMenu__button}`}>
+					Ingresar
+				</a>
+			</div>
+		</>
 	);
 };
 
