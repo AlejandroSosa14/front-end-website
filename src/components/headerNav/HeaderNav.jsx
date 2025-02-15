@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import NavigationLogo from "./NavigationLogo";
-import NavigationMobile from "./NavigationMobile";
+import NavigationToggleIcon from "./NavigationToggleIcon";
 import NavigationMenu from "./NavigationMenu";
 
 import styles from "./HeaderNav.module.css";
@@ -24,8 +24,8 @@ const HeaderNav = () => {
 				</div>
 
 				{/* TOGGLE MOBILE */}
-				<div className={styles.navigationMobile} onClick={handleToggleMenu}>
-					<NavigationMobile isOpen={isMenuOpen} />
+				<div onClick={handleToggleMenu}>
+					<NavigationToggleIcon isOpen={isMenuOpen} />
 				</div>
 
 				{/* NAVIGATION */}

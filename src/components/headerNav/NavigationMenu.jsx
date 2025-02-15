@@ -6,7 +6,7 @@ const HeaderMenu = () => {
 			{/* Main navigation menu */}
 			<ul className={styles.navigationMenu__list}>
 				<li>
-					<a href="#">Inicio</a>
+					<a href="/">Inicio</a>
 				</li>
 				<li>
 					<a href="#">Nosotros</a>
