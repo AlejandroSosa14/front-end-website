@@ -46,7 +46,7 @@
 	right: 0;
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
+	justify-content: flex-start;
 	align-items: flex-start;
 	gap: var(--menu-gap);
 	background: var(--blue-extra-light);
@@ -56,10 +56,12 @@
 	padding-right: var(--container-pr);
 	width: 66.666666%;
 	transition: opacity 0.4s ease, transform 0.3s ease;
+	height: 100vh;
 
 	@media screen and (min-width: 1024px) {
 		position: static;
 		width: 100%;
+		height: initial;
 		opacity: 1;
 		transform: translateX(0);
 		background-color: transparent;
@@ -91,10 +93,10 @@
 .navigationMenu__list {
 	display: flex;
 	flex-direction: column;
-	flex: 1;
 	gap: var(--menu-gap);
 
 	@media screen and (min-width: 1024px) {
+		flex: 1;
 		flex-direction: row;
 		justify-content: space-evenly;
 	}

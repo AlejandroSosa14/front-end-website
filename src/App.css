@@ -21,11 +21,12 @@
 	display: inline-block;
 	font-size: 1rem;
 	font-weight: 600;
-	padding: 0.4rem 3rem;
+	padding: 0.5rem 2.6rem;
 	border-radius: 8px;
 	background-color: var(--main-color);
 	color: white;
 	text-align: center;
+	text-transform: capitalize;
 	transition: background-color 0.3s ease-in-out;
 
 	&:hover {
