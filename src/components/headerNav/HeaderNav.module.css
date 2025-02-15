@@ -7,6 +7,7 @@
 	background-color: var(--white);
 	height: var(--header-height);
 	box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.2);
+	z-index: 55555;
 }
 
 .headerNav {
@@ -53,6 +54,7 @@
 	padding: 2rem 0;
 	padding-left: var(--container-pl);
 	padding-right: var(--container-pr);
+	width: 66.666666%;
 	transition: opacity 0.4s ease, transform 0.3s ease;
 
 	@media screen and (min-width: 1024px) {
@@ -69,7 +71,6 @@
 
 .navigationMenuMobileOpen {
 	opacity: 1;
-	z-index: 1;
 	transform: translateX(0);
 }
 
