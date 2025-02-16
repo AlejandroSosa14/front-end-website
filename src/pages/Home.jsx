@@ -8,11 +8,9 @@ const Home = () => {
 	return (
 		<Layout>
 			<HeroMain />
-			<section className="section">
-				<div className="container">
-					<Search />
-				</div>
-			</section>
+			<div className="container">
+				<Search />
+			</div>
 			<section className="section">
 				<div className="container">
 					<Categories />
