@@ -1,11 +1,9 @@
-// import Logo from "../icons/Logo";
-
-const HeaderLogo = () => {
+const NavigationLogo = () => {
 	return (
 		<a href="/">
-			<img src="/public/rapidcar-logo.svg" alt="Logo rapidcar" />
+			<img src="/rapidcar-logo.svg" alt="Logo rapidcar" />
 		</a>
 	);
 };
 
-export default HeaderLogo;
+export default NavigationLogo;
