@@ -88,7 +88,7 @@ const Categories = () => {
 
 	return (
 		<section className={styles.categories}>
-			<h2 className={styles.categoriesTitle}>Autos por Marca</h2>
+			<h2 className={styles.categoriesTitle}>Categorías</h2>
 			<div className={styles.categoriesCarrousel}>
 				{/* Previous Button */}
 				<button
