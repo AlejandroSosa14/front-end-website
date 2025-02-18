@@ -7,6 +7,8 @@
 	font-size: 1.8rem;
 	font-weight: 700;
 	margin-bottom: 1.2rem;
+	color: var(--black);
+	text-align: initial;
 }
 
 .categoriesCarrousel {
@@ -21,9 +23,9 @@
 	position: absolute;
 	top: 50%;
 	transform: translateY(-50%);
-	background-color: rgba(0, 0, 0, 0.5);
+	background-color: rgba(var(--rgb-blue-extra-light), 0.6);
 	font-size: 1.2rem;
-	color: white;
+	color: var(--black);
 	border: none;
 	border-radius: 10%;
 	padding: 0.6rem;
@@ -32,7 +34,8 @@
 	transition: background-color 0.3s;
 
 	&:hover {
-		background-color: rgba(0, 0, 0, 0.8);
+		background-color: rgba(var(--rgb-main-color), 0.8);
+		color: var(--white);
 	}
 }
 
@@ -54,7 +57,7 @@
 
 .categoriesCard {
 	position: relative;
-	background-color: gray;
+	background-color: var(--blue-extra-light);
 	border-radius: 0.6rem;
 	overflow: hidden;
 	transition: transform 0.5s ease-in-out;
@@ -77,6 +80,7 @@
 
 .categoriesCardContent {
 	padding: 1rem;
+	color: var(--black);
 }
 
 .categoriesCardLink {
@@ -94,7 +98,7 @@
 		bottom: 100%;
 		position: absolute;
 		left: 0;
-		background-color: rgba(0, 0, 0, 0.75);
+		background-color: rgba(var(--rgb-main-color), 0.85);
 		transition: top 0.5s ease-in-out, bottom 0.5s ease-in-out;
 	}
 }

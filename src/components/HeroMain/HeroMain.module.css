@@ -4,7 +4,7 @@
 	width: 100%;
 	min-height: 100svh;
 	height: 100%;
-	background-image: url("/public/rapidride_banner.png");
+	background-image: url("/rapidride_banner.png");
 	background-size: calc(90vw);
 	background-position: center 80%;
 	background-repeat: no-repeat;
