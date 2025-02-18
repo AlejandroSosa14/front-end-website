@@ -1,6 +1,6 @@
 import styles from "./HeaderNav.module.css";
 
-const NavigationMobile = ({ isOpen }) => (
+const NavigationToggleIcon = ({ isOpen }) => (
 	<svg
 		width="24"
 		height="24"
@@ -10,7 +10,7 @@ const NavigationMobile = ({ isOpen }) => (
 		strokeWidth="2"
 		strokeLinecap="round"
 		strokeLinejoin="round"
-		className={`${styles.navigationMobileIcon} ${isOpen ? styles.navigationMobileIconOpen : ""}`}>
+		className={`${styles.navigationToggleIcon} ${isOpen ? styles.navigationToggleIconOpen : ""}`}>
 		{isOpen ? (
 			<>
 				<path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -28,4 +28,4 @@ const NavigationMobile = ({ isOpen }) => (
 	</svg>
 );
 
-export default NavigationMobile;
+export default NavigationToggleIcon;
