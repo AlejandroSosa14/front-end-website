@@ -1,18 +1,16 @@
-import Categories from "../components/categories/Categories";
 import Layout from "../components/layout/Layout";
+import HeroMain from "../components/HeroMain/HeroMain";
 import Search from "../components/search/Search";
+import Categories from "../components/categories/Categories";
 import Suggestions from "../components/suggestions/Suggestions";
-
-import styles from "./Home.module.css";
 
 const Home = () => {
 	return (
 		<Layout>
-			<section className={`section ${styles.searchContainer}`}>
-				<div className="container">
-					<Search />
-				</div>
-			</section>
+			<HeroMain />
+			<div className="container">
+				<Search />
+			</div>
 			<section className="section">
 				<div className="container">
 					<Categories />

@@ -1,0 +1,40 @@
+.heroMain {
+	position: relative;
+	top: calc(var(--header-height) * -1);
+	width: 100%;
+	min-height: 100svh;
+	height: 100%;
+	background-image: url("/public/rapidride_banner.png");
+	background-size: calc(90vw);
+	background-position: center 80%;
+	background-repeat: no-repeat;
+	padding-top: calc(var(--header-height) * 1.5);
+
+	@media screen and (min-width: 1024px) {
+		background-size: calc(60vw);
+		background-position: center bottom;
+	}
+}
+
+.heroMainContent {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.heroMain h1 {
+	text-wrap: word-break;
+	font-size: clamp(2.6rem, 6vw, 3.4rem);
+	line-height: 1.1;
+	color: var(--black);
+	text-align: center;
+	width: 80%;
+	margin: 0 auto;
+	text-shadow: 1px 1px 1px rgba(256, 256, 256, 0.6);
+	margin-bottom: 2rem;
+}
+
+.heroMain strong {
+	color: var(--main-color);
+}

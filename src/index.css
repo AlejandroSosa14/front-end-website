@@ -12,7 +12,11 @@
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 
-	--main-color: #646cff;
+	--white: #ffffff;
+	--black: #000000;
+	--main-color: #2d74ba;
+	--main-color-darken: hsl(210, 61%, 40%);
+	--blue-extra-light: #ecf3f9;
 
 	--container-mw: 1280px;
 	--container-pl: 1rem;
@@ -24,6 +28,7 @@
 	--section-pb: 2rem;
 
 	--header-height: 5rem;
+	--menu-gap: 2rem;
 }
 
 *,
@@ -43,7 +48,7 @@ a {
 body {
 	display: flex;
 	flex-direction: column;
-	background-color: var(--main-color);
+	background-color: var(--white);
 	width: 100%;
 	min-height: 100vh;
 	height: 100%;

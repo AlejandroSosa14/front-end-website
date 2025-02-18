@@ -1,9 +1,9 @@
-const HeaderLogo = () => {
+const NavigationLogo = () => {
 	return (
 		<a href="/">
-			<h2>LogoImage</h2>
+			<img src="/rapidcar-logo.svg" alt="Logo rapidcar" />
 		</a>
 	);
 };
 
-export default HeaderLogo;
+export default NavigationLogo;
