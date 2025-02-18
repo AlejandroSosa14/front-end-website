@@ -18,14 +18,17 @@
 	--main-color-darken: hsl(210, 61%, 40%);
 	--blue-extra-light: #ecf3f9;
 
+	--rgb-main-color: 45, 116, 186;
+	--rgb-blue-extra-light: 236, 243, 249;
+
 	--container-mw: 1280px;
 	--container-pl: 1rem;
 	--container-pr: 1rem;
 	--container-ml: auto;
 	--container-mr: auto;
 
-	--section-pt: 2rem;
-	--section-pb: 2rem;
+	--section-pt: 4rem;
+	--section-pb: 4rem;
 
 	--header-height: 5rem;
 	--menu-gap: 2rem;
