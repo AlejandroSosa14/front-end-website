@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 
 import "./App.css";
 import CarDetails from "./pages/CarDetails";
+import CarDetail from "./pages/CarDetail";
 
 function App() {
 	// return <h1>Proyecto Integrador Final - Certified Tech Developer</h1>;
@@ -12,10 +13,7 @@ function App() {
 			<Routes>
 				<Route path="/" element={<Home />} />
 				<Route path="/car-details" element={<CarDetails />} />
-				{/* <Route path="/contact" element={<Contact />} /> */}
-				{/* <Route path="/products" element={<Products />} /> */}
-				{/* <Route path="/products/:productId" element={<ProductDetails />} /> */}
-				{/* <Route path="*" element={<Error404 />} /> */}
+				<Route path="/car/:carId" element={<CarDetail />} />
 			</Routes>
 		</BrowserRouter>
 	);
