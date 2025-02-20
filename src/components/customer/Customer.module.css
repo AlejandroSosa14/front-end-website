@@ -1,0 +1,61 @@
+.customer {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 1rem;
+
+	@media screen and (min-width: 768px) {
+		flex-wrap: nowrap;
+	}
+}
+
+.customerBanner {
+	width: 100%;
+	padding: 0 2rem;
+
+	& img {
+		width: 100%;
+		object-fit: cover;
+	}
+
+	@media screen and (min-width: 768px) {
+		width: 40%;
+	}
+}
+
+.customerContent {
+	width: 100%;
+
+	& > p {
+		margin-bottom: 1.6rem;
+	}
+	@media screen and (min-width: 768px) {
+		width: 60%;
+	}
+}
+
+.customerFeaturesContainer {
+	display: flex;
+	flex-wrap: wrap;
+	row-gap: 2.4rem;
+}
+
+.customerFeatures {
+	display: flex;
+	align-items: center;
+	gap: 0.6rem;
+	width: 100%;
+
+	& svg {
+		width: 1.8rem;
+		height: 1.8rem;
+		flex-shrink: 0;
+	}
+
+	@media screen and (min-width: 768px) {
+		width: 50%;
+		padding-left: 1rem;
+		padding-right: 1rem;
+		justify-content: flex-start;
+	}
+}
