@@ -88,51 +88,49 @@ const Suggestions = () => {
 
 	return (
 		<section className="suggestions">
-			<div className="container">
-				<div className="flex-row">
-					<h2 className={styles.suggestionsTitle}>Recomendaciones de automóviles</h2>
-				</div>
-				<div className={styles.suggestionsCarrousel}>
-					{/* <button
+			<div className="flex-row">
+				<h2 className={styles.suggestionsTitle}>Recomendaciones de automóviles</h2>
+			</div>
+			<div className={styles.suggestionsCarrousel}>
+				{/* <button
 						className={`${styles.suggestionsBtn} ${styles.suggestionsLeftBtn}`}
 						onClick={handlePrev}
 						disabled={startIndex === 0}>
 						&lt;
 					</button> */}
-					<div className={styles.suggestionsCardsContainer}>
-						{suggestedCars.map(
-							({
-								id,
-								imageURL,
-								name,
-								isAvailable,
-								score,
-								quantityAvailable,
-								rentalPrice,
-								isFavorite,
-							}) => {
-								return (
-									<CardSuggestion
-										key={id}
-										imageURL={imageURL}
-										name={name}
-										isAvailable={isAvailable}
-										score={score}
-										quantityAvailable={quantityAvailable}
-										rentalPrice={rentalPrice}
-										isFavorite={isFavorite}
-									/>
-								);
-							}
-						)}
-					</div>
-					{/* <button
+				<div className={styles.suggestionsCardsContainer}>
+					{suggestedCars.map(
+						({
+							id,
+							imageURL,
+							name,
+							isAvailable,
+							score,
+							quantityAvailable,
+							rentalPrice,
+							isFavorite,
+						}) => {
+							return (
+								<CardSuggestion
+									key={id}
+									imageURL={imageURL}
+									name={name}
+									isAvailable={isAvailable}
+									score={score}
+									quantityAvailable={quantityAvailable}
+									rentalPrice={rentalPrice}
+									isFavorite={isFavorite}
+								/>
+							);
+						}
+					)}
+				</div>
+				{/* <button
 						className={`${styles.suggestionsBtn} ${styles.suggestionsRightBtn}`}
 						onClick={handleNext}
 						disabled={startIndex + visibleCards >= suggestedCars.length}>
 						&gt;
 					</button> */}
-				</div>
 			</div>
 		</section>
 	);
