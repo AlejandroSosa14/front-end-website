@@ -8,13 +8,33 @@
 }
 
 .section {
+	display: block;
+	position: relative;
+	width: 100%;
+	height: auto;
 	padding-top: var(--section-pt);
 	padding-bottom: var(--section-pb);
+	color: var(--black);
+}
+
+.sectionTitle {
+	font-size: clamp(1.5rem, 5vw, 2rem);
+	font-weight: 600;
+	text-align: initial;
+	padding-bottom: 1rem;
 }
 
 .flex-row {
 	display: flex;
 	flex-wrap: nowrap;
+}
+
+.align-middle {
+	align-items: center;
+}
+
+.flex-column {
+	flex-direction: column;
 }
 
 .main-btn {
