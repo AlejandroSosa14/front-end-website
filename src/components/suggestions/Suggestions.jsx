@@ -89,7 +89,7 @@ const Suggestions = () => {
 	return (
 		<section className="suggestions">
 			<div className="flex-row">
-				<h2 className={styles.suggestionsTitle}>Recomendaciones de automóviles</h2>
+				<h2 className="sectionTitle">Recomendaciones de automóviles</h2>
 			</div>
 			<div className={styles.suggestionsCarrousel}>
 				{/* <button
