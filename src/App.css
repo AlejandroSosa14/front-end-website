@@ -8,13 +8,26 @@
 }
 
 .section {
+	display: block;
+	position: relative;
+	width: 100%;
+	height: auto;
 	padding-top: var(--section-pt);
 	padding-bottom: var(--section-pb);
+	color: var(--black);
 }
 
 .flex-row {
 	display: flex;
 	flex-wrap: nowrap;
+}
+
+.align-middle {
+	align-items: center;
+}
+
+.flex-column {
+	flex-direction: column;
 }
 
 .main-btn {
