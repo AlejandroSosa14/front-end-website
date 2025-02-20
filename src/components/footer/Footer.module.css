@@ -19,6 +19,7 @@
 	width: 100%;
 	border-bottom: 1px solid var(--white);
 	padding-bottom: 1.6rem;
+	color: var(--white);
 
 	@media screen and (min-width: 768px) {
 		flex-direction: row;
@@ -84,4 +85,5 @@
 .footerBottom {
 	text-align: center;
 	padding-top: 1.6rem;
+	color: var(--white);
 }
