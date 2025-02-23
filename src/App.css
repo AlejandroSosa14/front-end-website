@@ -53,3 +53,30 @@
 		background-color: var(--main-color-darken);
 	}
 }
+
+.favoriteButton {
+	display: flex;
+	justify-content: center;
+	padding: 0.3rem 1.8rem;
+	border-radius: 8px;
+	color: var(--main-color);
+	background-color: var(--white);
+	text-align: center;
+	border: 2px solid var(--main-color);
+	transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+
+	& svg {
+		width: 1.2rem;
+		height: auto;
+	}
+
+	&:hover {
+		background-color: var(--main-color);
+		color: var(--white);
+	}
+}
+
+.isFavoriteButton {
+	background-color: var(--main-color);
+	color: var(--white);
+}
