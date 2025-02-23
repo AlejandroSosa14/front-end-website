@@ -1,6 +1,6 @@
 const Shield = () => {
 	return (
-		<svg width="24" height="24" viewBox="0 0 24 24">
+		<svg width="32" height="32" viewBox="0 0 24 24">
 			<path
 				fill="#2d74ba"
 				fillRule="evenodd"
