@@ -1,9 +1,10 @@
-import CarOutline from "../../svgIcons/CarOutline";
-import HeartOutline from "../../svgIcons/HeartOutline";
-import Star from "../../svgIcons/Star";
-import styles from "./CardSuggestion.module.css";
+import CarOutline from "../svgIcons/CarOutline";
+import HeartOutline from "../svgIcons/HeartOutline";
+import Star from "../svgIcons/Star";
 
-const CardSuggestion = ({
+import styles from "./CarCard_V1.module.css";
+
+const CarCard_V1 = ({
 	imageURL,
 	name,
 	isAvailable,
@@ -52,4 +53,4 @@ const CardSuggestion = ({
 	);
 };
 
-export default CardSuggestion;
+export default CarCard_V1;

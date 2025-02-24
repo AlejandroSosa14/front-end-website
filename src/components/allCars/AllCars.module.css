@@ -1,0 +1,29 @@
+.carDetailsGrid {
+	width: 100%;
+	display: grid;
+	gap: 1rem;
+	border: 1px solid var(--main-color);
+	padding: 1.2rem;
+	border-radius: 0.5rem;
+	transition: opacity 0.1s ease-in-out, transform 0.1s ease-in-out;
+
+	@media screen and (min-width: 768px) {
+		width: 100%;
+		grid-template-columns: repeat(2, 1fr);
+	}
+
+	@media screen and (min-width: 1024px) {
+		grid-template-columns: repeat(3, 1fr);
+		width: 75%;
+	}
+}
+
+.carDetailsGrid.fade-out {
+	opacity: 0;
+	transform: scale(0.9);
+}
+
+.carDetailsGrid.fade-in {
+	opacity: 1;
+	transform: scale(1);
+}

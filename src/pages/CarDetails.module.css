@@ -88,60 +88,33 @@
 	}
 }
 
-.carDetailsGrid {
-	width: 100%;
-	display: grid;
+.noResults {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 	gap: 1rem;
-	border: 1px solid var(--main-color);
-	padding: 1.2rem;
-	border-radius: 0.5rem;
+	text-align: center;
+	width: 100%;
+	opacity: 0;
+	transform: scale(0.9);
+}
 
-	@media screen and (min-width: 768px) {
-		width: 100%;
-		grid-template-columns: repeat(2, 1fr);
+.noResults.visible {
+	animation: fadeIn 0.5s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+		transform: scale(0.9);
 	}
-
-	@media screen and (min-width: 1024px) {
-		grid-template-columns: repeat(3, 1fr);
-		width: 75%;
+	to {
+		opacity: 1;
+		transform: scale(1);
 	}
 }
 
-.carDetailsPagination {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	gap: 1rem;
-	margin-top: 2rem;
+.noResults b {
 	width: 100%;
-	background-color: var(--blue-extra-light);
-	padding: 0.75rem 0;
-
-	& a {
-		color: var(--black);
-	}
-
-	& button {
-		width: 2.5rem;
-		height: 2.5rem;
-		padding: 0.01rem;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		border-radius: 0.5rem;
-		color: var(--main-color);
-		background-color: var(--white);
-		border: 1px solid var(--main-color);
-		font-weight: 600;
-		cursor: pointer;
-		transition: background-color 0.3s;
-
-		& svg {
-			width: 100%;
-		}
-
-		&:hover {
-			background-color: var(--main-color-darken);
-		}
-	}
+	color: var(--warning);
 }
