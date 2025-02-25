@@ -26,7 +26,7 @@ const Footer = () => {
 									<a href="#">Nosotros</a>
 								</li>
 								<li>
-									<a href="#">Automóviles</a>
+									<a href="/autos">Automóviles</a>
 								</li>
 							</ul>
 						</nav>

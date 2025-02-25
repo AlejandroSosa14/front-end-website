@@ -2,12 +2,18 @@
 .header {
 	display: block;
 	position: fixed;
-	width: 100%;
+	width: 100vw;
 	top: 0;
+	left: 0;
+	right: 0;
 	background-color: var(--white);
 	height: var(--header-height);
 	box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.2);
 	z-index: 55555;
+
+	@media screen and (min-width: 1024px) {
+		width: 100%;
+	}
 }
 
 .headerNav {
@@ -51,12 +57,11 @@
 	gap: var(--menu-gap);
 	background: var(--blue-extra-light);
 	transform: translateX(-100%);
-	padding: 2rem 0;
-	padding-left: var(--container-pl);
-	padding-right: var(--container-pr);
 	width: 66.666666%;
 	transition: opacity 0.4s ease, transform 0.3s ease;
 	height: 100vh;
+	padding-top: 2rem;
+	padding-left: var(--container-pl);
 
 	@media screen and (min-width: 1024px) {
 		position: static;
@@ -68,6 +73,8 @@
 		height: inherit;
 		flex-direction: row;
 		align-items: center;
+		padding-top: 0;
+		padding-left: 0;
 	}
 }
 

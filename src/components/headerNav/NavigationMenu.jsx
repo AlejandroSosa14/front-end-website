@@ -12,7 +12,7 @@ const HeaderMenu = () => {
 					<a href="#">Nosotros</a>
 				</li>
 				<li>
-					<a href="#">Automóviles</a>
+					<a href="/detalle-autos">Automóviles</a>
 				</li>
 			</ul>
 
