@@ -36,7 +36,7 @@ const CARS_01 = [
 		isAvailable: true,
 		score: 4.6,
 		quantityAvailable: 4,
-		rentalPrice: 180,
+		rentalPrice: 150,
 		isFavorite: false,
 	},
 	{
@@ -76,7 +76,7 @@ const CARS_01 = [
 		isAvailable: true,
 		score: 4.6,
 		quantityAvailable: 4,
-		rentalPrice: 180,
+		rentalPrice: 150,
 		isFavorite: false,
 	},
 	{

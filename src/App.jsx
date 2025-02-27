@@ -1,9 +1,10 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Home from "./pages/Home";
+import CarDetails from "./pages/CarDetails";
+import CarDetail from "./pages/CarDetail";
 
 import "./App.css";
-import CarDetails from "./pages/CarDetails";
 
 function App() {
 	// return <h1>Proyecto Integrador Final - Certified Tech Developer</h1>;
@@ -11,11 +12,8 @@ function App() {
 		<BrowserRouter>
 			<Routes>
 				<Route path="/" element={<Home />} />
-				<Route path="/car-details" element={<CarDetails />} />
-				{/* <Route path="/contact" element={<Contact />} /> */}
-				{/* <Route path="/products" element={<Products />} /> */}
-				{/* <Route path="/products/:productId" element={<ProductDetails />} /> */}
-				{/* <Route path="*" element={<Error404 />} /> */}
+				<Route path="/detalle-autos" element={<CarDetails />} />
+				<Route path="/auto/:carId" element={<CarDetail />} />
 			</Routes>
 		</BrowserRouter>
 	);

@@ -1,32 +1,109 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import Layout from "../components/layout/Layout";
+
+import CARS from "../data/cars_01.js";
 
 import Car from "../components/svgIcons/Car";
 import Location from "../components/svgIcons/Location";
 import Wallet from "../components/svgIcons/Wallet";
 
-import CARS from "../data/cars_01.js";
-
 import styles from "./CarDetails.module.css";
-import CardSuggestion from "../components/suggestions/card/CardSuggestion";
-import ArrowsRight from "../components/svgIcons/ArrowsRight.jsx";
-import ArrowsLeft from "../components/svgIcons/ArrowsLeft.jsx";
-import ArrowLeft from "../components/svgIcons/ArrowLeft.jsx";
-import ArrowRight from "../components/svgIcons/ArrowRight.jsx";
+import AllCars from "../components/allCars/AllCars.jsx";
+import AllCarsPagination from "../components/allCars/AllCarsPagination.jsx";
 
 const CarDetails = () => {
 	const [location, setLocation] = useState("");
 	const [brand, setBrand] = useState("");
 	const [price, setPrice] = useState("");
+	const [currentPage, setCurrentPage] = useState(1);
+	const [shuffledCars, setShuffledCars] = useState([]);
+	const [filteredCars, setFilteredCars] = useState([]);
+	const [isAnimating, setIsAnimating] = useState(false);
+	const [showAllCars, setShowAllCars] = useState(false);
+
+	useEffect(() => {
+		const shuffled = [...CARS].sort(() => Math.random() - 0.5);
+		setShuffledCars(shuffled);
+		setFilteredCars(shuffled);
+	}, []);
+
+	const filterCars = () => {
+		let filtered = [...CARS];
+
+		if (location) filtered = filtered.filter((car) => car.location === location);
+		if (brand) filtered = filtered.filter((car) => car.brand === brand);
+		if (price) {
+			switch (price) {
+				case "low":
+					filtered = filtered.filter((car) => car.rentalPrice >= 150 && car.rentalPrice <= 200);
+					break;
+				case "mid":
+					filtered = filtered.filter((car) => car.rentalPrice >= 201 && car.rentalPrice <= 250);
+					break;
+				case "high":
+					filtered = filtered.filter((car) => car.rentalPrice >= 251 && car.rentalPrice <= 300);
+					break;
+				case "extra":
+					filtered = filtered.filter((car) => car.rentalPrice >= 301 && car.rentalPrice <= 350);
+					break;
+				default:
+					break;
+			}
+		}
+
+		setFilteredCars(filtered);
+		setCurrentPage(1);
+	};
 
 	const handleSearch = (e) => {
 		e.preventDefault();
-		console.log("Buscando autos con los siguientes filtros:");
-		console.log("Ubicación:", location);
-		console.log("Marca:", brand);
-		console.log("Precio:", price);
-		// Lógica para mandar a la API la solicitud de búsqueda y obtener los datos
+		setShowAllCars(false);
+		filterCars();
+		setBrand("");
+		setLocation("");
+		setPrice("");
+	};
+
+	const handleShowAllCars = () => {
+		setShowAllCars(true);
+		setFilteredCars(shuffledCars);
+		changePage(1);
+	};
+
+	const cardsPerPage = 9;
+	const indexOfLastCard = currentPage * cardsPerPage;
+	const indexOfFirstCard = indexOfLastCard - cardsPerPage;
+	// const currentCars = filteredCars.slice(indexOfFirstCard, indexOfLastCard);
+
+	// Cambiar de página con animación
+	const changePage = (newPage) => {
+		setIsAnimating(true);
+		setTimeout(() => {
+			setCurrentPage(newPage);
+			setIsAnimating(false);
+		}, 300);
+	};
+
+	const scrollToTop = () => {
+		window.scrollTo({
+			top: 0,
+			behavior: "smooth",
+		});
+	};
+
+	const handleNextPage = () => {
+		if (currentPage < Math.ceil(filteredCars.length / cardsPerPage)) {
+			changePage(currentPage + 1);
+			scrollToTop();
+		}
+	};
+
+	const handlePrevPage = () => {
+		if (currentPage > 1) {
+			changePage(currentPage - 1);
+			scrollToTop();
+		}
 	};
 
 	return (
@@ -87,38 +164,35 @@ const CarDetails = () => {
 								</button>
 							</form>
 						</div>
-						<div className={styles.carDetailsGrid}>
-							{CARS.map((car) => (
-								<CardSuggestion
-									key={car.id}
-									imageURL={car.imageURL}
-									name={car.name}
-									isAvailable={car.isAvailable}
-									score={car.score}
-									quantityAvailable={car.quantityAvailable}
-									rentalPrice={car.rentalPrice}
-									isFavorite={car.isFavorite}
-								/>
-							))}
-						</div>
+						{filteredCars.length === 0 && !showAllCars ? (
+							<div className={`${styles.noResults} ${styles.visible}`}>
+								<b>No se encontraron autos que coincidan con los filtros seleccionados.</b>
+								<button onClick={handleShowAllCars} className="main-btn">
+									Regresar
+								</button>
+							</div>
+						) : (
+							<AllCars
+								cars={
+									showAllCars
+										? shuffledCars.slice(indexOfFirstCard, indexOfLastCard)
+										: filteredCars.slice(indexOfFirstCard, indexOfLastCard)
+								}
+								cardsPerPage={cardsPerPage}
+								currentPage={currentPage}
+								isAnimating={isAnimating}
+							/>
+						)}
 					</div>
-					<div className={styles.carDetailsPagination}>
-						<button className={styles.carDetailsPaginationButton}>
-							<ArrowsLeft />
-						</button>
-						<button className={styles.carDetailsPaginationButton}>
-							<ArrowLeft />
-						</button>
-						<a href="#">1</a>
-						<a href="#">2</a>
-						<a href="#">3</a>
-						<button className={styles.carDetailsPaginationButton}>
-							<ArrowRight />
-						</button>
-						<button className={styles.carDetailsPaginationButton}>
-							<ArrowsRight />
-						</button>
-					</div>
+					<AllCarsPagination
+						cars={showAllCars ? shuffledCars : filteredCars}
+						cardsPerPage={cardsPerPage}
+						currentPage={currentPage}
+						handlePrevPage={handlePrevPage}
+						handleNextPage={handleNextPage}
+						changePage={changePage}
+						scrollToTop={scrollToTop}
+					/>
 				</div>
 			</section>
 		</Layout>
