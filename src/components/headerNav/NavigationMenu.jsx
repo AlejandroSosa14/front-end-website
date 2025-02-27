@@ -14,6 +14,9 @@ const HeaderMenu = () => {
 				<li>
 					<a href="/detalle-autos">Automóviles</a>
 				</li>
+				<li>
+					<a href="/dashboard">Dashboard</a>
+				</li>
 			</ul>
 
 			{/* Call to action buttons */}
