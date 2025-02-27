@@ -1,0 +1,100 @@
+.title {
+    background-color: var(--main-color);
+    text-align: center;
+    height: 6rem;
+    align-content: center;
+}
+
+.content{ 
+    width: 70%;
+    margin: auto;
+    padding: 2rem;
+    height: 37.5rem;
+}
+
+.searchByBrand {
+    display: flex;
+    /* width: 65%; */
+    height: 6rem;
+    margin: auto;
+    background-color: lightblue;
+    align-items: center;
+    border-radius: 1rem;
+}
+
+.divFormSearchByBrand {
+    width: 50%;
+    margin: auto;
+}
+
+.formSearchByBrand {
+    height: 4rem;
+    align-content: center;
+    display: flex;
+    align-items: center;
+    border-radius: 1rem;
+}
+
+.formIcon {
+    background-color: aliceblue;
+    height: 3rem;
+    align-content: center;
+}
+
+.iconSize {
+    width: 35px;
+    height: 35px;
+}
+
+.selectForm {
+    height: 3rem;
+    width: 55%;
+    text-align: center;
+    background-color: aliceblue;
+    color: var(--main-color);
+    border: 0px;
+}
+
+.divButtonForm {
+    margin: auto;
+}
+
+.buttonForm { 
+    background-color: var(--main-color);
+    width: 14rem;
+    height: 2.5rem;
+}
+
+.addNewCar {
+    margin-top: 1rem;
+}
+
+.carList {
+    margin-top: 2rem;
+}
+
+.tableInfo {
+    width: 100%;
+    height: 100%;
+    color: black;
+}
+
+.tableHead {
+    background-color: gainsboro;
+    height: 2rem;
+    border-radius: 2rem;
+}
+
+.tableContent {
+    text-align: center;
+}
+
+.tableIcon {
+    width: 30px;
+    height: 30px;
+}
+
+.iconCell {
+    display: flex;
+    justify-content: space-evenly;
+}
