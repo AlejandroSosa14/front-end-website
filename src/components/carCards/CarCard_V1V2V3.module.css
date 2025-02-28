@@ -1,0 +1,119 @@
+.card {
+	position: relative;
+	background-color: var(--blue-extra-light);
+	border-radius: 0.5rem;
+	overflow: hidden;
+	text-align: initial;
+	width: 100%;
+	height: auto;
+}
+
+.card_isFavorite {
+	position: absolute;
+	top: 0.8rem;
+	right: 1.2rem;
+}
+
+.cardContent {
+	padding: 0.8rem 1.2rem;
+	color: var(--black);
+
+	& svg {
+		width: 1.4rem;
+		height: 1.4rem;
+		margin-right: 0.4rem;
+	}
+}
+
+.cardContent_title {
+	font-size: 1.4rem;
+}
+.cardContent_subtitle {
+	font-size: 0.8rem;
+	font-weight: 600;
+}
+
+.cardContent_image {
+	width: 100%;
+	height: 10rem;
+	object-fit: cover;
+}
+
+.cardContent_header {
+	display: block;
+	margin-bottom: 0.2rem;
+}
+
+.cardContent_details {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: 0.4rem;
+	gap: 0.8rem;
+	margin-bottom: 0.6rem;
+}
+
+.cardContent_detailsScores,
+.cardContent_detailsLocation,
+.cardContent_detailsRental {
+	display: flex;
+	flex-wrap: nowrap;
+	align-items: center;
+	width: 100%;
+
+	& svg {
+		width: 1.4rem;
+		height: 1.4rem;
+		margin-right: 0.4rem;
+	}
+}
+
+.cardContent_detailsScores {
+	gap: 0.6rem;
+
+	& span {
+		font-weight: 600;
+	}
+}
+
+.cardContent_detailsRental {
+	justify-content: space-between;
+	align-items: center;
+
+	& p {
+		font-size: 1.2rem;
+		font-weight: 700;
+	}
+
+	& button {
+		padding: 0.4rem 0.7rem;
+		background-color: var(--main-color);
+		color: var(--white);
+		transition: background-color 0.3s ease-in-out;
+
+		&:hover {
+			background-color: var(--main-color-darken);
+		}
+	}
+}
+
+.cardContent_specs {
+	display: flex;
+	flex-direction: column;
+	gap: 0.6rem;
+}
+
+.cardContent_specsTitle {
+	font-size: 1.1rem;
+	font-weight: 400;
+	margin-bottom: 0.8rem;
+	padding-bottom: 0.6rem;
+	border-bottom: 1px solid var(--main-color);
+}
+
+.cardContent_specsList {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.4rem;
+}

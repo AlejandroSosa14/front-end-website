@@ -1,6 +1,6 @@
 import CarCard_V1 from "../carCards/CarCard_V1";
 
-import CARS_01 from "../../data/cars_01";
+import CARS_01 from "../../data/cars";
 
 import styles from "./Suggestions.module.css";
 
