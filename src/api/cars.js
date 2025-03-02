@@ -1,23 +1,45 @@
-const API_URL = "http://localhost:8181/api/cars?page=0&size=10";
-
 export const getCars = async () => {
     try {
-        const response = await fetch(API_URL, {
+        const response = await fetch("http://localhost:8181/api/cars?page=0&size=10", {
             method: "GET",
             headers: {
-                "Content-Type": "application/json",
-                // "Authorization": `Basic ${btoa("administrador:password")}` // Si es necesario
+                "Content-Type": "application/json"
             },
+            mode: "cors"
         });
 
         if (!response.ok) {
-            throw new Error(`Error HTTP: ${response.status}`);
+            throw new Error("Error al obtener los autos");
         }
 
-        const data = await response.json();
-        return data.content; // Retorna solo la lista de carros
+        return await response.json();
     } catch (error) {
-        console.error("Error al obtener los carros:", error);
+        console.error("Error en getCars:", error);
         return [];
+    }
+};
+
+
+export const deleteCar = async (carId) => {
+    try {
+        const response = await fetch(`http://localhost:8181/api/cars/${carId}`, {
+            method: "DELETE",
+            headers: {
+                "Authorization": "Basic " + btoa("administrador:password"),
+                "Content-Type": "application/json"
+            },
+            mode: "cors",
+            credentials: "include"
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.error || "Error al eliminar el auto");
+        }
+
+        return true;
+    } catch (error) {
+        console.error("Error en deleteCar:", error);
+        return false;
     }
 };
