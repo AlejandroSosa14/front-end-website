@@ -123,6 +123,31 @@
 	}
 }
 
+.carInfo_header {
+	position: sticky;
+	top: var(--header-height);
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-between;
+	align-items: center;
+	z-index: 555;
+	background-color: var(--blue-extra-light);
+	padding: 0.4rem 1.2rem;
+	border-radius: 0.3125rem;
+	box-shadow: 0 0 0.625rem rgba(23, 23, 23, 0.2);
+}
+
+.carInfo_backLink {
+	display: flex;
+	align-items: center;
+	transition: color 0.3s ease-in-out;
+
+	&:hover {
+		color: var(--main-color);
+	}
+}
+
 .carInfo_cards {
 	flex-direction: column;
 	display: flex;

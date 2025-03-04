@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 import Layout from "../components/layout/Layout";
 import CarCard_V2 from "../components/carCards/CarCard_V2";
@@ -8,6 +8,7 @@ import CarCard_V3 from "../components/carCards/CarCard_V3";
 import CARS from "../data/cars.js";
 
 import styles from "./CarDetail.module.css";
+import ArrowLeft from "../components/svgIcons/ArrowLeft.jsx";
 
 const CarDetail = () => {
 	const { carId } = useParams();
@@ -84,7 +85,13 @@ const CarDetail = () => {
 							</div>
 						</div>
 						<div className={styles.carInfo}>
-							<h3>Características</h3>
+							<header className={styles.carInfo_header}>
+								<h3>Características</h3>
+								<Link to="/detalle-autos" className={styles.carInfo_backLink}>
+									<ArrowLeft />
+									Regresar
+								</Link>
+							</header>
 							<div className={styles.carInfo_cards}>
 								<div className={styles.carInfo_cardContainer}>
 									<CarCard_V2
