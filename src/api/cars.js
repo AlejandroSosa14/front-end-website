@@ -1,4 +1,4 @@
-cars
+// cars
 export const getCars = async () => {
     try {
         const response = await fetch("http://localhost:8181/api/cars?page=0&size=10", {
