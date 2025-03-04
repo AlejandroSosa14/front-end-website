@@ -5,7 +5,7 @@ const CarDetailsNoResults = ({ handleShowAllCars }) => {
 		<div className={`${styles.noResults} ${styles.visible}`}>
 			<b>No se encontraron autos que coincidan con los filtros seleccionados.</b>
 			<button onClick={handleShowAllCars} className="main-btn">
-				Regresar
+				Nueva búsqueda
 			</button>
 		</div>
 	);

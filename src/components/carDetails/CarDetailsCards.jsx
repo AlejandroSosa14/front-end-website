@@ -13,7 +13,7 @@ const CarDetailsCards = ({ cars, isAnimating }) => {
 					key={car.id}
 					id={car.id}
 					imageURL={car.images[0]}
-					name={car.name}
+					model={car.model}
 					locationCity={car.locationCity}
 					locationCountry={car.locationCountry}
 					isAvailable={car.isAvailable}

@@ -11,61 +11,61 @@ import CarDetailsSearch from "../components/carDetails/CarDetailsSearch.jsx";
 import CarDetailsNoResults from "../components/carDetails/CarDetailsNoResults.jsx";
 
 const CarDetails = () => {
-	const [location, setLocation] = useState("");
-	const [brand, setBrand] = useState("");
-	const [price, setPrice] = useState("");
-	const [currentPage, setCurrentPage] = useState(1);
-	const [shuffledCars, setShuffledCars] = useState([]);
+	// const [allCars, setAllCars] = useState([]); // Autos desde la API
+	const [randomCars, setRandomCars] = useState([]);
 	const [filteredCars, setFilteredCars] = useState([]);
+	const [locations, setLocations] = useState([]);
+	const [brands, setBrands] = useState([]);
+	const [currentPage, setCurrentPage] = useState(1);
 	const [isAnimating, setIsAnimating] = useState(false);
 	const [showAllCars, setShowAllCars] = useState(false);
+	const [locationCity, setLocationCity] = useState("");
+	const [brand, setBrand] = useState("");
 
+	// Obtener autos desde el archivo cars.js
 	useEffect(() => {
 		const shuffled = [...CARS].sort(() => Math.random() - 0.5);
-		setShuffledCars(shuffled);
+		setRandomCars(shuffled);
 		setFilteredCars(shuffled);
+
+		setLocations([...new Set(CARS.map((car) => car.locationCity))]);
+		setBrands([...new Set(CARS.map((car) => car.brand))]);
 	}, []);
 
-	const filterCars = () => {
-		let filtered = [...CARS];
+	// // Obtener autos desde la API
+	// useEffect(() => {
+	// 	const fetchCars = async () => {
+	// 		try {
+	// 			const response = await fetch("https://api.example.com/cars");
+	// 			const data = await response.json();
+	// 			setAllCars(data);
+	// 			setFilteredCars(data);
 
-		if (location) filtered = filtered.filter((car) => car.location === location);
-		if (brand) filtered = filtered.filter((car) => car.brand === brand);
-		if (price) {
-			switch (price) {
-				case "low":
-					filtered = filtered.filter((car) => car.rentalPrice >= 150 && car.rentalPrice <= 200);
-					break;
-				case "mid":
-					filtered = filtered.filter((car) => car.rentalPrice >= 201 && car.rentalPrice <= 250);
-					break;
-				case "high":
-					filtered = filtered.filter((car) => car.rentalPrice >= 251 && car.rentalPrice <= 300);
-					break;
-				case "extra":
-					filtered = filtered.filter((car) => car.rentalPrice >= 301 && car.rentalPrice <= 350);
-					break;
-				default:
-					break;
-			}
-		}
+	// 			setLocations ([...new Set(data.map((car) => car.locationCity))]);
+	// 			setBrands ([...new Set(data.map((car) => car.brand))]);
+	// 		} catch (error) {
+	// 			console.error("Error al obtener autos:", error);
+	// 		}
+	// 	};
 
-		setFilteredCars(filtered);
-		setCurrentPage(1);
-	};
+	// 	fetchCars();
+	// }, []);
 
-	const handleSearch = (e) => {
-		e.preventDefault();
-		setShowAllCars(false);
-		filterCars();
-		setBrand("");
-		setLocation("");
-		setPrice("");
+	const handleSearch = ({ locationCity, brand }) => {
+		// const results = allCars.filter( // Autos desde la API
+		const results = CARS.filter(
+			(car) =>
+				(locationCity === "" || car.locationCity === locationCity) &&
+				(brand === "" || car.brand === brand)
+		);
+		setFilteredCars(results);
 	};
 
 	const handleShowAllCars = () => {
-		setShowAllCars(true);
-		setFilteredCars(shuffledCars);
+		setLocationCity("");
+		setBrand("");
+		setShowAllCars(false);
+		setFilteredCars(randomCars);
 		changePage(1);
 	};
 
@@ -73,7 +73,6 @@ const CarDetails = () => {
 	const indexOfLastCard = currentPage * cardsPerPage;
 	const indexOfFirstCard = indexOfLastCard - cardsPerPage;
 
-	// Cambiar de página con animación
 	const changePage = (newPage) => {
 		setIsAnimating(true);
 		setTimeout(() => {
@@ -83,10 +82,7 @@ const CarDetails = () => {
 	};
 
 	const scrollToTop = () => {
-		window.scrollTo({
-			top: 0,
-			behavior: "smooth",
-		});
+		window.scrollTo({ top: 0, behavior: "smooth" });
 	};
 
 	const handleNextPage = () => {
@@ -105,19 +101,19 @@ const CarDetails = () => {
 
 	return (
 		<Layout>
-			<section className={styles.carDetails}>
+			<section className={`section ${styles.carDetails}`}>
 				<h2>Automóviles</h2>
 				<div className="container">
 					<div className={styles.carDetailsContainer}>
 						<div className={styles.carDetailsSearch}>
 							<CarDetailsSearch
 								handleSearch={handleSearch}
-								location={location}
-								setLocation={setLocation}
+								locations={locations}
+								brands={brands}
+								locationCity={locationCity}
+								setLocationCity={setLocationCity}
 								brand={brand}
 								setBrand={setBrand}
-								price={price}
-								setPrice={setPrice}
 							/>
 						</div>
 						{filteredCars.length === 0 && !showAllCars ? (
@@ -126,7 +122,7 @@ const CarDetails = () => {
 							<CarDetailsCards
 								cars={
 									showAllCars
-										? shuffledCars.slice(indexOfFirstCard, indexOfLastCard)
+										? randomCars.slice(indexOfFirstCard, indexOfLastCard)
 										: filteredCars.slice(indexOfFirstCard, indexOfLastCard)
 								}
 								cardsPerPage={cardsPerPage}
@@ -136,7 +132,7 @@ const CarDetails = () => {
 						)}
 					</div>
 					<CarDetailsPagination
-						cars={showAllCars ? shuffledCars : filteredCars}
+						cars={showAllCars ? randomCars : filteredCars}
 						cardsPerPage={cardsPerPage}
 						currentPage={currentPage}
 						handlePrevPage={handlePrevPage}

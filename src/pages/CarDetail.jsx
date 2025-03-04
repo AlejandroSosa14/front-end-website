@@ -51,7 +51,8 @@ const CarDetail = () => {
 
 	return (
 		<Layout>
-			<section className="section">
+			<section className={`${styles.carDetail} section`}>
+				<h2>Detalles {car.model}</h2>
 				<div className="container">
 					<div className={styles.carDetail_container}>
 						<div className={styles.carGallery}>
@@ -83,7 +84,7 @@ const CarDetail = () => {
 							</div>
 						</div>
 						<div className={styles.carInfo}>
-							<h2>Características</h2>
+							<h3>Características</h3>
 							<div className={styles.carInfo_cards}>
 								<div className={styles.carInfo_cardContainer}>
 									<CarCard_V2

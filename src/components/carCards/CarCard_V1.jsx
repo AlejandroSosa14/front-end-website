@@ -10,7 +10,7 @@ import styles from "./CarCard_V1V2V3.module.css";
 const CarCard_V1 = ({
 	id,
 	imageURL,
-	name,
+	model,
 	locationCity,
 	locationCountry,
 	isAvailable,
@@ -46,10 +46,12 @@ const CarCard_V1 = ({
 				)}
 			</div>
 			<div className={styles.cardContent}>
-				<img className={styles.cardContent_image} src={imageURL} alt={`Model ${name}`} />
+				<img className={styles.cardContent_image} src={imageURL} alt={`Model ${model}`} />
 				<header className={styles.cardContent_header}>
-					<h3 className={styles.cardContent_title}>{name}</h3>
-					<h4 className={styles.cardContent_subtitle}>{isAvailable && "Disponible"}</h4>
+					<h3 className={styles.cardContent_title}>{model}</h3>
+					<h4 className={styles.cardContent_subtitle}>
+						{isAvailable ? "Disponible" : "No disponible"}
+					</h4>
 				</header>
 				<div className={styles.cardContent_details}>
 					<div className={styles.cardContent_detailsScores}>
