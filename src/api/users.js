@@ -1,9 +1,11 @@
+
+Users
 export const getUsers = async () => {
     try {
-        const response = await fetch("http://localhost:8181/users", {
+        const response = await fetch("http://localhost:8181/api/users", {
             method: "GET",
             headers: {
-                "Authorization": "Basic " + btoa("administrador:password"), // 🔹 Agrega autenticación
+                "Authorization": "Basic " + btoa("jose:pass123"),
                 "Content-Type": "application/json"
             },
             mode: "cors",
@@ -21,13 +23,12 @@ export const getUsers = async () => {
     }
 };
 
-
 export const createUser = async (userData) => {
     try {
-        const response = await fetch("http://localhost:8181/users", {
+        const response = await fetch("http://localhost:8181/api/users", {
             method: "POST",
             headers: {
-                "Authorization": "Basic " + btoa("administrador:password"),
+                "Authorization": "Basic " + btoa("jose:pass123"),
                 "Content-Type": "application/json"
             },
             mode: "cors",
@@ -48,7 +49,7 @@ export const createUser = async (userData) => {
 
 export const deleteUser = async (userId) => {
     try {
-        const response = await fetch(`http://localhost:8181/users/${userId}`, {
+        const response = await fetch(`http://localhost:8181/api/users/${userId}`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json"

@@ -22,7 +22,7 @@ const HeaderMenu = () => {
 
 			{/* Call to action buttons */}
 			<div className={styles.navigationMenu__cta}>
-				<Link href="#" className="main-btn">
+				<Link to="/registro" className="main-btn">
 					Crear cuenta
 				</Link>
 				<Link href="#" className="main-btn">

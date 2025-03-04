@@ -1,3 +1,4 @@
+cars
 export const getCars = async () => {
     try {
         const response = await fetch("http://localhost:8181/api/cars?page=0&size=10", {
@@ -19,13 +20,12 @@ export const getCars = async () => {
     }
 };
 
-
 export const deleteCar = async (carId) => {
     try {
         const response = await fetch(`http://localhost:8181/api/cars/${carId}`, {
             method: "DELETE",
             headers: {
-                "Authorization": "Basic " + btoa("administrador:password"),
+                "Authorization": "Basic " + btoa("jose:pass123"),
                 "Content-Type": "application/json"
             },
             mode: "cors",
