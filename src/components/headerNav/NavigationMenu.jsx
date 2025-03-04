@@ -21,7 +21,7 @@ const HeaderMenu = () => {
 
 			{/* Call to action buttons */}
 			<div className={styles.navigationMenu__cta}>
-				<a href="#" className="main-btn">
+				<a href="/registro" className="main-btn">
 					Crear cuenta
 				</a>
 				<a href="#" className="main-btn">
