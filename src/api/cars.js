@@ -22,10 +22,16 @@ export const getCars = async () => {
 
 export const deleteCar = async (carId) => {
     try {
+        const token = localStorage.getItem("authToken"); // Obtiene el token directamente
+
+        if (!token) {
+            throw new Error("No hay token disponible, el usuario debe iniciar sesión");
+        }
+
         const response = await fetch(`http://localhost:8181/api/cars/${carId}`, {
             method: "DELETE",
             headers: {
-                "Authorization": "Basic " + btoa("jose:pass123"),
+                "Authorization": `Bearer ${token}`,
                 "Content-Type": "application/json"
             },
             mode: "cors",
