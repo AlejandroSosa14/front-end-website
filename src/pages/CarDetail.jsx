@@ -84,24 +84,26 @@ const CarDetail = () => {
 						</div>
 						<div className={styles.carInfo}>
 							<h2>Características</h2>
-							<div className={styles.carInfo_cardContainer}>
-								<CarCard_V2
-									score={car.score}
-									model={car.model}
-									rentalPrice={car.rentalPrice}
-									locationCity={car.locationCity}
-									locationCountry={car.locationCountry}
-									isFavorite={car.isFavorite}
-								/>
-							</div>
-							<div className={styles.carInfo_cardContainer}>
-								<CarCard_V3
-									brand={car.brand}
-									model={car.model}
-									color={car.color}
-									fuel={car.fuel}
-									transmission={car.transmission}
-								/>
+							<div className={styles.carInfo_cards}>
+								<div className={styles.carInfo_cardContainer}>
+									<CarCard_V2
+										score={car.score}
+										model={car.model}
+										rentalPrice={car.rentalPrice}
+										locationCity={car.locationCity}
+										locationCountry={car.locationCountry}
+										isFavorite={car.isFavorite}
+									/>
+								</div>
+								<div className={styles.carInfo_cardContainer}>
+									<CarCard_V3
+										brand={car.brand}
+										model={car.model}
+										color={car.color}
+										fuel={car.fuel}
+										transmission={car.transmission}
+									/>
+								</div>
 							</div>
 						</div>
 					</div>
