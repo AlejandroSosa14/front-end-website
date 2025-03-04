@@ -1,3 +1,7 @@
+import { Link, NavLink } from "react-router-dom";
+
+import MENU_LINKS from "../../data/menuLinks";
+
 import styles from "./HeaderNav.module.css";
 
 const HeaderMenu = () => {
@@ -5,28 +9,29 @@ const HeaderMenu = () => {
 		<>
 			{/* Main navigation menu */}
 			<ul className={styles.navigationMenu__list}>
-				<li>
-					<a href="/">Inicio</a>
-				</li>
-				<li>
-					<a href="#">Nosotros</a>
-				</li>
-				<li>
-					<a href="/detalle-autos">Automóviles</a>
-				</li>
-				<li>
-					<a href="/dashboard">Dashboard</a>
-				</li>
+				{MENU_LINKS.map((link) => (
+					<li key={link.id}>
+						<NavLink
+							to={link.path}
+							className={({ isActive }) => (isActive ? styles.activeLink : "")}>
+							{link.label}
+						</NavLink>
+					</li>
+				))}
 			</ul>
 
 			{/* Call to action buttons */}
 			<div className={styles.navigationMenu__cta}>
+<<<<<<< HEAD
 				<a href="/registro" className="main-btn">
+=======
+				<Link href="#" className="main-btn">
+>>>>>>> 199a0f4 (Se integra mejora a los estilos y navegación del menú principal)
 					Crear cuenta
-				</a>
-				<a href="#" className="main-btn">
+				</Link>
+				<Link href="#" className="main-btn">
 					Ingresar
-				</a>
+				</Link>
 			</div>
 		</>
 	);
