@@ -1,0 +1,51 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem; /* Espacio entre los campos */
+}
+
+.inputGroup {
+    display: flex;
+    align-items: center;
+    border: 1px solid white; /* Borde blanco */
+    border-radius: 5px;
+    padding: 0.5rem;
+    background: white;
+    position: relative;
+    width: 100%;
+}
+
+.icon {
+    color: #3b82f6;
+    position: absolute;
+    left: 10px;
+    font-size: 18px;
+}
+
+.input {
+    border: none;
+    outline: none;
+    flex: 1;
+    padding: 0.5rem 0.5rem 0.5rem 35px; /* Espacio para el icono */
+    font-size: 1rem;
+    background: none;
+    color: black; /* Letra negra */
+}
+
+label {
+    font-weight: bold; /* Negrita */
+    color: black; /* Letra negra */
+    display: block; /* Para separarlo del input */
+    margin-bottom: 5px; /* Espacio entre el label y el input */
+}
+
+.showButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    font-size: 18px;
+    color: #3b82f6;
+	
+}

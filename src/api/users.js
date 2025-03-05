@@ -1,3 +1,26 @@
+export const loginUser = async (username, password) => {
+    try {
+        const response = await fetch("http://localhost:8181/api/user/authenticate", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ name: username, password: password })
+        });
+
+        if (!response.ok) {
+            throw new Error("Credenciales incorrectas");
+        }
+
+        const data = await response.json();
+        localStorage.setItem("authToken", data.token);
+        localStorage.setItem("username", username);
+
+        return { success: true, token: data.token };
+    } catch (error) {
+        console.error("Error en loginUser:", error);
+        return { success: false, error: error.message };
+    }
+};
+
 export const getUsers = async () => {
     try {
         const token = localStorage.getItem("authToken"); // Obtiene el token

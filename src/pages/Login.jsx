@@ -1,65 +1,35 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import styles from "./Login.module.css"; // Importa los estilos como módulo
+import { useRef } from "react";
+import LoginForm from "../components/UserForm/LoginForm";
+import Layout from "../components/layout/Layout";
+import styles from "./Login.module.css";
 
 const Login = () => {
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
-    const [error, setError] = useState(null);
-    const navigate = useNavigate();
+    const formRef = useRef(null);
 
-    const handleLogin = async (e) => {
-        e.preventDefault();
-        setError(null);
-    
-        try {
-            const response = await fetch("http://localhost:8181/api/user/authenticate", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ name: username, password })
-            });
-    
-            if (!response.ok) {
-                throw new Error("Credenciales incorrectas");
-            }
-    
-            const data = await response.json();
-            localStorage.setItem("authToken", data.token);
-            localStorage.setItem("username", username);
-            navigate("/");
-        } catch (error) {
-            setError(error.message);
+    const handleSubmit = () => {
+        if (formRef.current) {
+            formRef.current.requestSubmit();  // requestSubmit() es mejor que dispatchEvent("submit")
         }
-    };    
+    };
 
     return (
-        <div className={styles.loginContainer}>
-            <div className={styles.loginBox}>
+        <Layout>
+            <section className={styles.loginContainer}>
                 <h2>Iniciar Sesión</h2>
-                {error && <p className={styles.errorMessage}>{error}</p>}
-                <form onSubmit={handleLogin}>
-                    <input
-                        type="text"
-                        placeholder="Usuario"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
-                        className={styles.inputField}
-                        required
-                    />
-                    <input
-                        type="password"
-                        placeholder="Contraseña"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        className={styles.inputField}
-                        required
-                    />
-                    <button type="submit" className={styles.submitButton}>
+                <div className="container">
+                    <div className={styles.loginBox}>
+                        <div className={styles.loginFormContainer}>
+                            <LoginForm formRef={formRef} />
+                        </div>
+                    </div>
+                </div>
+                <div className={styles.buttonContainer}>
+                    <button className={styles.submitButton} type="button" onClick={handleSubmit}>
                         Iniciar sesión
                     </button>
-                </form>
-            </div>
-        </div>
+                </div>
+            </section>
+        </Layout>
     );
 };
 

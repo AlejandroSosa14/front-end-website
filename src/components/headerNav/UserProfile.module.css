@@ -2,7 +2,7 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    position: relative; /* Necesario para el posicionamiento del dropdown */
+    position: relative;
 }
 
 .userIconContainer {
@@ -11,20 +11,19 @@
 }
 
 .userIcon {
-    font-size: 40px; /* Tamaño más grande */
+    font-size: 40px;
     color: var(--main-color);
 }
 
 .userName {
     font-size: 16px;
     font-weight: bold;
-    color: black; /* Nombre en negro */
+    color: black;
 }
 
-/* Menú desplegable */
 .dropdownMenu {
     position: absolute;
-    top: 50px; /* Aparece justo debajo del icono */
+    top: 50px;
     right: 0;
     background-color: white;
     border: 1px solid #ccc;

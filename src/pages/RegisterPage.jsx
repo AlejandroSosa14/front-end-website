@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import RegisterForm from "../components/RegisterForm/RegisterForm";
+import RegisterForm from "../components/UserForm/RegisterForm";
 import Layout from "../components/layout/Layout";
 import styles from "./RegisterPage.module.css";
 
@@ -16,11 +16,11 @@ const RegisterPage = () => {
 
   return (
     <Layout>
-      <section className={styles.carDetails}>
+      <section className={styles.register}>
         <h2>Crear Cuenta</h2>
         <div className="container">
-          <div className={styles.carDetailsContainer}>
-            <div className={styles.carDetailsSearch}>
+          <div className={styles.registerContainer}>
+            <div className={styles.registerFormContainer}>
               <RegisterForm onFormReady={formRef} />
             </div>
           </div>

@@ -14,11 +14,10 @@ const UserProfile = ({ username, onLogout }) => {
     const handleLogout = () => {
         localStorage.removeItem("authToken");
         localStorage.removeItem("username");
-        onLogout(); // Notificar a HeaderMenu
-        navigate("/");
+        onLogout(); 
+        navigate("/"); 
     };
-
-    // Cerrar menú si se hace clic fuera
+    
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (!event.target.closest(`.${styles.userProfile}`)) {
