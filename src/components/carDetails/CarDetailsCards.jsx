@@ -1,8 +1,8 @@
 import CarCard_V1 from "../carCards/CarCard_V1";
 
-import styles from "./AllCars.module.css";
+import styles from "./CarDetailsCards.module.css";
 
-const AllCars = ({ cars, isAnimating }) => {
+const CarDetailsCards = ({ cars, isAnimating }) => {
 	return (
 		<div
 			className={`${styles.carDetailsGrid} ${
@@ -11,8 +11,11 @@ const AllCars = ({ cars, isAnimating }) => {
 			{cars.map((car) => (
 				<CarCard_V1
 					key={car.id}
-					imageURL={car.imageURL}
-					name={car.name}
+					id={car.id}
+					imageURL={car.images[0]}
+					model={car.model}
+					locationCity={car.locationCity}
+					locationCountry={car.locationCountry}
 					isAvailable={car.isAvailable}
 					score={car.score}
 					quantityAvailable={car.quantityAvailable}
@@ -24,4 +27,4 @@ const AllCars = ({ cars, isAnimating }) => {
 	);
 };
 
-export default AllCars;
+export default CarDetailsCards;

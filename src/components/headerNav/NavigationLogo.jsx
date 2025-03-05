@@ -1,8 +1,10 @@
+import { Link } from "react-router-dom";
+
 const NavigationLogo = () => {
 	return (
-		<a href="/">
+		<Link to="/">
 			<img src="/rapidcar-logo.svg" alt="Logo rapidcar" />
-		</a>
+		</Link>
 	);
 };
 

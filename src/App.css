@@ -57,8 +57,10 @@
 .favoriteButton {
 	display: flex;
 	justify-content: center;
-	padding: 0.3rem 1.8rem;
-	border-radius: 8px;
+	width: 2.25rem;
+	height: 2.25rem;
+	padding: 0.5rem;
+	border-radius: 50%;
 	color: var(--main-color);
 	background-color: var(--white);
 	text-align: center;

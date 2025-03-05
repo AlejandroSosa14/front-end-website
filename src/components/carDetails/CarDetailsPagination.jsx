@@ -3,9 +3,9 @@ import ArrowsLeft from "../svgIcons/ArrowsLeft";
 import ArrowRight from "../svgIcons/ArrowRight";
 import ArrowsRight from "../svgIcons/ArrowsRight";
 
-import styles from "./AllCarsPagination.module.css";
+import styles from "./CarDetailsPagination.module.css";
 
-const AllCarsPagination = ({
+const CarDetailsPagination = ({
 	cars,
 	cardsPerPage,
 	currentPage,
@@ -60,4 +60,4 @@ const AllCarsPagination = ({
 	);
 };
 
-export default AllCarsPagination;
+export default CarDetailsPagination;

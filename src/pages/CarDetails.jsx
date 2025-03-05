@@ -2,81 +2,77 @@ import { useState, useEffect } from "react";
 
 import Layout from "../components/layout/Layout";
 
-import CARS from "../data/cars_01.js";
-
-import Car from "../components/svgIcons/Car";
-import Location from "../components/svgIcons/Location";
-import Wallet from "../components/svgIcons/Wallet";
+import CARS from "../data/cars.js";
 
 import styles from "./CarDetails.module.css";
-import AllCars from "../components/allCars/AllCars.jsx";
-import AllCarsPagination from "../components/allCars/AllCarsPagination.jsx";
+import CarDetailsCards from "../components/carDetails/CarDetailsCards.jsx";
+import CarDetailsPagination from "../components/carDetails/CarDetailsPagination.jsx";
+import CarDetailsSearch from "../components/carDetails/CarDetailsSearch.jsx";
+import CarDetailsNoResults from "../components/carDetails/CarDetailsNoResults.jsx";
 
 const CarDetails = () => {
-	const [location, setLocation] = useState("");
-	const [brand, setBrand] = useState("");
-	const [price, setPrice] = useState("");
-	const [currentPage, setCurrentPage] = useState(1);
-	const [shuffledCars, setShuffledCars] = useState([]);
+	// const [allCars, setAllCars] = useState([]); // Autos desde la API
+	const [randomCars, setRandomCars] = useState([]);
 	const [filteredCars, setFilteredCars] = useState([]);
+	const [locations, setLocations] = useState([]);
+	const [brands, setBrands] = useState([]);
+	const [currentPage, setCurrentPage] = useState(1);
 	const [isAnimating, setIsAnimating] = useState(false);
 	const [showAllCars, setShowAllCars] = useState(false);
+	const [locationCity, setLocationCity] = useState("");
+	const [brand, setBrand] = useState("");
 
+	// Obtener autos desde el archivo cars.js
 	useEffect(() => {
 		const shuffled = [...CARS].sort(() => Math.random() - 0.5);
-		setShuffledCars(shuffled);
+		setRandomCars(shuffled);
 		setFilteredCars(shuffled);
+
+		setLocations([...new Set(CARS.map((car) => car.locationCity))]);
+		setBrands([...new Set(CARS.map((car) => car.brand))]);
 	}, []);
 
-	const filterCars = () => {
-		let filtered = [...CARS];
+	// // Obtener autos desde la API
+	// useEffect(() => {
+	// 	const fetchCars = async () => {
+	// 		try {
+	// 			const response = await fetch("https://api.example.com/cars");
+	// 			const data = await response.json();
+	// 			setAllCars(data);
+	// 			setFilteredCars(data);
 
-		if (location) filtered = filtered.filter((car) => car.location === location);
-		if (brand) filtered = filtered.filter((car) => car.brand === brand);
-		if (price) {
-			switch (price) {
-				case "low":
-					filtered = filtered.filter((car) => car.rentalPrice >= 150 && car.rentalPrice <= 200);
-					break;
-				case "mid":
-					filtered = filtered.filter((car) => car.rentalPrice >= 201 && car.rentalPrice <= 250);
-					break;
-				case "high":
-					filtered = filtered.filter((car) => car.rentalPrice >= 251 && car.rentalPrice <= 300);
-					break;
-				case "extra":
-					filtered = filtered.filter((car) => car.rentalPrice >= 301 && car.rentalPrice <= 350);
-					break;
-				default:
-					break;
-			}
-		}
+	// 			setLocations ([...new Set(data.map((car) => car.locationCity))]);
+	// 			setBrands ([...new Set(data.map((car) => car.brand))]);
+	// 		} catch (error) {
+	// 			console.error("Error al obtener autos:", error);
+	// 		}
+	// 	};
 
-		setFilteredCars(filtered);
-		setCurrentPage(1);
-	};
+	// 	fetchCars();
+	// }, []);
 
-	const handleSearch = (e) => {
-		e.preventDefault();
-		setShowAllCars(false);
-		filterCars();
-		setBrand("");
-		setLocation("");
-		setPrice("");
+	const handleSearch = ({ locationCity, brand }) => {
+		// const results = allCars.filter( // Autos desde la API
+		const results = CARS.filter(
+			(car) =>
+				(locationCity === "" || car.locationCity === locationCity) &&
+				(brand === "" || car.brand === brand)
+		);
+		setFilteredCars(results);
 	};
 
 	const handleShowAllCars = () => {
-		setShowAllCars(true);
-		setFilteredCars(shuffledCars);
+		setLocationCity("");
+		setBrand("");
+		setShowAllCars(false);
+		setFilteredCars(randomCars);
 		changePage(1);
 	};
 
 	const cardsPerPage = 9;
 	const indexOfLastCard = currentPage * cardsPerPage;
 	const indexOfFirstCard = indexOfLastCard - cardsPerPage;
-	// const currentCars = filteredCars.slice(indexOfFirstCard, indexOfLastCard);
 
-	// Cambiar de página con animación
 	const changePage = (newPage) => {
 		setIsAnimating(true);
 		setTimeout(() => {
@@ -86,10 +82,7 @@ const CarDetails = () => {
 	};
 
 	const scrollToTop = () => {
-		window.scrollTo({
-			top: 0,
-			behavior: "smooth",
-		});
+		window.scrollTo({ top: 0, behavior: "smooth" });
 	};
 
 	const handleNextPage = () => {
@@ -108,74 +101,28 @@ const CarDetails = () => {
 
 	return (
 		<Layout>
-			<section className={styles.carDetails}>
+			<section className={`section ${styles.carDetails}`}>
 				<h2>Automóviles</h2>
 				<div className="container">
 					<div className={styles.carDetailsContainer}>
 						<div className={styles.carDetailsSearch}>
-							<form className={styles.carDetailsSearchForm} onSubmit={handleSearch}>
-								<div className={styles.carDetailsSelectContainer}>
-									<Location />
-									<select
-										id="location"
-										value={location}
-										onChange={(e) => setLocation(e.target.value)}
-										className={styles.searchFormSelect}
-										required>
-										<option value="">Ubicación</option>
-										<option value="location-1">Location 1</option>
-										<option value="location-2">Location 2</option>
-										<option value="location-3">Location 3</option>
-										<option value="location-4">Location 4</option>
-									</select>
-								</div>
-								<div className={styles.carDetailsSelectContainer}>
-									<Car />
-									<select
-										id="brand"
-										value={brand}
-										onChange={(e) => setBrand(e.target.value)}
-										className={styles.searchFormSelect}
-										required>
-										<option value="">Marca</option>
-										<option value="audi">Audi</option>
-										<option value="bmw">BMW</option>
-										<option value="seat">Seat</option>
-										<option value="volkswagen">Volkswagen</option>
-									</select>
-								</div>
-								<div className={styles.carDetailsSelectContainer}>
-									<Wallet />
-									<select
-										id="price"
-										value={price}
-										onChange={(e) => setPrice(e.target.value)}
-										className={styles.searchFormSelect}
-										required>
-										<option value="">Precio</option>
-										<option value="low">$150 - $200</option>
-										<option value="mid">$201 - $250</option>
-										<option value="high">$251 - $300</option>
-										<option value="extra">$301 - $350</option>
-									</select>
-								</div>
-								<button type="submit" className="main-btn">
-									Buscar
-								</button>
-							</form>
+							<CarDetailsSearch
+								handleSearch={handleSearch}
+								locations={locations}
+								brands={brands}
+								locationCity={locationCity}
+								setLocationCity={setLocationCity}
+								brand={brand}
+								setBrand={setBrand}
+							/>
 						</div>
 						{filteredCars.length === 0 && !showAllCars ? (
-							<div className={`${styles.noResults} ${styles.visible}`}>
-								<b>No se encontraron autos que coincidan con los filtros seleccionados.</b>
-								<button onClick={handleShowAllCars} className="main-btn">
-									Regresar
-								</button>
-							</div>
+							<CarDetailsNoResults handleShowAllCars={handleShowAllCars} />
 						) : (
-							<AllCars
+							<CarDetailsCards
 								cars={
 									showAllCars
-										? shuffledCars.slice(indexOfFirstCard, indexOfLastCard)
+										? randomCars.slice(indexOfFirstCard, indexOfLastCard)
 										: filteredCars.slice(indexOfFirstCard, indexOfLastCard)
 								}
 								cardsPerPage={cardsPerPage}
@@ -184,8 +131,8 @@ const CarDetails = () => {
 							/>
 						)}
 					</div>
-					<AllCarsPagination
-						cars={showAllCars ? shuffledCars : filteredCars}
+					<CarDetailsPagination
+						cars={showAllCars ? randomCars : filteredCars}
 						cardsPerPage={cardsPerPage}
 						currentPage={currentPage}
 						handlePrevPage={handlePrevPage}

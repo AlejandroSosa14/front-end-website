@@ -1,9 +1,8 @@
 .heroMain {
 	position: relative;
-	top: calc(var(--header-height) * -1);
 	width: 100%;
-	min-height: 100svh;
-	height: 100%;
+	min-height: 100vh;
+	height: fit-content;
 	background-image: url("/rapidride_banner.png");
 	background-size: calc(90vw);
 	background-position: center 80%;
@@ -12,7 +11,7 @@
 
 	@media screen and (min-width: 1024px) {
 		background-size: calc(60vw);
-		background-position: center bottom;
+		background-position: center 100%;
 	}
 }
 
