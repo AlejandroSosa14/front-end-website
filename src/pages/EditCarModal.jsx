@@ -6,34 +6,55 @@ const EditCarModal = ({ car, onClose, onUpdate }) => {
     const [formData, setFormData] = useState({ ...car });
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
-    const [initialImages, setInitialImages] = useState([]); 
-    const [selectedFiles, setSelectedFiles] = useState([]); 
-    const [removedImages, setRemovedImages] = useState([]); 
+    const [initialImages, setInitialImages] = useState([]);
+    const [selectedFiles, setSelectedFiles] = useState([]);
+    const [removedImages, setRemovedImages] = useState([]);
 
+    // useEffect(() => {
+        
+    //     try {
+    //         if (car.images) {
+    //             const parsedImages = JSON.parse(car.images);
+    //             setInitialImages(Array.isArray(parsedImages) ? parsedImages : []);
+    //         }
+    //     } catch (error) {
+    //         console.error("Error al parsear imágenes:", error);
+    //         setInitialImages([]);
+    //     }
+    // }, [car.images]);
     useEffect(() => {
+        console.log("Datos recibidos del GET:", car);
+    
         try {
-            if (typeof car.images === "string") {
-                const imagesArray = JSON.parse(car.images);
-                setInitialImages(Array.isArray(imagesArray) ? imagesArray : []);
-            } else if (Array.isArray(car.images)) {
-                setInitialImages(car.images);
-            } else {
-                setInitialImages([]);
+            let imagesArray = [];
+    
+            if (car.images && car.images.length > 0) {
+                imagesArray = car.images.flatMap((imageString) => {
+                    try {
+                        const parsedArray = JSON.parse(imageString); // Convertir el string JSON en array
+                        return Array.isArray(parsedArray) ? parsedArray : []; // Asegurar que sea un array
+                    } catch (error) {
+                        console.error("Error al parsear imagen:", imageString, error);
+                        return [];
+                    }
+                });
             }
+    
+            console.log("Imágenes finales establecidas:", imagesArray);
+            setInitialImages(imagesArray);
         } catch (error) {
-            console.error("Error al parsear imágenes:", error);
+            console.error("Error general al procesar imágenes:", error);
             setInitialImages([]);
         }
     }, [car.images]);
+    
 
     const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
+        setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
     const handleFileChange = (e) => {
-        const files = Array.from(e.target.files);
-        setSelectedFiles([...selectedFiles, ...files]);
+        setSelectedFiles([...selectedFiles, ...Array.from(e.target.files)]);
     };
 
     const handleRemoveImage = (index, isNew) => {
@@ -51,12 +72,14 @@ const EditCarModal = ({ car, onClose, onUpdate }) => {
         setError(null);
 
         try {
+            const imagesToKeep = initialImages.filter(img => !removedImages.includes(img));
+
             const updatedCarData = {
                 ...formData,
                 model: parseInt(formData.model, 10),
                 reserveCost: parseFloat(formData.reserveCost),
                 status: formData.status === "true",
-                images: JSON.stringify(initialImages.filter(img => !removedImages.includes(img)))
+                images: JSON.stringify(imagesToKeep) 
             };
 
             const formDataToSend = new FormData();
@@ -71,6 +94,7 @@ const EditCarModal = ({ car, onClose, onUpdate }) => {
             }
 
             const updatedCar = await updateCar(car.id, formDataToSend);
+
             onUpdate(updatedCar);
             onClose();
         } catch (error) {
@@ -101,7 +125,6 @@ const EditCarModal = ({ car, onClose, onUpdate }) => {
                     </label>
                     <label>Combustible:
                         <select name="fuelType" value={formData.fuelType} onChange={handleChange} required>
-                            <option value="">Seleccione el tipo de combustible</option>
                             <option value="gasolina">Gasolina</option>
                             <option value="diésel">Diésel</option>
                             <option value="eléctrico">Eléctrico</option>
@@ -110,7 +133,6 @@ const EditCarModal = ({ car, onClose, onUpdate }) => {
                     </label>
                     <label>Transmisión:
                         <select name="transmissionType" value={formData.transmissionType} onChange={handleChange} required>
-                            <option value="">Seleccione el tipo de transmisión</option>
                             <option value="estandar">Manual</option>
                             <option value="automatico">Automática</option>
                         </select>
@@ -124,6 +146,22 @@ const EditCarModal = ({ car, onClose, onUpdate }) => {
                     <label>Precio de Reserva:
                         <input type="number" name="reserveCost" value={formData.reserveCost} onChange={handleChange} required />
                     </label>
+{/* 
+                    <label>Imágenes Actuales:</label>
+                    <div className={styles.imageContainer}>
+                        {initialImages.length > 0 ? (
+                            initialImages.map((img, index) => (
+                                <div key={index} className={styles.imageWrapper}>
+                                    <img src={img} alt={`Imagen ${index + 1}`} className={styles.carImage} />
+                                    <button type="button" className={styles.removeImageBtn} onClick={() => handleRemoveImage(index, false)}>
+                                        ❌
+                                    </button>
+                                </div>
+                            ))
+                        ) : (
+                            <p>No hay imágenes disponibles</p>
+                        )}
+                    </div> */}
 
                     <label>Imágenes Actuales:</label>
                     <div className={styles.imageContainer}>
@@ -169,5 +207,3 @@ const EditCarModal = ({ car, onClose, onUpdate }) => {
 };
 
 export default EditCarModal;
-
-
