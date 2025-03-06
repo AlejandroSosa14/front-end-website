@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaUser, FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
+import Swal from "sweetalert2";
 import styles from "./UserForm.module.css";
-import { loginUser } from "../../api/users";  // Importa el servicio
+import { loginUser } from "../../api/users";
 
 const LoginForm = ({ formRef }) => {
     const [formData, setFormData] = useState({
@@ -10,11 +11,25 @@ const LoginForm = ({ formRef }) => {
         password: "",
         showPassword: false,
     });
-    const [error, setError] = useState(null);
+    const [errors, setErrors] = useState({});
     const navigate = useNavigate();
 
+    const validateField = (name, value) => {
+        let error = "";
+        if (name === "password") {
+            if (!value) {
+                error = "La contraseña es obligatoria";
+            } else if (value.length < 8) {
+                error = "Debe tener al menos 8 caracteres";
+            }
+        }
+        return error;
+    };
+
     const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
+        setErrors({ ...errors, [name]: validateField(name, value) });
     };
 
     const togglePasswordVisibility = () => {
@@ -23,21 +38,33 @@ const LoginForm = ({ formRef }) => {
 
     const handleLogin = async (e) => {
         e.preventDefault();
-        setError(null);
+        
+        let newErrors = {};
+        Object.keys(formData).forEach((key) => {
+            if (key !== "showPassword") {
+                newErrors[key] = validateField(key, formData[key]);
+            }
+        });
+
+        setErrors(newErrors);
+        if (Object.values(newErrors).some((error) => error)) return;
 
         const result = await loginUser(formData.username, formData.password);
 
         if (result.success) {
             navigate("/");
         } else {
-            setError(result.error);
+            Swal.fire({
+                title: "Error de autenticación",
+                text: "Usuario o contraseña incorrectos",
+                icon: "error",
+                confirmButtonText: "Aceptar",
+            });
         }
     };
 
     return (
         <form ref={formRef} className={styles.container} onSubmit={handleLogin}>
-            {error && <p className={styles.errorMessage}>{error}</p>}
-
             <div>
                 <label>Usuario:</label>
                 <div className={styles.inputGroup}>
@@ -56,7 +83,7 @@ const LoginForm = ({ formRef }) => {
 
             <div>
                 <label>Contraseña:</label>
-                <div className={styles.inputGroup}>
+                <div className={`${styles.inputGroup} ${errors.password ? styles.errorBorder : ""}`}>
                     <FaLock className={styles.icon} />
                     <input
                         className={styles.input}
@@ -71,6 +98,7 @@ const LoginForm = ({ formRef }) => {
                         {formData.showPassword ? <FaEyeSlash /> : <FaEye />}
                     </button>
                 </div>
+                {errors.password && <p className={styles.error}>{errors.password}</p>}
             </div>
         </form>
     );

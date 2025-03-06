@@ -52,27 +52,35 @@ export const getUsers = async () => {
 
 export const createUser = async (userData) => {
     try {
-        const response = await fetch("http://localhost:8181/api/users", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            mode: "cors",
-            credentials: "include",
-            body: JSON.stringify(userData),
-        });
-
-        if (!response.ok) {
-            throw new Error("Error al crear el usuario");
+      const response = await fetch("http://localhost:8181/api/users", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userData),
+      });
+  
+      let errorMessage = "Error al crear el usuario";
+  
+      if (!response.ok) {
+        const contentType = response.headers.get("Content-Type");
+  
+        if (contentType && contentType.includes("application/json")) {
+          const errorData = await response.json();
+          errorMessage = errorData.message || errorMessage;
+        } else {
+          errorMessage = await response.text();
         }
-
-        return await response.json();
+  
+        throw new Error(errorMessage);
+      }
+  
+      return await response.json();
     } catch (error) {
-        console.error("Error en createUser:", error);
-        return null;
+      console.error("Error en createUser:", error);
+      throw error;
     }
-};
-
+  };
 
 export const deleteUser = async (userId) => {
     try {

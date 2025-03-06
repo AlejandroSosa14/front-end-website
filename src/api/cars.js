@@ -1,11 +1,9 @@
 // cars
-export const getCars = async () => {
+export const getCars = async (page = 0, size = 10) => {
     try {
-        const response = await fetch("http://localhost:8181/api/cars?page=0&size=10", {
+        const response = await fetch(`http://localhost:8181/api/cars?page=${page}&size=${size}`, {
             method: "GET",
-            headers: {
-                "Content-Type": "application/json"
-            },
+            headers: { "Content-Type": "application/json" },
             mode: "cors"
         });
 
@@ -16,7 +14,7 @@ export const getCars = async () => {
         return await response.json();
     } catch (error) {
         console.error("Error en getCars:", error);
-        return [];
+        return { content: [], totalPages: 0, totalElements: 0, currentPage: 0 };
     }
 };
 
@@ -47,5 +45,58 @@ export const deleteCar = async (carId) => {
     } catch (error) {
         console.error("Error en deleteCar:", error);
         return false;
+    }
+};
+
+
+export const createCar = async (carData, files = []) => {
+    try {
+        const token = localStorage.getItem("authToken");
+        if (!token) throw new Error("No hay token disponible, el usuario debe iniciar sesión");
+
+        const formData = new FormData();
+        formData.append("car", JSON.stringify(carData));
+
+        files.forEach((file) => formData.append("files", file));
+
+        const response = await fetch("http://localhost:8181/api/cars", {
+            method: "POST",
+            headers: { Authorization: `Bearer ${token}` }, 
+            mode: "cors",
+            credentials: "include",
+            body: formData,
+        });
+
+        if (!response.ok) throw new Error("Error al crear el auto");
+
+        return await response.json();
+    } catch (error) {
+        console.error("Error en createCar:", error);
+        return null;
+    }
+};
+
+export const updateCar = async (carId, formData) => {
+    try {
+        const token = localStorage.getItem("authToken");
+        if (!token) throw new Error("No hay token disponible, el usuario debe iniciar sesión");
+
+        const response = await fetch(`http://localhost:8181/api/cars/${carId}`, {
+            method: "PUT",
+            headers: { "Authorization": `Bearer ${token}` }, 
+            mode: "cors",
+            credentials: "include",
+            body: formData,
+        });
+
+        if (!response.ok) {
+            const errorText = await response.text();
+            throw new Error(`Error ${response.status}: ${errorText}`);
+        }
+
+        return await response.json();
+    } catch (error) {
+        console.error("Error en updateCar:", error);
+        return null;
     }
 };
