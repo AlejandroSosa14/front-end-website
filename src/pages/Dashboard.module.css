@@ -12,7 +12,7 @@ html, body {
     flex-direction: column;
 }
 
-.content{ 
+.content { 
     width: 70%;
     margin: auto;
     padding: 2rem;
@@ -22,7 +22,6 @@ html, body {
 
 .searchByBrand {
     display: flex;
-    /* width: 65%; */
     height: 6rem;
     margin: auto;
     background-color: lightblue;
@@ -75,38 +74,179 @@ html, body {
 
 .addNewCar {
     margin-top: 1rem;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 2rem;
+}
+
+.addNewCar button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.addNewCar button:hover {
+    background-color: #0056b3;
 }
 
 .carList {
     margin-top: 2rem;
-    min-height: 70vh; /* Asegura que haya suficiente espacio antes del footer */
-    
+    min-height: 70vh;
 }
 
 .tableInfo {
     width: 100%;
     height: 100%;
     color: black;
+    border-collapse: collapse;
+    border-radius: 8px;
+    overflow: hidden;
 }
+
+
 
 .tableHead {
     background-color: gainsboro;
     height: 2rem;
-    border-radius: 2rem;
+}
+
+.tableHead th {
+    padding: 12px;
+    text-align: center;
+    font-weight: bold;
 }
 
 .tableContent {
     text-align: center;
 }
 
-.tableIcon {
-    width: 30px;
-    height: 30px;
+.tableContent td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    vertical-align: middle;
+}
+
+.tableContent tr:hover {
+    background-color: #f1f1f1;
 }
 
 .iconCell {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
+    gap: 15px; /* Aumenta la separación entre los botones */
+    padding: 10px; /* Espacio interno */
+    min-width: 150px; /* Ajusta el ancho mínimo */
+}
+
+/* Ajustar el tamaño de los botones de acción */
+.tableIcon {
+    width: 40px;
+    height: 40px;
+    padding: 5px; /* Espaciado interno para que no se vean apretados */
+    border-radius: 5px;
+    transition: transform 0.2s;
+}
+
+/* Efecto al pasar el mouse */
+.tableIcon:hover {
+    transform: scale(1.1);
+}
+
+.carImage {
+    width: 80px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.paginationContainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    align-items: center;
+    gap: 10px;
+}
+
+.pageButton {
+    padding: 8px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.pageButton:disabled {
+    background-color: gray;
+    cursor: not-allowed;
+}
+
+.pageButton:hover:not(:disabled) {
+    background-color: #0056b3;
+}
+
+.register {
+    width: 100%;
+    min-height: 60vh;
+    height: 100%;
+    padding-bottom: 2rem;
+}
+
+.register h2 {
+    font-size: 2rem;
+    width: 100%;
+    background-color: var(--main-color);
+    padding: 2rem 0;
+    text-align: center;
+    margin-bottom: 1.4rem;
+    margin-top: 5rem;
+    color: white;
+}
+
+.buttonContainer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 1.5rem;
+}
+
+.submitButton {
+    background-color: var(--main-color);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 10px 20px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.submitButton:hover {
+    background-color: #001a4d;
+}
+
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modalContent {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
 }
 
 .mobileContainer {
@@ -142,87 +282,60 @@ html, body {
     }
 }
 
+.buttonWrapper {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 2rem;
+    margin-bottom: 1rem;
+}
 
-.carImage {
-    width: 80px;
-    height: auto;
+.addCarButton {
+    background-color: var(--button-color, #007bff);
+    color: white;
+    border: none;
+    padding: 12px 18px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.3s ease-in-out;
+}
+
+.addCarButton:hover {
+    background-color: var(--button-hover-color, #0056b3);
+    transform: scale(1.05);
+}
+
+/* Ajuste para botones de acciones en la tabla */
+.actionButtons {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+}
+
+.editButton, .deleteButton {
+    padding: 6px 12px;
+    border: none;
     border-radius: 5px;
-}
-
-.pagination {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-}
-
-.pageButton {
-    padding: 8px 15px;
-    margin: 0 5px;
-    background-color: #007bff;
-    color: white;
-    border: none;
     cursor: pointer;
+    transition: all 0.3s;
 }
 
-.pageButton:disabled {
-    background-color: gray;
-    cursor: not-allowed;
+.editButton {
+    background-color: #ffc107;
+    color: black;
 }
 
-/*niuevo*/
-
-.register {
-    width: 100%;
-    min-height: 60vh;
-    height: 100%;
-    padding-bottom: 2rem;
+.editButton:hover {
+    background-color: #e0a800;
 }
 
-.register h2 {
-    font-size: 2rem;
-    width: 100%;
-    background-color: var(--main-color);
-    padding: 2rem 0;
-    text-align: center;
-    margin-bottom: 1.4rem;
-    margin-top: 5rem;
+.deleteButton {
+    background-color: #dc3545;
     color: white;
 }
 
-.buttonContainer {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    margin-top: 1.5rem;
-}
-
-.submitButton {
-    background-color: var(--main-color);
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.submitButton:hover {
-    background-color: #001a4d;
-}
-
-.modalOverlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.modalContent {
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+.deleteButton:hover {
+    background-color: #c82333;
 }

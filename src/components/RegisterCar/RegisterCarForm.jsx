@@ -13,13 +13,13 @@ const RegisterCarForm = ({ onCarCreated }) => {
         transmissionType: "",
         categoryId: "",
         reserveCost: "",
-        images: []
     });
 
     const [categories, setCategories] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [successMessage, setSuccessMessage] = useState("");
+    const [selectedFiles, setSelectedFiles] = useState([]);
 
     useEffect(() => {
         const fetchCategories = async () => {
@@ -43,10 +43,7 @@ const RegisterCarForm = ({ onCarCreated }) => {
 
     const handleImageUpload = (e) => {
         const files = Array.from(e.target.files);
-        setCarData(prevData => ({
-            ...prevData,
-            images: [...prevData.images, ...files]
-        }));
+        setSelectedFiles(files);
     };
 
     const handleSubmit = async (e) => {
@@ -63,8 +60,14 @@ const RegisterCarForm = ({ onCarCreated }) => {
                 reserveCost: parseFloat(carData.reserveCost),
                 category: { id: parseInt(carData.categoryId) }
             };
-
-            const result = await createCar(newCar, carData.images);
+    
+            const formData = new FormData();
+            
+            const carBlob = new Blob([JSON.stringify(newCar)], { type: "application/json" });
+            formData.append("car", carBlob);
+            selectedFiles.forEach((file) => formData.append("files", file));
+    
+            const result = await createCar(formData);
             if (result) {
                 setSuccessMessage("Auto registrado exitosamente");
                 setTimeout(() => setSuccessMessage(""), 3000);
@@ -77,8 +80,8 @@ const RegisterCarForm = ({ onCarCreated }) => {
                     transmissionType: "",
                     categoryId: "",
                     reserveCost: "",
-                    images: []
                 });
+                setSelectedFiles([]);
                 onCarCreated && onCarCreated(result);
             } else {
                 throw new Error("No se pudo registrar el auto");
@@ -87,7 +90,7 @@ const RegisterCarForm = ({ onCarCreated }) => {
             setError(error.message);
         }
     };
-
+    
     return (
         <div>
             {successMessage && <p className={styles.success}>{successMessage}</p>}
@@ -145,8 +148,8 @@ const RegisterCarForm = ({ onCarCreated }) => {
                     <input type="file" multiple accept="image/*" onChange={handleImageUpload} />
                 </label>
                 <div className={styles.imagePreview}>
-                    {carData.images.map((img, index) => (
-                        <img key={index} src={URL.createObjectURL(img)} alt={`Car ${index + 1}`} />
+                    {selectedFiles.map((file, index) => (
+                        <img key={index} src={URL.createObjectURL(file)} alt={`Car ${index + 1}`} />
                     ))}
                 </div>
                 <button className={styles.button} type="submit">Registrar Auto</button>

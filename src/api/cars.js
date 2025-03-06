@@ -76,6 +76,7 @@ export const createCar = async (carData, files = []) => {
     }
 };
 
+
 export const updateCar = async (carId, formData) => {
     try {
         const token = localStorage.getItem("authToken");
@@ -83,7 +84,7 @@ export const updateCar = async (carId, formData) => {
 
         const response = await fetch(`http://localhost:8181/api/cars/${carId}`, {
             method: "PUT",
-            headers: { "Authorization": `Bearer ${token}` }, 
+            headers: { "Authorization": `Bearer ${token}` },
             mode: "cors",
             credentials: "include",
             body: formData,
