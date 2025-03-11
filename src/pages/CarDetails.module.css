@@ -46,3 +46,34 @@
 		width: 25%;
 	}
 }
+
+.carDetailsSearch form {
+	flex-direction: column;
+	align-items: center;
+	padding: 1.75rem;
+	width: 100%;
+	gap: 1rem;
+
+	@media screen and (min-width: 768px) {
+	}
+}
+
+.carDetailsSearch form div {
+	gap: 1rem;
+	width: inherit;
+	flex-direction: column;
+	@media screen and (min-width: 768px) {
+		flex-direction: row;
+	}
+
+	@media screen and (min-width: 1024px) {
+		flex-direction: column;
+	}
+}
+
+.carDetailsSearch form select {
+	background-color: var(--white);
+}
+.carDetailsSearch form button {
+	margin-top: 0;
+}

@@ -1,102 +1,77 @@
 import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 
 import Layout from "../components/layout/Layout";
 
 import CARS from "../data/cars.js";
 
-import styles from "./CarDetails.module.css";
+import CardSkeletonV1 from "../components/ui/CardSkeletonV1.jsx";
+import FormSearch from "../components/search/FormSearch.jsx";
 import CarDetailsCards from "../components/carDetails/CarDetailsCards.jsx";
-import CarDetailsPagination from "../components/carDetails/CarDetailsPagination.jsx";
-import CarDetailsSearch from "../components/carDetails/CarDetailsSearch.jsx";
 import CarDetailsNoResults from "../components/carDetails/CarDetailsNoResults.jsx";
+import CarDetailsPagination from "../components/carDetails/CarDetailsPagination.jsx";
+
+import styles from "./CarDetails.module.css";
+import cardGrid from "../components/carDetails/CarDetailsCards.module.css";
 
 const CarDetails = () => {
-	// const [allCars, setAllCars] = useState([]); // Autos desde la API
-	const [randomCars, setRandomCars] = useState([]);
 	const [filteredCars, setFilteredCars] = useState([]);
-	const [locations, setLocations] = useState([]);
-	const [brands, setBrands] = useState([]);
 	const [currentPage, setCurrentPage] = useState(1);
 	const [isAnimating, setIsAnimating] = useState(false);
-	const [showAllCars, setShowAllCars] = useState(false);
-	const [locationCity, setLocationCity] = useState("");
-	const [brand, setBrand] = useState("");
-
-	// Obtener autos desde el archivo cars.js
-	useEffect(() => {
-		const shuffled = [...CARS].sort(() => Math.random() - 0.5);
-		setRandomCars(shuffled);
-		setFilteredCars(shuffled);
-
-		setLocations([...new Set(CARS.map((car) => car.locationCity))]);
-		setBrands([...new Set(CARS.map((car) => car.brand))]);
-	}, []);
-
-	// // Obtener autos desde la API
-	// useEffect(() => {
-	// 	const fetchCars = async () => {
-	// 		try {
-	// 			const response = await fetch("https://api.example.com/cars");
-	// 			const data = await response.json();
-	// 			setAllCars(data);
-	// 			setFilteredCars(data);
-
-	// 			setLocations ([...new Set(data.map((car) => car.locationCity))]);
-	// 			setBrands ([...new Set(data.map((car) => car.brand))]);
-	// 		} catch (error) {
-	// 			console.error("Error al obtener autos:", error);
-	// 		}
-	// 	};
-
-	// 	fetchCars();
-	// }, []);
-
-	const handleSearch = ({ locationCity, brand }) => {
-		// const results = allCars.filter( // Autos desde la API
-		const results = CARS.filter(
-			(car) =>
-				(locationCity === "" || car.locationCity === locationCity) &&
-				(brand === "" || car.brand === brand)
-		);
-		setFilteredCars(results);
-	};
-
-	const handleShowAllCars = () => {
-		setLocationCity("");
-		setBrand("");
-		setShowAllCars(false);
-		setFilteredCars(randomCars);
-		changePage(1);
-	};
+	const [searchParams, setSearchParams] = useSearchParams();
+	const [loading, setLoading] = useState(true);
 
 	const cardsPerPage = 9;
 	const indexOfLastCard = currentPage * cardsPerPage;
 	const indexOfFirstCard = indexOfLastCard - cardsPerPage;
 
-	const changePage = (newPage) => {
+	useEffect(() => {
+		setLoading(true);
+		window.scrollTo({ top: 0, behavior: "smooth" });
+
+		const brand = searchParams.get("brand") || "";
+		const locationCity = searchParams.get("locationCity") || "";
+
+		const results = CARS.filter(
+			(car) =>
+				(brand === "" || car.brand === brand) &&
+				(locationCity === "" || car.locationCity === locationCity)
+		);
+
+		const randomResults = results.sort(() => Math.random() - 0.5);
 		setIsAnimating(true);
+		setLoading(true);
+
+		setTimeout(() => {
+			setFilteredCars(randomResults);
+			setCurrentPage(1);
+			setIsAnimating(false);
+			setLoading(false);
+		}, 1000);
+	}, [searchParams]);
+
+	const handleShowAllCars = () => {
+		const randomCars = [...CARS].sort(() => Math.random() - 0.5);
+		setIsAnimating(true);
+		setLoading(true);
+
+		setTimeout(() => {
+			setSearchParams({});
+			setFilteredCars(randomCars);
+			setCurrentPage(1);
+			setIsAnimating(false);
+		}, 1000);
+	};
+
+	const changePage = (newPage) => {
+		window.scrollTo({ top: 0, behavior: "smooth" });
+		setIsAnimating(true);
+		setLoading(true);
 		setTimeout(() => {
 			setCurrentPage(newPage);
 			setIsAnimating(false);
-		}, 300);
-	};
-
-	const scrollToTop = () => {
-		window.scrollTo({ top: 0, behavior: "smooth" });
-	};
-
-	const handleNextPage = () => {
-		if (currentPage < Math.ceil(filteredCars.length / cardsPerPage)) {
-			changePage(currentPage + 1);
-			scrollToTop();
-		}
-	};
-
-	const handlePrevPage = () => {
-		if (currentPage > 1) {
-			changePage(currentPage - 1);
-			scrollToTop();
-		}
+			setLoading(false);
+		}, 1000);
 	};
 
 	return (
@@ -106,40 +81,36 @@ const CarDetails = () => {
 				<div className="container">
 					<div className={styles.carDetailsContainer}>
 						<div className={styles.carDetailsSearch}>
-							<CarDetailsSearch
-								handleSearch={handleSearch}
-								locations={locations}
-								brands={brands}
-								locationCity={locationCity}
-								setLocationCity={setLocationCity}
-								brand={brand}
-								setBrand={setBrand}
-							/>
+							<FormSearch />
 						</div>
-						{filteredCars.length === 0 && !showAllCars ? (
+						{loading ? (
+							<div className={cardGrid.carDetailsGrid}>
+								{Array.from({ length: 6 }).map((_, index) => (
+									<CardSkeletonV1 key={index} />
+								))}
+							</div>
+						) : filteredCars.length === 0 ? (
 							<CarDetailsNoResults handleShowAllCars={handleShowAllCars} />
 						) : (
 							<CarDetailsCards
-								cars={
-									showAllCars
-										? randomCars.slice(indexOfFirstCard, indexOfLastCard)
-										: filteredCars.slice(indexOfFirstCard, indexOfLastCard)
-								}
+								cars={filteredCars.slice(indexOfFirstCard, indexOfLastCard)}
 								cardsPerPage={cardsPerPage}
 								currentPage={currentPage}
 								isAnimating={isAnimating}
 							/>
 						)}
 					</div>
-					<CarDetailsPagination
-						cars={showAllCars ? randomCars : filteredCars}
-						cardsPerPage={cardsPerPage}
-						currentPage={currentPage}
-						handlePrevPage={handlePrevPage}
-						handleNextPage={handleNextPage}
-						changePage={changePage}
-						scrollToTop={scrollToTop}
-					/>
+
+					{!loading && filteredCars.length > 0 && (
+						<CarDetailsPagination
+							cars={filteredCars}
+							cardsPerPage={cardsPerPage}
+							currentPage={currentPage}
+							changePage={changePage}
+							setIsAnimating={setIsAnimating}
+							setIsLoading={setLoading}
+						/>
+					)}
 				</div>
 			</section>
 		</Layout>
