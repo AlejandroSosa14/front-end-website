@@ -1,5 +1,8 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { CarProvider } from "./context/SearchCarContext";
+
 import Home from "./pages/Home";
+
 import CarDetails from "./pages/CarDetails";
 import CarDetail from "./pages/CarDetail";
 import Dashboard from "./pages/Dashboard";
@@ -12,15 +15,17 @@ import "./App.css";
 function App() {
 	return (
 		<BrowserRouter>
-			<Routes>
-				<Route path="/" element={<Home />} />
-				<Route path="/login" element={<Login />} />
-				<Route path="/detalle-autos" element={<CarDetails />} />
-				<Route path="/dashboard" element={<Dashboard />} />
-				<Route path="/auto/:carId" element={<CarDetail />} />
-				<Route path="/registro" element={<RegisterPage />} />
-				<Route path="/register-car" element={<RegisterCarPage />} />
-			</Routes>
+			<CarProvider>
+				<Routes>
+					<Route path="/" element={<Home />} />
+					<Route path="/login" element={<Login />} />
+					<Route path="/detalle-autos" element={<CarDetails />} />
+					<Route path="/dashboard" element={<Dashboard />} />
+					<Route path="/auto/:carId" element={<CarDetail />} />
+					<Route path="/registro" element={<RegisterPage />} />
+					<Route path="/register-car" element={<RegisterCarPage />} />
+				</Routes>
+			</CarProvider>
 		</BrowserRouter>
 	);
 }
