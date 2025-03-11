@@ -1,13 +1,18 @@
+import { motion } from "framer-motion";
+
 import CarCard_V1 from "../carCards/CarCard_V1";
 
 import styles from "./CarDetailsCards.module.css";
 
 const CarDetailsCards = ({ cars, isAnimating }) => {
 	return (
-		<div
-			className={`${styles.carDetailsGrid} ${
-				isAnimating ? styles["fade-out"] : styles["fade-in"]
-			}`}>
+		<motion.div
+			key={isAnimating}
+			className={`${styles.carDetailsGrid} ${isAnimating ? styles["fade-out"] : styles["fade-in"]}`}
+			initial={{ opacity: 0, y: 20 }}
+			animate={{ opacity: 1, y: 0 }}
+			exit={{ opacity: 0, y: 20 }}
+			transition={{ duration: 0.3 }}>
 			{cars.map((car) => (
 				<CarCard_V1
 					key={car.id}
@@ -23,7 +28,7 @@ const CarDetailsCards = ({ cars, isAnimating }) => {
 					isFavorite={car.isFavorite}
 				/>
 			))}
-		</div>
+		</motion.div>
 	);
 };
 
