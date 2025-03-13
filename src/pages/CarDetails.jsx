@@ -11,6 +11,8 @@ import CarDetailsCards from "../components/carDetails/CarDetailsCards.jsx";
 import CarDetailsNoResults from "../components/carDetails/CarDetailsNoResults.jsx";
 import CarDetailsPagination from "../components/carDetails/CarDetailsPagination.jsx";
 
+import { normalizeText } from "../utils/textUtils.js";
+
 import styles from "./CarDetails.module.css";
 import cardGrid from "../components/carDetails/CarDetailsCards.module.css";
 
@@ -31,11 +33,17 @@ const CarDetails = () => {
 
 		const brand = searchParams.get("brand") || "";
 		const locationCity = searchParams.get("locationCity") || "";
+		const carBody = searchParams.get("carBody") || "";
+
+		const normalizedBrand = normalizeText(brand);
+		const normalizedLocationCity = normalizeText(locationCity);
+		const normalizedCarBody = normalizeText(carBody);
 
 		const results = CARS.filter(
 			(car) =>
-				(brand === "" || car.brand === brand) &&
-				(locationCity === "" || car.locationCity === locationCity)
+				(normalizedBrand === "" || normalizeText(car.brand) === brand) &&
+				(normalizedLocationCity === "" || normalizeText(car.locationCity) === locationCity) &&
+				(normalizedCarBody === "" || normalizeText(car.carBody) === normalizedCarBody)
 		);
 
 		const randomResults = results.sort(() => Math.random() - 0.5);
