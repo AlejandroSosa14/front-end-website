@@ -2,6 +2,8 @@ import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import SearchCarContext from "../../context/SearchCarContext";
 
+import { normalizeText } from "../../utils/textUtils";
+
 import styles from "./FormSearch.module.css";
 
 const FormSearch = () => {
@@ -14,8 +16,8 @@ const FormSearch = () => {
 		e.preventDefault();
 
 		const queryParams = new URLSearchParams();
-		if (brand) queryParams.append("brand", brand);
-		if (locationCity) queryParams.append("locationCity", locationCity);
+		if (brand) queryParams.append("brand", normalizeText(brand));
+		if (locationCity) queryParams.append("locationCity", normalizeText(locationCity));
 		navigate(`/detalle-autos?${queryParams.toString()}`);
 		setBrand("");
 		setLocationCity("");
@@ -30,8 +32,7 @@ const FormSearch = () => {
 						id="brand"
 						value={brand}
 						onChange={(e) => setBrand(e.target.value)}
-						className={styles.searchFormSelect}
-						required>
+						className={styles.searchFormSelect}>
 						<option value="" disabled>
 							Marca
 						</option>
@@ -52,8 +53,7 @@ const FormSearch = () => {
 						id="location"
 						value={locationCity}
 						onChange={(e) => setLocationCity(e.target.value)}
-						className={styles.searchFormSelect}
-						required>
+						className={styles.searchFormSelect}>
 						<option value="" disabled>
 							Ubicación
 						</option>
