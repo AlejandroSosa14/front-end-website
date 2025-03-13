@@ -66,7 +66,7 @@ const FormSearch = () => {
 				</div>
 			</div>
 			<button className="main-btn" type="submit">
-				Buscar
+				Realizar búsqueda
 			</button>
 		</form>
 	);

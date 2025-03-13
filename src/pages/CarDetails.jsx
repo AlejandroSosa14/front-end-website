@@ -89,6 +89,10 @@ const CarDetails = () => {
 				<div className="container">
 					<div className={styles.carDetailsContainer}>
 						<div className={styles.carDetailsSearch}>
+							<h3>Búsqueda</h3>
+							<p>
+								Puedes buscar por <span>Marca</span>, <span>Ubicación</span> o ambos.
+							</p>
 							<FormSearch />
 						</div>
 						{loading ? (
