@@ -1,53 +1,64 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "./Categories.module.css";
+import CategoryCard from "../carCards/CategoryCard";
+
+import { normalizeText } from "../../utils/textUtils";
 
 // Datos de ejemplo (se reemplazarán con datos reales)
-const carsByBrand = [
+const CATEGORIES = [
 	{
 		id: 1,
-		brand: "Mercedes Benz",
-		image:
-			"https://w7.pngwing.com/pngs/329/482/png-transparent-2010-mercedes-benz-glk-class-2015-mercedes-benz-glk-class-2011-mercedes-benz-glk-class-2013-mercedes-benz-glk-class-mercedes-car-love-compact-car-vehicle-thumbnail.png",
+		carBody: "Sedán",
+		total: 10,
+		image: "/src/assets/images/categories/sedan.webp",
 	},
 	{
 		id: 2,
-		brand: "BMW",
-		image:
-			"https://w7.pngwing.com/pngs/998/989/png-transparent-2018-bmw-x6-m-suv-car-bmw-6-series-bmw-x4-bmw-compact-car-car-performance-car-thumbnail.png",
+		carBody: "SUV",
+		total: 15,
+		image: "/src/assets/images/categories/suv.webp",
 	},
 	{
 		id: 3,
-		brand: "Volvo",
-		image:
-			"https://w7.pngwing.com/pngs/302/988/png-transparent-volvo-cars-volvo-v40-volvo-xc40-t3-volvo-compact-car-car-vehicle-thumbnail.png",
+		carBody: "Pickup",
+		total: 5,
+		image: "/src/assets/images/categories/pickup.webp",
 	},
 	{
 		id: 4,
-		brand: "Fiat",
-		image:
-			"https://w7.pngwing.com/pngs/756/875/png-transparent-fiat-automobiles-car-fiat-strada-fiat-argo-fiat-mobi-car-compact-car-sedan-car-thumbnail.png",
+		carBody: "Coupé",
+		total: 7,
+		image: "/src/assets/images/categories/coupe.webp",
 	},
 	{
 		id: 5,
-		brand: "Nissan",
-		image:
-			"https://w7.pngwing.com/pngs/621/591/png-transparent-2017-nissan-maxima-2016-nissan-maxima-car-front-wheel-drive-nissan-car-compact-car-sedan-driving-thumbnail.png",
+		carBody: "Hatchback",
+		total: 12,
+		image: "/src/assets/images/categories/hatchback.webp",
 	},
 	{
 		id: 6,
-		brand: "Kia",
-		image:
-			"https://w7.pngwing.com/pngs/155/632/png-transparent-white-kia-suv-2016-kia-sportage-2015-kia-sportage-2017-kia-sportage-car-kia-compact-car-vehicle-transport-thumbnail.png",
+		carBody: "Deportivo",
+		total: 3,
+		image: "/src/assets/images/categories/sport.webp",
 	},
 	{
 		id: 7,
-		brand: "Honda",
-		image:
-			"https://w7.pngwing.com/pngs/801/997/png-transparent-2017-honda-civic-2018-honda-civic-honda-city-honda-today-honda-compact-car-glass-sedan-thumbnail.png",
+		carBody: "Minivan",
+		total: 4,
+		image: "/src/assets/images/categories/minivan.webp",
+	},
+	{
+		id: 8,
+		carBody: "Familiar",
+		total: 8,
+		image: "/src/assets/images/categories/familiar.webp",
 	},
 ];
 
 const Categories = () => {
+	const navigate = useNavigate();
 	const [startCardIndex, setStartCardIndex] = useState(0);
 	const [visibleCards, setVisibleCards] = useState(1);
 	const [gap, setGap] = useState(15);
@@ -79,11 +90,16 @@ const Categories = () => {
 	}, []);
 
 	const handleNextBtn = () => {
-		setStartCardIndex((prevIndex) => Math.min(prevIndex + 1, carsByBrand.length - visibleCards));
+		setStartCardIndex((prevIndex) => Math.min(prevIndex + 1, CATEGORIES.length - visibleCards));
 	};
 
 	const handlePrevBtn = () => {
 		setStartCardIndex((prevIndex) => Math.max(prevIndex - 1, 0));
+	};
+
+	const handleCategoryClick = (carBody) => {
+		const normalizedCarBody = normalizeText(carBody);
+		navigate(`/detalle-autos?carBody=${encodeURIComponent(normalizedCarBody)}`);
 	};
 
 	return (
@@ -97,9 +113,10 @@ const Categories = () => {
 					disabled={startCardIndex === 0}>
 					&lt;
 				</button>
+
 				{/* Cards Gallery*/}
 				<div className={styles.categoriesCards}>
-					{carsByBrand.map((car) => (
+					{CATEGORIES.map((car) => (
 						<div
 							key={car.id}
 							className={styles.categoriesCard}
@@ -108,24 +125,28 @@ const Categories = () => {
 									startCardIndex * 100
 								}% - (${gapTranslate}*${startCardIndex}px)))`,
 								flex: `0 0 calc(${100 / visibleCards}% - (${gap}px - ${visibleCards}px))`,
-							}}>
-							<div className={styles.categoriesCardImage}>
-								<img src={car.image} alt={`${car.brand} ${car.model}`} />
-							</div>
+							}}
+							onClick={() => handleCategoryClick(car.carBody)}>
+							<CategoryCard name={car.carBody} image={car.image} total={car.total} />
 							<div className={styles.categoriesCardContent}>
-								<h3>{car.brand}</h3>
-								<a className={styles.categoriesCardLink} href="#">
-									Ver autos de {car.brand}
-								</a>
+								<button
+									className={styles.categoriesCardLink}
+									onClick={(e) => {
+										e.stopPropagation();
+										handleCategoryClick(car.carBody);
+									}}>
+									Ver autos {car.carBody}
+								</button>
 							</div>
 						</div>
 					))}
 				</div>
+
 				{/* Next Button */}
 				<button
 					className={`${styles.categoriesNavButton} ${styles.categoriesNextBtn}`}
 					onClick={handleNextBtn}
-					disabled={startCardIndex + visibleCards >= carsByBrand.length}>
+					disabled={startCardIndex + visibleCards >= CATEGORIES.length}>
 					&gt;
 				</button>
 			</div>
