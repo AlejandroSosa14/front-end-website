@@ -1,4 +1,8 @@
+import { useMemo } from "react";
+
 import CarCard_V1 from "../carCards/CarCard_V1";
+
+import { getBestPrices } from "../../utils/getBestPrices";
 
 import CARS from "../../data/cars";
 
@@ -7,6 +11,11 @@ import styles from "./Suggestions.module.css";
 // Consumir desde API para generar tarjetas actualizadas
 
 const Suggestions = () => {
+	const bestPrice = useMemo(() => {
+		const rentalPrices = CARS.map((car) => car.rentalPrice);
+		return getBestPrices(rentalPrices, 0.25);
+	}, []);
+
 	return (
 		<section className="suggestions">
 			<div className="flex-row">
@@ -19,6 +28,8 @@ const Suggestions = () => {
 							id,
 							images,
 							model,
+							locationCity,
+							locationCountry,
 							isAvailable,
 							score,
 							quantityAvailable,
@@ -27,11 +38,13 @@ const Suggestions = () => {
 						}) => {
 							console.log(rentalPrice);
 							return (
-								rentalPrice <= 250 && (
+								rentalPrice <= bestPrice && (
 									<CarCard_V1
 										key={id}
 										imageURL={images[0]}
-										name={model}
+										model={model}
+										locationCity={locationCity}
+										locationCountry={locationCountry}
 										isAvailable={isAvailable}
 										score={score}
 										quantityAvailable={quantityAvailable}
