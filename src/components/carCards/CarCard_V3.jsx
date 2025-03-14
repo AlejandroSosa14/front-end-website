@@ -10,7 +10,7 @@ const CarCard_V3 = ({ brand, model, color, fuel, transmission }) => {
 	return (
 		<div className={styles.card}>
 			<div className={styles.cardContent}>
-				<h3 className={styles.cardContent_specsTitle}>Especificaciones:</h3>
+				<h3 className={styles.cardContent_specsTitle}>Especificaciones</h3>
 				<ul className={styles.cardContent_specs}>
 					<li className={styles.cardContent_specsList}>
 						<CarGarageOutline />
