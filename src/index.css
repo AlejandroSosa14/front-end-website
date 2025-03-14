@@ -19,10 +19,12 @@
 	--blue-extra-light: #ecf3f9;
 	--mid-grey: #5f6569;
 	--warning: #ba2d74;
+	--warning-darken: hsl(330, 61%, 40%);
 
 	--rgb-main-color: 45, 116, 186;
 	--rgb-blue-extra-light: 236, 243, 249;
 	--rgb-white: 255, 255, 255;
+	--rgb-warning: 186, 45, 116;
 
 	--container-mw: 1280px;
 	--container-pl: 1rem;

@@ -4,16 +4,19 @@ import { Link, useParams } from "react-router-dom";
 import Layout from "../components/layout/Layout";
 import CarCard_V2 from "../components/carCards/CarCard_V2";
 import CarCard_V3 from "../components/carCards/CarCard_V3";
+import ArrowLeft from "../components/svgIcons/ArrowLeft.jsx";
+import ArrowRight from "../components/svgIcons/ArrowRight.jsx";
 
 import CARS from "../data/cars.js";
 
 import styles from "./CarDetail.module.css";
-import ArrowLeft from "../components/svgIcons/ArrowLeft.jsx";
+import GalleryModal from "../components/galleryModal/GalleryModal.jsx";
 
 const CarDetail = () => {
 	const { carId } = useParams();
 	const [car, setCar] = useState(null);
 	const [currentImageIndex, setCurrentImageIndex] = useState(0);
+	const [showGallery, setShowGallery] = useState(false);
 
 	useEffect(() => {
 		const foundCar = CARS.find((car) => car.id === parseInt(carId));
@@ -55,68 +58,69 @@ const CarDetail = () => {
 			<section className={`${styles.carDetail} section`}>
 				<h2>Detalles {car.model}</h2>
 				<div className="container">
-					<div className={styles.carDetail_container}>
-						<div className={styles.carGallery}>
-							<div className={styles.carGallery_mainImageContainer}>
-								<button className={styles.carGallery_navButtonLeft} onClick={handlePrevImage}>
-									&lt;
-								</button>
-								<img
-									src={car.images[currentImageIndex]}
-									alt={`${car.brand} ${car.model}`}
-									className={styles.carGallery_mainImage}
-								/>
-								<button className={styles.carGallery_navButtonRight} onClick={handleNextImage}>
-									&gt;
-								</button>
-							</div>
-							<div className={styles.carGallery_thumbnails}>
-								{car.images.slice(0, 3).map((image, index) => (
+					<header className={styles.carDetail_header}>
+						<h3>Características</h3>
+						<Link to="/detalle-autos" className={styles.carDetail_backLink}>
+							<ArrowLeft />
+							Regresar
+						</Link>
+					</header>
+					{/* GALLERY */}
+					<div className={styles.carGallery}>
+						<div className={styles.carGallery_image}>
+							<button className={styles.carGallery_leftButton} onClick={handlePrevImage}>
+								<ArrowLeft />
+							</button>
+							<img src={car.images[currentImageIndex]} alt={`${car.brand} ${car.model}`} />
+							<button className={styles.carGallery_rightButton} onClick={handleNextImage}>
+								<ArrowRight />
+							</button>
+						</div>
+						<div className={styles.carGallery_grid}>
+							<div className={styles.carGallery_gridImages}>
+								{car.images.slice(0, 4).map((image, index) => (
 									<img
 										key={index}
 										src={image}
 										alt={`Miniatura ${car.model} ${index + 1}`}
-										className={`${styles.carGallery_thumbnail} ${
+										className={`${styles.carGallery_gridImage} ${
 											index === currentImageIndex ? styles.active : ""
 										}`}
 										onClick={() => handleThumbnailClick(index)}
 									/>
 								))}
 							</div>
+							<button className="main-btn" onClick={() => setShowGallery(true)}>
+								Ver Más
+							</button>
 						</div>
-						<div className={styles.carInfo}>
-							<header className={styles.carInfo_header}>
-								<h3>Características</h3>
-								<Link to="/detalle-autos" className={styles.carInfo_backLink}>
-									<ArrowLeft />
-									Regresar
-								</Link>
-							</header>
-							<div className={styles.carInfo_cards}>
-								<div className={styles.carInfo_cardContainer}>
-									<CarCard_V2
-										score={car.score}
-										model={car.model}
-										rentalPrice={car.rentalPrice}
-										locationCity={car.locationCity}
-										locationCountry={car.locationCountry}
-										isFavorite={car.isFavorite}
-									/>
-								</div>
-								<div className={styles.carInfo_cardContainer}>
-									<CarCard_V3
-										brand={car.brand}
-										model={car.model}
-										color={car.color}
-										fuel={car.fuel}
-										transmission={car.transmission}
-									/>
-								</div>
-							</div>
+					</div>
+
+					{/* INFO */}
+					<div className={styles.carInfo_cards}>
+						<div className={styles.carInfo_cardContainer}>
+							<CarCard_V3
+								brand={car.brand}
+								model={car.model}
+								color={car.color}
+								fuel={car.fuel}
+								transmission={car.transmission}
+							/>
+						</div>
+						<div className={styles.carInfo_cardContainer}>
+							<CarCard_V2
+								score={car.score}
+								model={car.model}
+								rentalPrice={car.rentalPrice}
+								locationCity={car.locationCity}
+								locationCountry={car.locationCountry}
+								isFavorite={car.isFavorite}
+							/>
 						</div>
 					</div>
 				</div>
 			</section>
+			{showGallery && <GalleryModal images={car.images} onClose={() => setShowGallery(false)} />}
 		</Layout>
 	);
 };
