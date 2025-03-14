@@ -45,8 +45,6 @@
 
 	@media screen and (min-width: 1024px) {
 		flex-direction: row;
-		margin-bottom: 0;
-		align-items: center;
 	}
 }
 

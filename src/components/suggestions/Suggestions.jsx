@@ -1,6 +1,6 @@
 import CarCard_V1 from "../carCards/CarCard_V1";
 
-import CARS_01 from "../../data/cars";
+import CARS from "../../data/cars";
 
 import styles from "./Suggestions.module.css";
 
@@ -14,23 +14,24 @@ const Suggestions = () => {
 			</div>
 			<div className={styles.suggestionsCarrousel}>
 				<div className={styles.suggestionsCardsContainer}>
-					{CARS_01.map(
+					{CARS.map(
 						({
 							id,
-							imageURL,
-							name,
+							images,
+							model,
 							isAvailable,
 							score,
 							quantityAvailable,
 							rentalPrice,
 							isFavorite,
 						}) => {
+							console.log(rentalPrice);
 							return (
-								rentalPrice <= 150 && (
+								rentalPrice <= 250 && (
 									<CarCard_V1
 										key={id}
-										imageURL={imageURL}
-										name={name}
+										imageURL={images[0]}
+										name={model}
 										isAvailable={isAvailable}
 										score={score}
 										quantityAvailable={quantityAvailable}
