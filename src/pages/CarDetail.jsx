@@ -68,8 +68,9 @@ const CarDetail = () => {
 							</Link>
 						</header>
 					</div>
+
+					{/* GALLERY AND DETAILS */}
 					<div className={styles.carDetail_content}>
-						{/* GALLERY */}
 						<div className={styles.carGallery}>
 							<div className={styles.carGallery_image}>
 								<button className={styles.carGallery_leftButton} onClick={handlePrevImage}>
@@ -99,8 +100,6 @@ const CarDetail = () => {
 								</button>
 							</div>
 						</div>
-
-						{/* INFO */}
 						<div className={styles.carInfo_cards}>
 							<div className={styles.carInfo_cardContainer}>
 								<CarCard_V2
@@ -113,8 +112,38 @@ const CarDetail = () => {
 								/>
 							</div>
 							<div className={styles.carInfo_cardContainer}>
-								<CarCard_V3 specs={car.specs} />
+								<CarCard_V3 title={"Especificaciones"}>
+									<ul className={styles.cardInfo_specsList}>
+										{car.specs.length > 0 ? (
+											car.specs.map((spec) => (
+												<li key={spec.id} className={styles.cardInfo_specsItem}>
+													<img src={spec.icon} alt={spec.detail} />
+													<p>
+														<span>{spec.type}:</span> {spec.detail}
+													</p>
+												</li>
+											))
+										) : (
+											<p className={styles.cardContent_noData}>
+												No hay especificaciones para éste auto.
+											</p>
+										)}
+									</ul>
+								</CarCard_V3>
 							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<section className="section">
+				<div className="container">
+					{/* RATING AND DATES */}
+					<div className={styles.carDetail_extra}>
+						<div className={styles.carDetail_extraRating}>
+							<CarCard_V3 title={"Opiniones del auto"}></CarCard_V3>
+						</div>
+						<div className={styles.carDetail_extraDates}>
+							<CarCard_V3 title={"Fechas Disponibles"}></CarCard_V3>
 						</div>
 					</div>
 				</div>
