@@ -1,3 +1,11 @@
+import CarGarage from "../assets/images/icons/car_garage.svg";
+import Car from "../assets/images/icons/car.svg";
+import PaintBrush from "../assets/images/icons/paint_brush.svg";
+import GasPump from "../assets/images/icons/gas_pump.svg";
+import Engine from "../assets/images/icons/engine.svg";
+
+console.log(CarGarage);
+
 const CARS = [
 	{
 		id: 1,
@@ -22,6 +30,13 @@ const CARS = [
 		isAvailable: true,
 		quantityAvailable: 5,
 		isFavorite: false,
+		specs: [
+			{ id: 1, icon: CarGarage, type: "Marca", detail: "Toyota" },
+			{ id: 2, icon: Car, type: "Modelo", detail: "Corolla" },
+			{ id: 3, icon: PaintBrush, type: "Color", detail: "Rojo" },
+			{ id: 4, icon: GasPump, type: "Combustible", detail: "Gasolina" },
+			{ id: 5, icon: Engine, type: "Transmisión", detail: "Automática" },
+		],
 	},
 	{
 		id: 2,
@@ -46,6 +61,13 @@ const CARS = [
 		isAvailable: true,
 		quantityAvailable: 3,
 		isFavorite: true,
+		specs: [
+			{ id: 1, icon: CarGarage, type: "Marca", detail: "Toyota" },
+			{ id: 2, icon: Car, type: "Modelo", detail: "Corolla" },
+			{ id: 3, icon: PaintBrush, type: "Color", detail: "Rojo" },
+			{ id: 4, icon: GasPump, type: "Combustible", detail: "Gasolina" },
+			{ id: 5, icon: Engine, type: "Transmisión", detail: "Automática" },
+		],
 	},
 	{
 		id: 3,
@@ -70,6 +92,13 @@ const CARS = [
 		isAvailable: true,
 		quantityAvailable: 7,
 		isFavorite: false,
+		specs: [
+			{ id: 1, icon: CarGarage, type: "Marca", detail: "Toyota" },
+			{ id: 2, icon: Car, type: "Modelo", detail: "Corolla" },
+			{ id: 3, icon: PaintBrush, type: "Color", detail: "Rojo" },
+			{ id: 4, icon: GasPump, type: "Combustible", detail: "Gasolina" },
+			{ id: 5, icon: Engine, type: "Transmisión", detail: "Automática" },
+		],
 	},
 	{
 		id: 4,
@@ -94,6 +123,13 @@ const CARS = [
 		isAvailable: false,
 		quantityAvailable: 0,
 		isFavorite: true,
+		specs: [
+			{ id: 1, icon: CarGarage, type: "Marca", detail: "Toyota" },
+			{ id: 2, icon: Car, type: "Modelo", detail: "Corolla" },
+			{ id: 3, icon: PaintBrush, type: "Color", detail: "Rojo" },
+			{ id: 4, icon: GasPump, type: "Combustible", detail: "Gasolina" },
+			{ id: 5, icon: Engine, type: "Transmisión", detail: "Automática" },
+		],
 	},
 	{
 		id: 5,
@@ -118,6 +154,13 @@ const CARS = [
 		isAvailable: true,
 		quantityAvailable: 4,
 		isFavorite: false,
+		specs: [
+			// { id: 1, icon: CarGarage, type:"Marca", detail: "Toyota" },
+			// { id: 2, icon: Car, type:"Maodelo, detail: "Corolla" },
+			// { id: 3, icon: PaintBrush, type:"MColor, detail: "Rojo" },
+			// { id: 4, icon: GasPump, type:"MCombustible, detail: "Gasolina" },
+			// { id: 5, icon: Engine, type:"MTransmisión, detail: "Automática" },
+		],
 	},
 	{
 		id: 6,
@@ -142,6 +185,13 @@ const CARS = [
 		isAvailable: true,
 		quantityAvailable: 2,
 		isFavorite: true,
+		specs: [
+			{ id: 1, icon: CarGarage, type: "Marca", detail: "Toyota" },
+			{ id: 2, icon: Car, type: "Modelo", detail: "Corolla" },
+			{ id: 3, icon: PaintBrush, type: "Color", detail: "Rojo" },
+			{ id: 4, icon: GasPump, type: "Combustible", detail: "Gasolina" },
+			{ id: 5, icon: Engine, type: "Transmisión", detail: "Automática" },
+		],
 	},
 	{
 		id: 7,
@@ -166,6 +216,13 @@ const CARS = [
 		isAvailable: true,
 		quantityAvailable: 6,
 		isFavorite: false,
+		specs: [
+			{ id: 1, icon: CarGarage, type: "Marca", detail: "Toyota" },
+			{ id: 2, icon: Car, type: "Modelo", detail: "Corolla" },
+			{ id: 3, icon: PaintBrush, type: "Color", detail: "Rojo" },
+			{ id: 4, icon: GasPump, type: "Combustible", detail: "Gasolina" },
+			{ id: 5, icon: Engine, type: "Transmisión", detail: "Automática" },
+		],
 	},
 	{
 		id: 8,
@@ -190,6 +247,13 @@ const CARS = [
 		isAvailable: true,
 		quantityAvailable: 3,
 		isFavorite: true,
+		specs: [
+			{ id: 1, icon: CarGarage, type: "Marca", detail: "Toyota" },
+			{ id: 2, icon: Car, type: "Modelo", detail: "Corolla" },
+			{ id: 3, icon: PaintBrush, type: "Color", detail: "Rojo" },
+			{ id: 4, icon: GasPump, type: "Combustible", detail: "Gasolina" },
+			{ id: 5, icon: Engine, type: "Transmisión", detail: "Automática" },
+		],
 	},
 	{
 		id: 9,
@@ -214,6 +278,13 @@ const CARS = [
 		isAvailable: true,
 		quantityAvailable: 8,
 		isFavorite: false,
+		specs: [
+			{ id: 1, icon: CarGarage, type: "Marca", detail: "Toyota" },
+			{ id: 2, icon: Car, type: "Modelo", detail: "Corolla" },
+			{ id: 3, icon: PaintBrush, type: "Color", detail: "Rojo" },
+			{ id: 4, icon: GasPump, type: "Combustible", detail: "Gasolina" },
+			{ id: 5, icon: Engine, type: "Transmisión", detail: "Automática" },
+		],
 	},
 	{
 		id: 10,
@@ -238,6 +309,13 @@ const CARS = [
 		isAvailable: true,
 		quantityAvailable: 5,
 		isFavorite: false,
+		specs: [
+			{ id: 1, icon: CarGarage, type: "Marca", detail: "Toyota" },
+			{ id: 2, icon: Car, type: "Modelo", detail: "Corolla" },
+			{ id: 3, icon: PaintBrush, type: "Color", detail: "Rojo" },
+			{ id: 4, icon: GasPump, type: "Combustible", detail: "Gasolina" },
+			{ id: 5, icon: Engine, type: "Transmisión", detail: "Automática" },
+		],
 	},
 	{
 		id: 11,
@@ -262,6 +340,13 @@ const CARS = [
 		isAvailable: true,
 		quantityAvailable: 4,
 		isFavorite: false,
+		specs: [
+			{ id: 1, icon: CarGarage, type: "Marca", detail: "Toyota" },
+			{ id: 2, icon: Car, type: "Modelo", detail: "Corolla" },
+			{ id: 3, icon: PaintBrush, type: "Color", detail: "Rojo" },
+			{ id: 4, icon: GasPump, type: "Combustible", detail: "Gasolina" },
+			{ id: 5, icon: Engine, type: "Transmisión", detail: "Automática" },
+		],
 	},
 	{
 		id: 12,
@@ -286,6 +371,13 @@ const CARS = [
 		isAvailable: true,
 		quantityAvailable: 3,
 		isFavorite: true,
+		specs: [
+			{ id: 1, icon: CarGarage, type: "Marca", detail: "Toyota" },
+			{ id: 2, icon: Car, type: "Modelo", detail: "Corolla" },
+			{ id: 3, icon: PaintBrush, type: "Color", detail: "Rojo" },
+			{ id: 4, icon: GasPump, type: "Combustible", detail: "Gasolina" },
+			{ id: 5, icon: Engine, type: "Transmisión", detail: "Automática" },
+		],
 	},
 	{
 		id: 13,
@@ -310,6 +402,13 @@ const CARS = [
 		isAvailable: true,
 		quantityAvailable: 2,
 		isFavorite: false,
+		specs: [
+			{ id: 1, icon: CarGarage, type: "Marca", detail: "Toyota" },
+			{ id: 2, icon: Car, type: "Modelo", detail: "Corolla" },
+			{ id: 3, icon: PaintBrush, type: "Color", detail: "Rojo" },
+			{ id: 4, icon: GasPump, type: "Combustible", detail: "Gasolina" },
+			{ id: 5, icon: Engine, type: "Transmisión", detail: "Automática" },
+		],
 	},
 	{
 		id: 14,
@@ -334,6 +433,13 @@ const CARS = [
 		isAvailable: true,
 		quantityAvailable: 4,
 		isFavorite: true,
+		specs: [
+			{ id: 1, icon: CarGarage, type: "Marca", detail: "Toyota" },
+			{ id: 2, icon: Car, type: "Modelo", detail: "Corolla" },
+			{ id: 3, icon: PaintBrush, type: "Color", detail: "Rojo" },
+			{ id: 4, icon: GasPump, type: "Combustible", detail: "Gasolina" },
+			{ id: 5, icon: Engine, type: "Transmisión", detail: "Automática" },
+		],
 	},
 	{
 		id: 15,
@@ -358,6 +464,13 @@ const CARS = [
 		isAvailable: true,
 		quantityAvailable: 3,
 		isFavorite: false,
+		specs: [
+			{ id: 1, icon: CarGarage, type: "Marca", detail: "Toyota" },
+			{ id: 2, icon: Car, type: "Modelo", detail: "Corolla" },
+			{ id: 3, icon: PaintBrush, type: "Color", detail: "Rojo" },
+			{ id: 4, icon: GasPump, type: "Combustible", detail: "Gasolina" },
+			{ id: 5, icon: Engine, type: "Transmisión", detail: "Automática" },
+		],
 	},
 	{
 		id: 16,
@@ -382,6 +495,13 @@ const CARS = [
 		isAvailable: true,
 		quantityAvailable: 1,
 		isFavorite: true,
+		specs: [
+			{ id: 1, icon: CarGarage, type: "Marca", detail: "Toyota" },
+			{ id: 2, icon: Car, type: "Modelo", detail: "Corolla" },
+			{ id: 3, icon: PaintBrush, type: "Color", detail: "Rojo" },
+			{ id: 4, icon: GasPump, type: "Combustible", detail: "Gasolina" },
+			{ id: 5, icon: Engine, type: "Transmisión", detail: "Automática" },
+		],
 	},
 	{
 		id: 17,
@@ -406,6 +526,13 @@ const CARS = [
 		isAvailable: true,
 		quantityAvailable: 4,
 		isFavorite: false,
+		specs: [
+			{ id: 1, icon: CarGarage, type: "Marca", detail: "Toyota" },
+			{ id: 2, icon: Car, type: "Modelo", detail: "Corolla" },
+			{ id: 3, icon: PaintBrush, type: "Color", detail: "Rojo" },
+			{ id: 4, icon: GasPump, type: "Combustible", detail: "Gasolina" },
+			{ id: 5, icon: Engine, type: "Transmisión", detail: "Automática" },
+		],
 	},
 	{
 		id: 18,
@@ -430,6 +557,13 @@ const CARS = [
 		isAvailable: true,
 		quantityAvailable: 2,
 		isFavorite: true,
+		specs: [
+			{ id: 1, icon: CarGarage, type: "Marca", detail: "Toyota" },
+			{ id: 2, icon: Car, type: "Modelo", detail: "Corolla" },
+			{ id: 3, icon: PaintBrush, type: "Color", detail: "Rojo" },
+			{ id: 4, icon: GasPump, type: "Combustible", detail: "Gasolina" },
+			{ id: 5, icon: Engine, type: "Transmisión", detail: "Automática" },
+		],
 	},
 	{
 		id: 19,
@@ -454,6 +588,13 @@ const CARS = [
 		isAvailable: true,
 		quantityAvailable: 6,
 		isFavorite: false,
+		specs: [
+			{ id: 1, icon: CarGarage, type: "Marca", detail: "Toyota" },
+			{ id: 2, icon: Car, type: "Modelo", detail: "Corolla" },
+			{ id: 3, icon: PaintBrush, type: "Color", detail: "Rojo" },
+			{ id: 4, icon: GasPump, type: "Combustible", detail: "Gasolina" },
+			{ id: 5, icon: Engine, type: "Transmisión", detail: "Automática" },
+		],
 	},
 	{
 		id: 20,
@@ -478,6 +619,13 @@ const CARS = [
 		isAvailable: true,
 		quantityAvailable: 4,
 		isFavorite: false,
+		specs: [
+			{ id: 1, icon: CarGarage, type: "Marca", detail: "Toyota" },
+			{ id: 2, icon: Car, type: "Modelo", detail: "Corolla" },
+			{ id: 3, icon: PaintBrush, type: "Color", detail: "Rojo" },
+			{ id: 4, icon: GasPump, type: "Combustible", detail: "Gasolina" },
+			{ id: 5, icon: Engine, type: "Transmisión", detail: "Automática" },
+		],
 	},
 ];
 

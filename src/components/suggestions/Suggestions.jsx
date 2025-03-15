@@ -36,11 +36,11 @@ const Suggestions = () => {
 							rentalPrice,
 							isFavorite,
 						}) => {
-							console.log(rentalPrice);
 							return (
 								rentalPrice <= bestPrice && (
 									<CarCard_V1
 										key={id}
+										id={id}
 										imageURL={images[0]}
 										model={model}
 										locationCity={locationCity}

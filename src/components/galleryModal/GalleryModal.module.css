@@ -39,17 +39,18 @@
 	position: absolute;
 	top: 0.75rem;
 	right: 0.75rem;
-	background: var(--warning);
-	color: white;
-	border: none;
+	color: var(--warning);
+	background-color: transparent;
 	padding: 0.5rem;
-	cursor: pointer;
-	font-size: 16px;
-	border-radius: 5px;
+	width: 2.5rem;
+	border-radius: 100%;
 	margin-top: 0;
+	cursor: pointer;
+	transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
 
 	&:hover {
-		background: var(--warning-darken);
+		background-color: var(--warning-darken);
+		color: var(--white);
 	}
 }
 

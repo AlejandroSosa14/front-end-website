@@ -31,6 +31,16 @@ const CarDetail = () => {
 	// 		.catch((err) => console.error(err));
 	// }, [carId]);
 
+	const handleThumbnailClick = (index) => setCurrentImageIndex(index);
+
+	const handlePrevImage = () => {
+		setCurrentImageIndex((prevIndex) => (prevIndex === 0 ? car.images.length - 1 : prevIndex - 1));
+	};
+
+	const handleNextImage = () => {
+		setCurrentImageIndex((prevIndex) => (prevIndex === car.images.length - 1 ? 0 : prevIndex + 1));
+	};
+
 	if (!car) {
 		return (
 			<Layout>
@@ -43,79 +53,68 @@ const CarDetail = () => {
 		);
 	}
 
-	const handleThumbnailClick = (index) => setCurrentImageIndex(index);
-
-	const handlePrevImage = () => {
-		setCurrentImageIndex((prevIndex) => (prevIndex === 0 ? car.images.length - 1 : prevIndex - 1));
-	};
-
-	const handleNextImage = () => {
-		setCurrentImageIndex((prevIndex) => (prevIndex === car.images.length - 1 ? 0 : prevIndex + 1));
-	};
-
 	return (
 		<Layout>
 			<section className={`${styles.carDetail} section`}>
-				<h2>Detalles {car.model}</h2>
+				<h2 className="sectionTitle">{car.model}</h2>
 				<div className="container">
-					<header className={styles.carDetail_header}>
-						<h3>Características</h3>
-						<Link to="/detalle-autos" className={styles.carDetail_backLink}>
-							<ArrowLeft />
-							Regresar
-						</Link>
-					</header>
-					{/* GALLERY */}
-					<div className={styles.carGallery}>
-						<div className={styles.carGallery_image}>
-							<button className={styles.carGallery_leftButton} onClick={handlePrevImage}>
+					{/* HEADER */}
+					<div className={styles.carDetail_stickyTop}>
+						<header className={styles.carDetail_header}>
+							<h3>Características</h3>
+							<Link to="/detalle-autos" className={styles.carDetail_backLink}>
 								<ArrowLeft />
-							</button>
-							<img src={car.images[currentImageIndex]} alt={`${car.brand} ${car.model}`} />
-							<button className={styles.carGallery_rightButton} onClick={handleNextImage}>
-								<ArrowRight />
-							</button>
-						</div>
-						<div className={styles.carGallery_grid}>
-							<div className={styles.carGallery_gridImages}>
-								{car.images.slice(0, 4).map((image, index) => (
-									<img
-										key={index}
-										src={image}
-										alt={`Miniatura ${car.model} ${index + 1}`}
-										className={`${styles.carGallery_gridImage} ${
-											index === currentImageIndex ? styles.active : ""
-										}`}
-										onClick={() => handleThumbnailClick(index)}
-									/>
-								))}
-							</div>
-							<button className="main-btn" onClick={() => setShowGallery(true)}>
-								Ver Más
-							</button>
-						</div>
+								Regresar
+							</Link>
+						</header>
 					</div>
-
-					{/* INFO */}
-					<div className={styles.carInfo_cards}>
-						<div className={styles.carInfo_cardContainer}>
-							<CarCard_V3
-								brand={car.brand}
-								model={car.model}
-								color={car.color}
-								fuel={car.fuel}
-								transmission={car.transmission}
-							/>
+					<div className={styles.carDetail_content}>
+						{/* GALLERY */}
+						<div className={styles.carGallery}>
+							<div className={styles.carGallery_image}>
+								<button className={styles.carGallery_leftButton} onClick={handlePrevImage}>
+									<ArrowLeft />
+								</button>
+								<img src={car.images[currentImageIndex]} alt={`${car.brand} ${car.model}`} />
+								<button className={styles.carGallery_rightButton} onClick={handleNextImage}>
+									<ArrowRight />
+								</button>
+							</div>
+							<div className={styles.carGallery_grid}>
+								<div className={styles.carGallery_gridItem}>
+									{car.images.slice(0, 4).map((image, index) => (
+										<img
+											key={index}
+											src={image}
+											alt={`Miniatura ${car.model} ${index + 1}`}
+											className={`${styles.carGallery_gridImage} ${
+												index === currentImageIndex ? styles.active : ""
+											}`}
+											onClick={() => handleThumbnailClick(index)}
+										/>
+									))}
+								</div>
+								<button className="main-btn" onClick={() => setShowGallery(true)}>
+									Ver Más
+								</button>
+							</div>
 						</div>
-						<div className={styles.carInfo_cardContainer}>
-							<CarCard_V2
-								score={car.score}
-								model={car.model}
-								rentalPrice={car.rentalPrice}
-								locationCity={car.locationCity}
-								locationCountry={car.locationCountry}
-								isFavorite={car.isFavorite}
-							/>
+
+						{/* INFO */}
+						<div className={styles.carInfo_cards}>
+							<div className={styles.carInfo_cardContainer}>
+								<CarCard_V2
+									score={car.score}
+									model={car.model}
+									rentalPrice={car.rentalPrice}
+									locationCity={car.locationCity}
+									locationCountry={car.locationCountry}
+									isFavorite={car.isFavorite}
+								/>
+							</div>
+							<div className={styles.carInfo_cardContainer}>
+								<CarCard_V3 specs={car.specs} />
+							</div>
 						</div>
 					</div>
 				</div>
