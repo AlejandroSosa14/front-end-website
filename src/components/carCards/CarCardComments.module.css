@@ -1,0 +1,41 @@
+.cardComments_container {
+	position: relative;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: 1.25rem;
+}
+
+.cardComments_card {
+	width: inherit;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 1rem;
+	background-color: var(--white);
+	padding: 1.25rem;
+	border-radius: 0.5rem;
+}
+
+.cardComments_cardHeader {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.cardComments_cardRating {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 1rem;
+
+	& span {
+		font-size: 1.1rem;
+	}
+}
+
+.cardComments_comments {
+	font-style: oblique;
+}
