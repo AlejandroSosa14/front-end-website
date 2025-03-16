@@ -4,13 +4,20 @@ import { Link, useParams } from "react-router-dom";
 import Layout from "../components/layout/Layout";
 import CarCard_V2 from "../components/carCards/CarCard_V2";
 import CarCard_V3 from "../components/carCards/CarCard_V3";
+
 import ArrowLeft from "../components/svgIcons/ArrowLeft.jsx";
 import ArrowRight from "../components/svgIcons/ArrowRight.jsx";
 
 import CARS from "../data/cars.js";
+import USER_COMMENTS from "../data/userComments.js";
 
 import styles from "./CarDetail.module.css";
 import GalleryModal from "../components/galleryModal/GalleryModal.jsx";
+import CarCardComments from "../components/carCards/CarCardComments.jsx";
+import CarCalendars from "../components/carCalendars/CarCalendars.jsx";
+
+// Fechas ocupadas (Ejemplo: se obtiene de una API)
+const unavailableDates = ["2025-03-17", "2025-03-25", "2025-04-11"];
 
 const CarDetail = () => {
 	const { carId } = useParams();
@@ -52,6 +59,8 @@ const CarDetail = () => {
 			</Layout>
 		);
 	}
+
+	const userComments = USER_COMMENTS.filter((comment) => comment.carId === car.id);
 
 	return (
 		<Layout>
@@ -135,15 +144,25 @@ const CarDetail = () => {
 					</div>
 				</div>
 			</section>
+
 			<section className="section">
 				<div className="container">
-					{/* RATING AND DATES */}
-					<div className={styles.carDetail_extra}>
-						<div className={styles.carDetail_extraRating}>
-							<CarCard_V3 title={"Opiniones del auto"}></CarCard_V3>
+					<div className={styles.carDetail_info}>
+						{/* USER RATING */}
+						<div className={styles.carDetail_infoRating}>
+							<CarCard_V3 title={"Opiniones del auto"}>
+								<CarCardComments userComments={userComments} />
+							</CarCard_V3>
 						</div>
-						<div className={styles.carDetail_extraDates}>
-							<CarCard_V3 title={"Fechas Disponibles"}></CarCard_V3>
+						{/* AVAILABILITY CALENDAR */}
+						<div className={styles.carDetail_infoDates}>
+							<CarCard_V3 title={"Disponibilidad del auto"}>
+								<div className={styles.carDetail_infoTip}>
+									<span></span>
+									<p>No disponible</p>
+								</div>
+								<CarCalendars unavailableDates={unavailableDates} />
+							</CarCard_V3>
 						</div>
 					</div>
 				</div>
