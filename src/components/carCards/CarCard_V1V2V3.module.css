@@ -19,6 +19,7 @@
 }
 
 .cardContent {
+	width: 100%;
 	color: var(--black);
 	padding: 2rem 1.2rem;
 	height: inherit;
@@ -31,6 +32,12 @@
 		height: 1.4rem;
 		margin-right: 0.4rem;
 	}
+}
+
+.cardContent_header {
+	width: inherit;
+	display: block;
+	margin-bottom: 0.2rem;
 }
 
 .cardContent_title {
@@ -47,12 +54,8 @@
 	object-fit: contain;
 }
 
-.cardContent_header {
-	display: block;
-	margin-bottom: 0.2rem;
-}
-
 .cardContent_details {
+	width: inherit;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
@@ -93,10 +96,6 @@
 		font-size: 1.2rem;
 		font-weight: 700;
 	}
-
-	& button {
-		margin-top: 0;
-	}
 }
 
 .cardContent_detailsTitle,
@@ -117,4 +116,21 @@
 	text-align: center;
 	color: var(--warning);
 	padding: 0.6rem 0;
+}
+
+.cardContent_button {
+	display: inline-block;
+	font-size: 1rem;
+	font-weight: 600;
+	padding: 0.5rem 0.8rem;
+	border-radius: 8px;
+	background-color: var(--main-color);
+	color: white;
+	text-transform: capitalize;
+	cursor: pointer;
+	transition: background-color 0.3s ease-in-out;
+
+	&:hover {
+		background-color: var(--main-color-darken);
+	}
 }
