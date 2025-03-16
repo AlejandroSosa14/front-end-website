@@ -65,9 +65,7 @@ const FormSearch = () => {
 					</select>
 				</div>
 			</div>
-			<button className="main-btn" type="submit">
-				Realizar búsqueda
-			</button>
+			<button className={`main-btn ${styles.searchSubmitButton}`}>Realizar búsqueda</button>
 		</form>
 	);
 };
