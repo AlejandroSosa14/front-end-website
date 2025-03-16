@@ -244,6 +244,10 @@
 	}
 }
 
+.cardContent_noData {
+	color: var(--warning);
+}
+
 .carDetail_infoTip {
 	width: 100%;
 	display: flex;

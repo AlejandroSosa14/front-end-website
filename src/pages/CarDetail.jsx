@@ -11,10 +11,11 @@ import ArrowRight from "../components/svgIcons/ArrowRight.jsx";
 import CARS from "../data/cars.js";
 import USER_COMMENTS from "../data/userComments.js";
 
-import styles from "./CarDetail.module.css";
 import GalleryModal from "../components/galleryModal/GalleryModal.jsx";
 import CarCardComments from "../components/carCards/CarCardComments.jsx";
 import CarCalendars from "../components/carCalendars/CarCalendars.jsx";
+
+import styles from "./CarDetail.module.css";
 
 // Fechas ocupadas (Ejemplo: se obtiene de una API)
 const unavailableDates = ["2025-03-17", "2025-03-25", "2025-04-11"];
