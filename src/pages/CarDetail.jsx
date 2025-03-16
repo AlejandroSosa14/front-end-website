@@ -65,7 +65,7 @@ const CarDetail = () => {
 
 	return (
 		<Layout>
-			<section className={`${styles.carDetail} section`}>
+			<section className={`section ${styles.carDetail}`}>
 				<h2 className="sectionTitle">{car.model}</h2>
 				<div className="container">
 					{/* HEADER */}
