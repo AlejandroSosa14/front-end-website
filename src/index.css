@@ -18,6 +18,7 @@
 	--main-color-darken: hsl(210, 61%, 36%);
 	--blue-extra-light: #ecf3f9;
 	--mid-grey: #5f6569;
+	--golden: #eaca17;
 	--warning: #ba2d74;
 	--warning-darken: hsl(330, 61%, 40%);
 
@@ -63,32 +64,18 @@ body {
 }
 
 h1 {
-	font-size: 3.2em;
-	line-height: 1.1;
-}
-
-button {
-	border-radius: 8px;
-	border: 1px solid transparent;
-	padding: 0.6em 1.2em;
-	font-size: 1em;
-	font-weight: 500;
-	font-family: inherit;
-	background-color: #1a1a1a;
-	cursor: pointer;
-	transition: border-color 0.25s;
-}
-button:hover {
-	border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-	outline: 4px auto -webkit-focus-ring-color;
+	line-height: 1.5;
 }
 
 ol,
 ul {
 	list-style: none;
+}
+
+button {
+	background: inherit;
+	border: none;
+	line-height: 1.5;
 }
 
 @media (prefers-color-scheme: light) {
@@ -98,8 +85,5 @@ ul {
 	}
 	a:hover {
 		color: #747bff;
-	}
-	button {
-		background-color: #f9f9f9;
 	}
 }
