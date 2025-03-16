@@ -4,8 +4,6 @@ import PaintBrush from "../assets/images/icons/paint_brush.svg";
 import GasPump from "../assets/images/icons/gas_pump.svg";
 import Engine from "../assets/images/icons/engine.svg";
 
-console.log(CarGarage);
-
 const CARS = [
 	{
 		id: 1,
