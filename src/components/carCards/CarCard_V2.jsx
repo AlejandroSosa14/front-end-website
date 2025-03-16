@@ -19,11 +19,12 @@ const CardCard_V2 = ({ score, model, rentalPrice, locationCity, locationCountry,
 				)}
 			</div>
 			<div className={styles.cardContent}>
+				<h3 className={styles.cardContent_detailsTitle}>Detalles</h3>
 				<div className="flex-row align-middle">
 					<Star />
 					<span>{score}</span>
 				</div>
-				<h3 className={styles.cardContent_title}>{model}</h3>
+				<h4 className={styles.cardContent_title}>{model}</h4>
 				<div className={styles.cardContent_detailsLocation}>
 					<LocationOutline />
 					<p>
@@ -32,7 +33,7 @@ const CardCard_V2 = ({ score, model, rentalPrice, locationCity, locationCountry,
 				</div>
 				<div className={styles.cardContent_detailsRental}>
 					<p>{`$${rentalPrice} / día`}</p>
-					<button>Alquilar</button>
+					<button className={styles.cardContent_button}>Alquilar</button>
 				</div>
 			</div>
 		</div>

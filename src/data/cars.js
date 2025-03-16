@@ -1,3 +1,9 @@
+import CarGarage from "../assets/images/icons/car_garage.svg";
+import Car from "../assets/images/icons/car.svg";
+import PaintBrush from "../assets/images/icons/paint_brush.svg";
+import GasPump from "../assets/images/icons/gas_pump.svg";
+import Engine from "../assets/images/icons/engine.svg";
+
 const CARS = [
 	{
 		id: 1,
@@ -13,7 +19,7 @@ const CARS = [
 		rentalPrice: 250,
 		year: 2022,
 		color: "Rojo",
-		carBody: "Sedan",
+		carBody: "Sedán",
 		fuel: "Gasolina",
 		description: "Un auto confiable y eficiente.",
 		locationCity: "Florida",
@@ -22,6 +28,13 @@ const CARS = [
 		isAvailable: true,
 		quantityAvailable: 5,
 		isFavorite: false,
+		specs: [
+			{ id: 1, icon: CarGarage, type: "Marca", detail: "Toyota" },
+			{ id: 2, icon: Car, type: "Modelo", detail: "Corolla" },
+			{ id: 3, icon: PaintBrush, type: "Color", detail: "Rojo" },
+			{ id: 4, icon: GasPump, type: "Combustible", detail: "Gasolina" },
+			{ id: 5, icon: Engine, type: "Transmisión", detail: "Automática" },
+		],
 	},
 	{
 		id: 2,
@@ -46,6 +59,13 @@ const CARS = [
 		isAvailable: true,
 		quantityAvailable: 3,
 		isFavorite: true,
+		specs: [
+			{ id: 1, icon: CarGarage, type: "Marca", detail: "Toyota" },
+			{ id: 2, icon: Car, type: "Modelo", detail: "Corolla" },
+			{ id: 3, icon: PaintBrush, type: "Color", detail: "Rojo" },
+			{ id: 4, icon: GasPump, type: "Combustible", detail: "Gasolina" },
+			{ id: 5, icon: Engine, type: "Transmisión", detail: "Automática" },
+		],
 	},
 	{
 		id: 3,
@@ -61,7 +81,7 @@ const CARS = [
 		rentalPrice: 220,
 		year: 2023,
 		color: "Blanco",
-		carBody: "Sedan",
+		carBody: "Sedán",
 		fuel: "Híbrido",
 		description: "Eficiencia y tecnología en un solo auto.",
 		locationCity: "Texas",
@@ -70,6 +90,13 @@ const CARS = [
 		isAvailable: true,
 		quantityAvailable: 7,
 		isFavorite: false,
+		specs: [
+			{ id: 1, icon: CarGarage, type: "Marca", detail: "Toyota" },
+			{ id: 2, icon: Car, type: "Modelo", detail: "Corolla" },
+			{ id: 3, icon: PaintBrush, type: "Color", detail: "Rojo" },
+			{ id: 4, icon: GasPump, type: "Combustible", detail: "Gasolina" },
+			{ id: 5, icon: Engine, type: "Transmisión", detail: "Automática" },
+		],
 	},
 	{
 		id: 4,
@@ -94,6 +121,13 @@ const CARS = [
 		isAvailable: false,
 		quantityAvailable: 0,
 		isFavorite: true,
+		specs: [
+			{ id: 1, icon: CarGarage, type: "Marca", detail: "Toyota" },
+			{ id: 2, icon: Car, type: "Modelo", detail: "Corolla" },
+			{ id: 3, icon: PaintBrush, type: "Color", detail: "Rojo" },
+			{ id: 4, icon: GasPump, type: "Combustible", detail: "Gasolina" },
+			{ id: 5, icon: Engine, type: "Transmisión", detail: "Automática" },
+		],
 	},
 	{
 		id: 5,
@@ -118,6 +152,13 @@ const CARS = [
 		isAvailable: true,
 		quantityAvailable: 4,
 		isFavorite: false,
+		specs: [
+			// { id: 1, icon: CarGarage, type:"Marca", detail: "Toyota" },
+			// { id: 2, icon: Car, type:"Maodelo, detail: "Corolla" },
+			// { id: 3, icon: PaintBrush, type:"MColor, detail: "Rojo" },
+			// { id: 4, icon: GasPump, type:"MCombustible, detail: "Gasolina" },
+			// { id: 5, icon: Engine, type:"MTransmisión, detail: "Automática" },
+		],
 	},
 	{
 		id: 6,
@@ -133,7 +174,7 @@ const CARS = [
 		rentalPrice: 600,
 		year: 2023,
 		color: "Rojo",
-		carBody: "Sedan",
+		carBody: "Sedán",
 		fuel: "Eléctrico",
 		description: "Tecnología de vanguardia y cero emisiones.",
 		locationCity: "California",
@@ -142,6 +183,13 @@ const CARS = [
 		isAvailable: true,
 		quantityAvailable: 2,
 		isFavorite: true,
+		specs: [
+			{ id: 1, icon: CarGarage, type: "Marca", detail: "Toyota" },
+			{ id: 2, icon: Car, type: "Modelo", detail: "Corolla" },
+			{ id: 3, icon: PaintBrush, type: "Color", detail: "Rojo" },
+			{ id: 4, icon: GasPump, type: "Combustible", detail: "Gasolina" },
+			{ id: 5, icon: Engine, type: "Transmisión", detail: "Automática" },
+		],
 	},
 	{
 		id: 7,
@@ -166,6 +214,13 @@ const CARS = [
 		isAvailable: true,
 		quantityAvailable: 6,
 		isFavorite: false,
+		specs: [
+			{ id: 1, icon: CarGarage, type: "Marca", detail: "Toyota" },
+			{ id: 2, icon: Car, type: "Modelo", detail: "Corolla" },
+			{ id: 3, icon: PaintBrush, type: "Color", detail: "Rojo" },
+			{ id: 4, icon: GasPump, type: "Combustible", detail: "Gasolina" },
+			{ id: 5, icon: Engine, type: "Transmisión", detail: "Automática" },
+		],
 	},
 	{
 		id: 8,
@@ -181,7 +236,7 @@ const CARS = [
 		rentalPrice: 350,
 		year: 2021,
 		color: "Negro",
-		carBody: "Sedan",
+		carBody: "Sedán",
 		fuel: "Gasolina",
 		description: "Elegancia y tecnología en un auto premium.",
 		locationCity: "Texas",
@@ -190,6 +245,13 @@ const CARS = [
 		isAvailable: true,
 		quantityAvailable: 3,
 		isFavorite: true,
+		specs: [
+			{ id: 1, icon: CarGarage, type: "Marca", detail: "Toyota" },
+			{ id: 2, icon: Car, type: "Modelo", detail: "Corolla" },
+			{ id: 3, icon: PaintBrush, type: "Color", detail: "Rojo" },
+			{ id: 4, icon: GasPump, type: "Combustible", detail: "Gasolina" },
+			{ id: 5, icon: Engine, type: "Transmisión", detail: "Automática" },
+		],
 	},
 	{
 		id: 9,
@@ -205,7 +267,7 @@ const CARS = [
 		rentalPrice: 180,
 		year: 2020,
 		color: "Blanco",
-		carBody: "Sedan",
+		carBody: "Sedán",
 		fuel: "Gasolina",
 		description: "Confort y eficiencia para el día a día.",
 		locationCity: "California",
@@ -214,6 +276,13 @@ const CARS = [
 		isAvailable: true,
 		quantityAvailable: 8,
 		isFavorite: false,
+		specs: [
+			{ id: 1, icon: CarGarage, type: "Marca", detail: "Toyota" },
+			{ id: 2, icon: Car, type: "Modelo", detail: "Corolla" },
+			{ id: 3, icon: PaintBrush, type: "Color", detail: "Rojo" },
+			{ id: 4, icon: GasPump, type: "Combustible", detail: "Gasolina" },
+			{ id: 5, icon: Engine, type: "Transmisión", detail: "Automática" },
+		],
 	},
 	{
 		id: 10,
@@ -238,6 +307,13 @@ const CARS = [
 		isAvailable: true,
 		quantityAvailable: 5,
 		isFavorite: false,
+		specs: [
+			{ id: 1, icon: CarGarage, type: "Marca", detail: "Toyota" },
+			{ id: 2, icon: Car, type: "Modelo", detail: "Corolla" },
+			{ id: 3, icon: PaintBrush, type: "Color", detail: "Rojo" },
+			{ id: 4, icon: GasPump, type: "Combustible", detail: "Gasolina" },
+			{ id: 5, icon: Engine, type: "Transmisión", detail: "Automática" },
+		],
 	},
 	{
 		id: 11,
@@ -262,6 +338,13 @@ const CARS = [
 		isAvailable: true,
 		quantityAvailable: 4,
 		isFavorite: false,
+		specs: [
+			{ id: 1, icon: CarGarage, type: "Marca", detail: "Toyota" },
+			{ id: 2, icon: Car, type: "Modelo", detail: "Corolla" },
+			{ id: 3, icon: PaintBrush, type: "Color", detail: "Rojo" },
+			{ id: 4, icon: GasPump, type: "Combustible", detail: "Gasolina" },
+			{ id: 5, icon: Engine, type: "Transmisión", detail: "Automática" },
+		],
 	},
 	{
 		id: 12,
@@ -286,6 +369,13 @@ const CARS = [
 		isAvailable: true,
 		quantityAvailable: 3,
 		isFavorite: true,
+		specs: [
+			{ id: 1, icon: CarGarage, type: "Marca", detail: "Toyota" },
+			{ id: 2, icon: Car, type: "Modelo", detail: "Corolla" },
+			{ id: 3, icon: PaintBrush, type: "Color", detail: "Rojo" },
+			{ id: 4, icon: GasPump, type: "Combustible", detail: "Gasolina" },
+			{ id: 5, icon: Engine, type: "Transmisión", detail: "Automática" },
+		],
 	},
 	{
 		id: 13,
@@ -310,6 +400,13 @@ const CARS = [
 		isAvailable: true,
 		quantityAvailable: 2,
 		isFavorite: false,
+		specs: [
+			{ id: 1, icon: CarGarage, type: "Marca", detail: "Toyota" },
+			{ id: 2, icon: Car, type: "Modelo", detail: "Corolla" },
+			{ id: 3, icon: PaintBrush, type: "Color", detail: "Rojo" },
+			{ id: 4, icon: GasPump, type: "Combustible", detail: "Gasolina" },
+			{ id: 5, icon: Engine, type: "Transmisión", detail: "Automática" },
+		],
 	},
 	{
 		id: 14,
@@ -325,7 +422,7 @@ const CARS = [
 		rentalPrice: 450,
 		year: 2023,
 		color: "Plateado",
-		carBody: "Sedan",
+		carBody: "Sedán",
 		fuel: "Gasolina",
 		description: "Lujo y rendimiento en un auto premium.",
 		locationCity: "California",
@@ -334,6 +431,13 @@ const CARS = [
 		isAvailable: true,
 		quantityAvailable: 4,
 		isFavorite: true,
+		specs: [
+			{ id: 1, icon: CarGarage, type: "Marca", detail: "Toyota" },
+			{ id: 2, icon: Car, type: "Modelo", detail: "Corolla" },
+			{ id: 3, icon: PaintBrush, type: "Color", detail: "Rojo" },
+			{ id: 4, icon: GasPump, type: "Combustible", detail: "Gasolina" },
+			{ id: 5, icon: Engine, type: "Transmisión", detail: "Automática" },
+		],
 	},
 	{
 		id: 15,
@@ -358,6 +462,13 @@ const CARS = [
 		isAvailable: true,
 		quantityAvailable: 3,
 		isFavorite: false,
+		specs: [
+			{ id: 1, icon: CarGarage, type: "Marca", detail: "Toyota" },
+			{ id: 2, icon: Car, type: "Modelo", detail: "Corolla" },
+			{ id: 3, icon: PaintBrush, type: "Color", detail: "Rojo" },
+			{ id: 4, icon: GasPump, type: "Combustible", detail: "Gasolina" },
+			{ id: 5, icon: Engine, type: "Transmisión", detail: "Automática" },
+		],
 	},
 	{
 		id: 16,
@@ -382,6 +493,13 @@ const CARS = [
 		isAvailable: true,
 		quantityAvailable: 1,
 		isFavorite: true,
+		specs: [
+			{ id: 1, icon: CarGarage, type: "Marca", detail: "Toyota" },
+			{ id: 2, icon: Car, type: "Modelo", detail: "Corolla" },
+			{ id: 3, icon: PaintBrush, type: "Color", detail: "Rojo" },
+			{ id: 4, icon: GasPump, type: "Combustible", detail: "Gasolina" },
+			{ id: 5, icon: Engine, type: "Transmisión", detail: "Automática" },
+		],
 	},
 	{
 		id: 17,
@@ -406,6 +524,13 @@ const CARS = [
 		isAvailable: true,
 		quantityAvailable: 4,
 		isFavorite: false,
+		specs: [
+			{ id: 1, icon: CarGarage, type: "Marca", detail: "Toyota" },
+			{ id: 2, icon: Car, type: "Modelo", detail: "Corolla" },
+			{ id: 3, icon: PaintBrush, type: "Color", detail: "Rojo" },
+			{ id: 4, icon: GasPump, type: "Combustible", detail: "Gasolina" },
+			{ id: 5, icon: Engine, type: "Transmisión", detail: "Automática" },
+		],
 	},
 	{
 		id: 18,
@@ -430,6 +555,13 @@ const CARS = [
 		isAvailable: true,
 		quantityAvailable: 2,
 		isFavorite: true,
+		specs: [
+			{ id: 1, icon: CarGarage, type: "Marca", detail: "Toyota" },
+			{ id: 2, icon: Car, type: "Modelo", detail: "Corolla" },
+			{ id: 3, icon: PaintBrush, type: "Color", detail: "Rojo" },
+			{ id: 4, icon: GasPump, type: "Combustible", detail: "Gasolina" },
+			{ id: 5, icon: Engine, type: "Transmisión", detail: "Automática" },
+		],
 	},
 	{
 		id: 19,
@@ -454,6 +586,13 @@ const CARS = [
 		isAvailable: true,
 		quantityAvailable: 6,
 		isFavorite: false,
+		specs: [
+			{ id: 1, icon: CarGarage, type: "Marca", detail: "Toyota" },
+			{ id: 2, icon: Car, type: "Modelo", detail: "Corolla" },
+			{ id: 3, icon: PaintBrush, type: "Color", detail: "Rojo" },
+			{ id: 4, icon: GasPump, type: "Combustible", detail: "Gasolina" },
+			{ id: 5, icon: Engine, type: "Transmisión", detail: "Automática" },
+		],
 	},
 	{
 		id: 20,
@@ -478,6 +617,13 @@ const CARS = [
 		isAvailable: true,
 		quantityAvailable: 4,
 		isFavorite: false,
+		specs: [
+			{ id: 1, icon: CarGarage, type: "Marca", detail: "Toyota" },
+			{ id: 2, icon: Car, type: "Modelo", detail: "Corolla" },
+			{ id: 3, icon: PaintBrush, type: "Color", detail: "Rojo" },
+			{ id: 4, icon: GasPump, type: "Combustible", detail: "Gasolina" },
+			{ id: 5, icon: Engine, type: "Transmisión", detail: "Automática" },
+		],
 	},
 ];
 

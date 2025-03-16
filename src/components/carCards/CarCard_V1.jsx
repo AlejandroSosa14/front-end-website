@@ -72,7 +72,9 @@ const CarCard_V1 = ({
 					</div>
 					<div className={styles.cardContent_detailsRental}>
 						<p>{`$${rentalPrice} / día`}</p>
-						<button onClick={handleViewDetails}>Ver Detalle</button>
+						<button className={styles.cardContent_button} onClick={handleViewDetails}>
+							Ver Detalle
+						</button>
 					</div>
 				</div>
 			</div>

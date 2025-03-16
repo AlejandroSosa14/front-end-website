@@ -9,29 +9,39 @@ const CarDetailsPagination = ({
 	cars,
 	cardsPerPage,
 	currentPage,
-	handlePrevPage,
-	handleNextPage,
 	changePage,
-	scrollToTop,
+	setIsAnimating,
+	setIsLoading,
 }) => {
+	const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
+
 	const totalPages = Math.ceil(cars.length / cardsPerPage) || 1;
 
-	const handleFirstPage = () => {
-		changePage(1);
-		scrollToTop();
+	const handlePrevPage = () => {
+		if (currentPage > 1) changePage(currentPage - 1);
 	};
 
-	const handleLastPage = () => {
-		changePage(totalPages);
+	const handleNextPage = () => {
+		if (currentPage < totalPages) changePage(currentPage + 1);
+	};
+
+	const handleChangePage = (newPage) => {
 		scrollToTop();
+		setIsAnimating(true);
+		setIsLoading(true);
+		setTimeout(() => {
+			changePage(newPage);
+			setIsLoading(false);
+			setIsAnimating(false);
+		}, 1000);
 	};
 
 	return (
 		<div className={styles.carDetailsPagination}>
-			<button onClick={() => handleFirstPage()} title="Primera">
+			<button onClick={() => handleChangePage(1)} title="Primera" disabled={currentPage === 1}>
 				<ArrowsLeft />
 			</button>
-			<button onClick={handlePrevPage} title="Anterior">
+			<button onClick={() => handlePrevPage()} title="Anterior" disabled={currentPage === 1}>
 				<ArrowLeft />
 			</button>
 			{[...Array(totalPages).keys()].map((page) => (
@@ -50,10 +60,16 @@ const CarDetailsPagination = ({
 					{page + 1}
 				</a>
 			))}
-			<button onClick={handleNextPage} title="Siguiente">
+			<button
+				onClick={() => handleNextPage()}
+				title="Siguiente"
+				disabled={currentPage === totalPages}>
 				<ArrowRight />
 			</button>
-			<button onClick={() => handleLastPage()} title="Última">
+			<button
+				onClick={() => handleChangePage(totalPages)}
+				title="Última"
+				disabled={currentPage === totalPages}>
 				<ArrowsRight />
 			</button>
 		</div>
