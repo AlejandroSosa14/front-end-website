@@ -55,7 +55,7 @@ const CarDetails = () => {
 			setCurrentPage(1);
 			setIsAnimating(false);
 			setLoading(false);
-		}, 1000);
+		}, 500);
 	}, [searchParams]);
 
 	const handleShowAllCars = () => {
@@ -68,7 +68,7 @@ const CarDetails = () => {
 			setFilteredCars(randomCars);
 			setCurrentPage(1);
 			setIsAnimating(false);
-		}, 1000);
+		}, 500);
 	};
 
 	const changePage = (newPage) => {
@@ -79,7 +79,7 @@ const CarDetails = () => {
 			setCurrentPage(newPage);
 			setIsAnimating(false);
 			setLoading(false);
-		}, 1000);
+		}, 500);
 	};
 
 	return (
