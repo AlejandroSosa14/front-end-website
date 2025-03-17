@@ -5,7 +5,6 @@ import Layout from "../components/layout/Layout";
 
 import CARS from "../data/cars.js";
 
-import PageTitle from "../components/pageTitle/PageTitle.jsx";
 import CardSkeletonV1 from "../components/ui/CardSkeletonV1.jsx";
 import FormSearch from "../components/search/FormSearch.jsx";
 import CarDetailsCards from "../components/carDetails/CarDetailsCards.jsx";
@@ -16,6 +15,7 @@ import { normalizeText } from "../utils/textUtils.js";
 
 import styles from "./CarDetails.module.css";
 import cardGrid from "../components/carDetails/CarDetailsCards.module.css";
+import PageTitle from "../components/pageTitle/PageTitle.jsx";
 
 const CarDetails = () => {
 	const [filteredCars, setFilteredCars] = useState([]);

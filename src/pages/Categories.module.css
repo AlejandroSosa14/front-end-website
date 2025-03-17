@@ -1,329 +1,315 @@
 .title {
-    background-color: var(--main-color);
-    text-align: center;
-    height: 6rem;
-    align-content: center;
+	background-color: var(--main-color);
+	text-align: center;
+	height: 6rem;
+	align-content: center;
 }
 
-html, body {
-    height: 100%;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
+html,
+body {
+	height: 100%;
+	margin: 0;
+	display: flex;
+	flex-direction: column;
 }
 
-.content { 
-    width: 70%;
-    margin: auto;
-    padding: 2rem;
-    height: 37.5rem;
-    flex: 1;
+.content {
+	width: 70%;
+	margin: auto;
+	padding: 2rem;
+	height: 37.5rem;
+	flex: 1;
 }
 
 .searchByBrand {
-    display: flex;
-    height: 6rem;
-    margin: auto;
-    background-color: lightblue;
-    align-items: center;
-    border-radius: 1rem;
+	display: flex;
+	height: 6rem;
+	margin: auto;
+	background-color: lightblue;
+	align-items: center;
+	border-radius: 1rem;
 }
 
 .divFormSearchByBrand {
-    width: 50%;
-    margin: auto;
+	width: 50%;
+	margin: auto;
 }
 
 .formSearchByBrand {
-    height: 4rem;
-    align-content: center;
-    display: flex;
-    align-items: center;
-    border-radius: 1rem;
+	height: 4rem;
+	align-content: center;
+	display: flex;
+	align-items: center;
+	border-radius: 1rem;
 }
 
 .formIcon {
-    background-color: aliceblue;
-    height: 3rem;
-    align-content: center;
+	background-color: aliceblue;
+	height: 3rem;
+	align-content: center;
 }
 
 .iconSize {
-    width: 35px;
-    height: 35px;
+	width: 35px;
+	height: 35px;
 }
 
 .selectForm {
-    height: 3rem;
-    width: 55%;
-    text-align: center;
-    background-color: aliceblue;
-    color: var(--main-color);
-    border: 0px;
+	height: 3rem;
+	width: 55%;
+	text-align: center;
+	background-color: aliceblue;
+	color: var(--main-color);
+	border: 0px;
 }
 
 .divButtonForm {
-    margin: auto;
+	margin: auto;
 }
 
-.buttonForm { 
-    background-color: var(--main-color);
-    width: 14rem;
-    height: 2.5rem;
+.buttonForm {
+	background-color: var(--main-color);
+	width: 14rem;
+	height: 2.5rem;
 }
-
 
 .tableInfo {
-    width: 100%;
-    height: 100%;
-    color: black;
-    border-collapse: collapse;
-    border-radius: 8px;
-    overflow: hidden;
+	width: 100%;
+	height: 100%;
+	color: black;
+	border-collapse: collapse;
+	border-radius: 8px;
+	overflow: hidden;
 }
 
-
-
 .tableHead {
-    background-color: gainsboro;
-    height: 2rem;
+	background-color: gainsboro;
+	height: 2rem;
 }
 
 .tableHead th {
-    padding: 12px;
-    text-align: center;
-    font-weight: bold;
+	padding: 12px;
+	text-align: center;
+	font-weight: bold;
 }
 
 .tableContent {
-    text-align: center;
+	text-align: center;
 }
 
 .tableContent td {
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
-    vertical-align: middle;
+	padding: 10px;
+	border-bottom: 1px solid #ddd;
+	vertical-align: middle;
 }
 
 .tableContent tr:hover {
-    background-color: #f1f1f1;
+	background-color: #f1f1f1;
 }
 
 .iconCell {
-    display: flex;
-    justify-content: center;
-    gap: 10px; 
+	display: flex;
+	justify-content: center;
+	gap: 10px;
 }
 
 .tableIcon {
-    width: 32px;
-    height: 32px;
-    border-radius: 5px;
-    transition: transform 0.2s;
-    cursor: pointer;
+	width: 32px;
+	height: 32px;
+	border-radius: 5px;
+	transition: transform 0.2s;
+	cursor: pointer;
 }
 
 .tableIcon:hover {
-    transform: scale(1.1);
+	transform: scale(1.1);
 }
 
 .paginationContainer {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-    align-items: center;
-    gap: 10px;
+	display: flex;
+	justify-content: center;
+	margin-top: 20px;
+	align-items: center;
+	gap: 10px;
 }
 
 .pageButton {
-    padding: 8px 15px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+	padding: 8px 15px;
+	background-color: #007bff;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: background-color 0.3s;
 }
 
 .pageButton:disabled {
-    background-color: gray;
-    cursor: not-allowed;
+	background-color: gray;
+	cursor: not-allowed;
 }
 
 .pageButton:hover:not(:disabled) {
-    background-color: #0056b3;
+	background-color: #0056b3;
 }
 
 .register {
-    width: 100%;
-    min-height: 60vh;
-    height: 100%;
-    padding-bottom: 2rem;
-}
-
-.register h2 {
-    font-size: 2rem;
-    width: 100%;
-    background-color: var(--main-color);
-    padding: 2rem 0;
-    text-align: center;
-    margin-bottom: 1.4rem;
-    margin-top: 5rem;
-    color: white;
+	width: 100%;
+	min-height: 60vh;
+	height: 100%;
+	padding-bottom: 2rem;
 }
 
 .buttonContainer {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    margin-top: 1.5rem;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	margin-top: 1.5rem;
 }
 
 .submitButton {
-    background-color: var(--main-color);
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    padding: 10px 20px;
-    transition: background-color 0.3s ease-in-out;
+	background-color: var(--main-color);
+	color: white;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	padding: 10px 20px;
+	transition: background-color 0.3s ease-in-out;
 }
 
 .submitButton:hover {
-    background-color: #001a4d;
+	background-color: #001a4d;
 }
 
 .modalOverlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.5);
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .modalContent {
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+	background: white;
+	padding: 20px;
+	border-radius: 10px;
+	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
 }
 
 .mobileContainer {
-    text-align: center;
-    padding: 20px;
+	text-align: center;
+	padding: 20px;
 }
 
 .mobileMessage {
-    font-size: 18px;
-    color: red;
-    font-weight: bold;
-    margin-bottom: 20px;
+	font-size: 18px;
+	color: red;
+	font-weight: bold;
+	margin-bottom: 20px;
 }
 
 .backButton {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: background-color 0.3s;
+	background-color: #007bff;
+	color: white;
+	border: none;
+	padding: 10px 20px;
+	font-size: 16px;
+	cursor: pointer;
+	border-radius: 5px;
+	transition: background-color 0.3s;
 }
 
 .backButton:hover {
-    background-color: #0056b3;
+	background-color: #0056b3;
 }
 
 @media (min-width: 1024px) {
-    .mobileContainer {
-        display: none;
-    }
+	.mobileContainer {
+		display: none;
+	}
 }
 
 .buttonWrapper {
-    width: 100%;
-    display: flex;
-    justify-content: flex-start;
-    margin-bottom: 1rem;
+	width: 100%;
+	display: flex;
+	justify-content: flex-start;
+	margin-bottom: 1rem;
 }
 
 .actionButtons {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
+	display: flex;
+	justify-content: center;
+	gap: 8px;
 }
 
-.editButton, .deleteButton {
-    padding: 6px 12px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: all 0.3s;
+.editButton,
+.deleteButton {
+	padding: 6px 12px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: all 0.3s;
 }
 
 .editButton {
-    background-color: #ffc107;
-    color: black;
+	background-color: #ffc107;
+	color: black;
 }
 
 .editButton:hover {
-    background-color: #e0a800;
+	background-color: #e0a800;
 }
 
 .deleteButton {
-    background-color: #dc3545;
-    color: white;
+	background-color: #dc3545;
+	color: white;
 }
 
 .deleteButton:hover {
-    background-color: #c82333;
+	background-color: #c82333;
 }
 
-
 .addButton {
-    background-color: var(--main-color);
-    color: white;
-    border: none;
-    padding: 8px 18px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    border-radius: 8px;
-    transition: all 0.3s ease-in-out;
+	background-color: var(--main-color);
+	color: white;
+	border: none;
+	padding: 8px 18px;
+	font-size: 16px;
+	font-weight: bold;
+	cursor: pointer;
+	border-radius: 8px;
+	transition: all 0.3s ease-in-out;
 }
 
 .addButton:hover {
-    background-color: var(--button-hover-color, #0056b3);
-    transform: scale(1.03);
+	background-color: var(--button-hover-color, #0056b3);
+	transform: scale(1.03);
 }
 
-
 .categoryImage {
-    width: 80px;
-    height: 60px;
-    object-fit: contain; /* Ajusta la imagen sin recortar */
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    display: block;
-    margin: auto;
+	width: 80px;
+	height: 60px;
+	object-fit: contain; /* Ajusta la imagen sin recortar */
+	border-radius: 5px;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+	display: block;
+	margin: auto;
 }
 
 /* Asegurar que las imágenes dentro de la tabla no se desborden */
 .tableContent img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    margin: auto;
+	max-width: 100%;
+	height: auto;
+	display: block;
+	margin: auto;
 }
 
 @media (max-width: 768px) {
-    .categoryImage {
-        width: 60px;
-        height: 50px;
-    }
+	.categoryImage {
+		width: 60px;
+		height: 50px;
+	}
 }
