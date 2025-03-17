@@ -5,6 +5,7 @@ import Layout from "../components/layout/Layout";
 
 import CARS from "../data/cars.js";
 
+import PageTitle from "../components/pageTitle/PageTitle.jsx";
 import CardSkeletonV1 from "../components/ui/CardSkeletonV1.jsx";
 import FormSearch from "../components/search/FormSearch.jsx";
 import CarDetailsCards from "../components/carDetails/CarDetailsCards.jsx";
@@ -84,8 +85,8 @@ const CarDetails = () => {
 
 	return (
 		<Layout>
-			<section className={`section ${styles.carDetails}`}>
-				<h2>Automóviles</h2>
+			<section className={styles.carDetails}>
+				<PageTitle title={"Automóviles"} />
 				<div className="container">
 					<div className={styles.carDetailsContainer}>
 						<div className={styles.carDetailsSearch}>

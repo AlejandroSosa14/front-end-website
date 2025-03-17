@@ -52,7 +52,7 @@ const CarDetail = () => {
 	if (!car) {
 		return (
 			<Layout>
-				<section className="section">
+				<section className={styles.carDetail}>
 					<div className="container">
 						<h2>Auto no encontrado</h2>
 					</div>
@@ -65,7 +65,7 @@ const CarDetail = () => {
 
 	return (
 		<Layout>
-			<section className={`section ${styles.carDetail}`}>
+			<section className={styles.carDetail}>
 				<h2 className="sectionTitle">{car.model}</h2>
 				<div className="container">
 					{/* HEADER */}

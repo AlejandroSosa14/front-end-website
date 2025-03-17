@@ -2,6 +2,7 @@ import { useRef } from "react";
 import RegisterForm from "../components/UserForm/RegisterForm";
 import Layout from "../components/layout/Layout";
 import styles from "./RegisterPage.module.css";
+import PageTitle from "../components/pageTitle/PageTitle";
 
 const RegisterPage = () => {
 	const formRef = useRef(null);
@@ -15,7 +16,7 @@ const RegisterPage = () => {
 	return (
 		<Layout>
 			<section className={styles.register}>
-				<h2>Crear Cuenta</h2>
+				<PageTitle title={"Crear Cuenta"} />
 				<div className="container">
 					<div className={styles.registerContainer}>
 						<div className={styles.registerFormContainer}>

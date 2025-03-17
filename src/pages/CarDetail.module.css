@@ -13,10 +13,6 @@
 	}
 }
 
-section.carDetail {
-	padding-top: var(--header-height);
-}
-
 .carDetail_header {
 	display: flex;
 	flex-direction: row;
@@ -25,6 +21,10 @@ section.carDetail {
 	align-items: center;
 	background-color: var(--white);
 	padding: 0.4rem 1.2rem;
+
+	& h3 {
+		color: var(--black);
+	}
 }
 
 .carDetail_backLink {
