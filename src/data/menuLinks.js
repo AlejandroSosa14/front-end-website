@@ -16,8 +16,13 @@ const MENU_LINKS = [
 	},
 	{
 		id: 4,
-		label: "Dashboard",
+		label: "Dashboard Automóviles",
 		path: "/dashboard",
+	},
+	{
+		id: 5,
+		label: "Dashboard Categorías",
+		path: "/categories",
 	},
 ];
 
