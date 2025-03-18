@@ -72,32 +72,6 @@ html, body {
     height: 2.5rem;
 }
 
-.addNewCar {
-    margin-top: 1rem;
-    display: flex;
-    justify-content: flex-end;
-    padding-right: 2rem;
-}
-
-.addNewCar button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: background-color 0.3s;
-}
-
-.addNewCar button:hover {
-    background-color: #0056b3;
-}
-
-.carList {
-    margin-top: 2rem;
-    min-height: 70vh;
-}
 
 .tableInfo {
     width: 100%;
@@ -151,13 +125,6 @@ html, body {
 
 .tableIcon:hover {
     transform: scale(1.1);
-}
-
-.carImage {
-    width: 80px;
-    height: 60px;
-    object-fit: cover;
-    border-radius: 5px;
 }
 
 .paginationContainer {
@@ -281,26 +248,8 @@ html, body {
 .buttonWrapper {
     width: 100%;
     display: flex;
-    justify-content: flex-end;
-    padding-right: 2rem;
+    justify-content: flex-start;
     margin-bottom: 1rem;
-}
-
-.addCarButton {
-    background-color: var(--button-color, #007bff);
-    color: white;
-    border: none;
-    padding: 12px 18px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    border-radius: 8px;
-    transition: all 0.3s ease-in-out;
-}
-
-.addCarButton:hover {
-    background-color: var(--button-hover-color, #0056b3);
-    transform: scale(1.05);
 }
 
 .actionButtons {
@@ -337,10 +286,10 @@ html, body {
 
 
 .addButton {
-    background-color: var(--button-color, #007bff);
+    background-color: var(--main-color);
     color: white;
     border: none;
-    padding: 12px 18px;
+    padding: 8px 18px;
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
@@ -350,7 +299,7 @@ html, body {
 
 .addButton:hover {
     background-color: var(--button-hover-color, #0056b3);
-    transform: scale(1.05);
+    transform: scale(1.03);
 }
 
 

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { createCategory } from "../../api/categories";
 import styles from "./CreateCategoryModal.module.css";
 
@@ -11,6 +11,13 @@ const CreateCategoryModal = ({ onClose, onCategoryCreated }) => {
     const [preview, setPreview] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+
+    useEffect(() => {
+        document.body.style.overflow = "hidden";
+        return () => {
+            document.body.style.overflow = "auto";
+        };
+    }, []);
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -62,7 +69,7 @@ const CreateCategoryModal = ({ onClose, onCategoryCreated }) => {
     return (
         <div className={styles.modalOverlay}>
             <div className={styles.modalContent}>
-                <h2>Crear Categoría</h2>
+                <h4>Registrar Categoría</h4>
                 {error && <p className={styles.error}>{error}</p>}
                 <form onSubmit={handleSubmit}>
                     <label>
