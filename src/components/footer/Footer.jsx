@@ -28,6 +28,9 @@ const Footer = () => {
 								<li>
 									<a href="/autos">Automóviles</a>
 								</li>
+								<li>
+									<a href="/Terms">Términos y condiciones</a>
+								</li>
 							</ul>
 						</nav>
 					</div>

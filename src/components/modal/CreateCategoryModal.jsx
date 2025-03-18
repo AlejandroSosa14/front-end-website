@@ -75,6 +75,7 @@ const CreateCategoryModal = ({ onClose, onCategoryCreated }) => {
                     <label>
                         Nombre:
                         <input
+                            className={styles.inputT}
                             type="text"
                             name="name"
                             value={formData.name}

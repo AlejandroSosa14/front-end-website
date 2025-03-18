@@ -10,6 +10,7 @@ import RegisterPage from "./pages/RegisterPage";
 import RegisterCarPage from "./pages/RegisterCarPage";
 import Categories from "./pages/Categories";
 import Login from "./pages/Login";
+import Terms from "./pages/Terms";
 
 import "./App.css";
 
@@ -26,6 +27,7 @@ function App() {
 					<Route path="/auto/:carId" element={<CarDetail />} />
 					<Route path="/registro" element={<RegisterPage />} />
 					<Route path="/register-car" element={<RegisterCarPage />} />
+					<Route path="/terms" element={<Terms />} />
 				</Routes>
 			</CarProvider>
 		</BrowserRouter>
