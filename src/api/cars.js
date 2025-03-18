@@ -77,6 +77,32 @@ export const createCar = async (carData, files = []) => {
 };
 
 
+/*export const updateCar = async (carId, formData) => {
+    try {
+        const token = localStorage.getItem("authToken");
+        if (!token) throw new Error("No hay token disponible, el usuario debe iniciar sesión");
+
+        const response = await fetch(`http://localhost:8181/api/cars/${carId}`, {
+            method: "PUT",
+            headers: { "Authorization": `Bearer ${token}` },
+            mode: "cors",
+            credentials: "include",
+            body: formData,
+        });
+
+        if (!response.ok) {
+            const errorText = await response.text();
+            throw new Error(`Error ${response.status}: ${errorText}`);
+        }
+
+        return await response.json();
+    } catch (error) {
+        console.error("Error en updateCar:", error);
+        return null;
+    }
+};*/
+
+// Actualizar un auto con imágenes
 export const updateCar = async (carId, formData) => {
     try {
         const token = localStorage.getItem("authToken");

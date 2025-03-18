@@ -334,3 +334,47 @@ html, body {
 .deleteButton:hover {
     background-color: #c82333;
 }
+
+
+.addButton {
+    background-color: var(--button-color, #007bff);
+    color: white;
+    border: none;
+    padding: 12px 18px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.3s ease-in-out;
+}
+
+.addButton:hover {
+    background-color: var(--button-hover-color, #0056b3);
+    transform: scale(1.05);
+}
+
+
+.categoryImage {
+    width: 80px;
+    height: 60px;
+    object-fit: contain; /* Ajusta la imagen sin recortar */
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    display: block;
+    margin: auto;
+}
+
+/* Asegurar que las imágenes dentro de la tabla no se desborden */
+.tableContent img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: auto;
+}
+
+@media (max-width: 768px) {
+    .categoryImage {
+        width: 60px;
+        height: 50px;
+    }
+}

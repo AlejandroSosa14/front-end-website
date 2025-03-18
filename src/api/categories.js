@@ -28,3 +28,30 @@ export const getCategories = async () => {
         return [];
     }
 };
+
+export const createCategory = async (formData) => {
+    try {
+        const token = localStorage.getItem("authToken");
+
+        if (!token) {
+            throw new Error("No hay token disponible, el usuario debe iniciar sesión");
+        }
+
+        const response = await fetch(API_URL, {
+            method: "POST",
+            headers: {
+                "Authorization": `Bearer ${token}`,
+            },
+            body: formData,
+        });
+
+        if (!response.ok) {
+            throw new Error("Error al crear la categoría");
+        }
+
+        return await response.json();
+    } catch (error) {
+        console.error("Error en createCategory:", error);
+        throw error;
+    }
+};
