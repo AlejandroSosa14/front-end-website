@@ -179,7 +179,7 @@ const CarDetail = () => {
 							{/* SHARE AND CALENDARS */}
 							<div className={styles.carDetail_complementCards}>
 								<CarCard_V3 title={"Compartir en"}>
-									<ShareSocialMedia />
+									<ShareSocialMedia id={carId} />
 								</CarCard_V3>
 								<CarCard_V3 title={"Disponibilidad del auto"}>
 									<div className={styles.carDetail_noAvailableTip}>
