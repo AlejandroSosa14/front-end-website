@@ -1,0 +1,17 @@
+.whatsappChat {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 1000;
+    background-color: #25d366;
+    color: #fff;
+    border-radius: 50%;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: 0.3s;
+    justify-content: center;
+}
+
+.whatsappChat:hover {
+    background-color: #128c7e;
+}

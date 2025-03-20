@@ -15,6 +15,7 @@ import ReservedCars from "./pages/ReservedCars";
 import FavoriteCars from "./pages/FavoriteCars";
 
 import "./App.css";
+import WhatsAppChat from "./components/whatsapp/WhatsAppChat";
 
 function App() {
 	return (
@@ -33,6 +34,7 @@ function App() {
 					<Route path="/register-car" element={<RegisterCarPage />} />
 					<Route path="/terms" element={<Terms />} />
 				</Routes>
+				<WhatsAppChat />
 			</CarProvider>
 		</BrowserRouter>
 	);
