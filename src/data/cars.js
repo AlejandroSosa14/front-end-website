@@ -28,6 +28,7 @@ const CARS = [
 		isAvailable: true,
 		quantityAvailable: 5,
 		isFavorite: false,
+		postDate: "2024-07-01",
 		specs: [
 			{ id: 1, icon: CarGarage, type: "Marca", detail: "Toyota" },
 			{ id: 2, icon: Car, type: "Modelo", detail: "Corolla" },
@@ -59,6 +60,7 @@ const CARS = [
 		isAvailable: true,
 		quantityAvailable: 3,
 		isFavorite: true,
+		postDate: "2024-08-05",
 		specs: [
 			{ id: 1, icon: CarGarage, type: "Marca", detail: "Toyota" },
 			{ id: 2, icon: Car, type: "Modelo", detail: "Corolla" },
@@ -90,6 +92,7 @@ const CARS = [
 		isAvailable: true,
 		quantityAvailable: 7,
 		isFavorite: false,
+		postDate: "2024-06-15",
 		specs: [
 			{ id: 1, icon: CarGarage, type: "Marca", detail: "Toyota" },
 			{ id: 2, icon: Car, type: "Modelo", detail: "Corolla" },
@@ -121,6 +124,7 @@ const CARS = [
 		isAvailable: false,
 		quantityAvailable: 0,
 		isFavorite: true,
+		postDate: "2024-09-09",
 		specs: [
 			{ id: 1, icon: CarGarage, type: "Marca", detail: "Toyota" },
 			{ id: 2, icon: Car, type: "Modelo", detail: "Corolla" },
@@ -152,6 +156,7 @@ const CARS = [
 		isAvailable: true,
 		quantityAvailable: 4,
 		isFavorite: false,
+		postDate: "2025-03-15",
 		specs: [
 			// { id: 1, icon: CarGarage, type:"Marca", detail: "Toyota" },
 			// { id: 2, icon: Car, type:"Modelo, detail: "Corolla" },
@@ -183,6 +188,7 @@ const CARS = [
 		isAvailable: true,
 		quantityAvailable: 2,
 		isFavorite: true,
+		postDate: "2025-02-09",
 		specs: [
 			{ id: 1, icon: CarGarage, type: "Marca", detail: "Toyota" },
 			{ id: 2, icon: Car, type: "Modelo", detail: "Corolla" },
@@ -214,6 +220,7 @@ const CARS = [
 		isAvailable: true,
 		quantityAvailable: 6,
 		isFavorite: false,
+		postDate: "2024-05-24",
 		specs: [
 			{ id: 1, icon: CarGarage, type: "Marca", detail: "Toyota" },
 			{ id: 2, icon: Car, type: "Modelo", detail: "Corolla" },
@@ -245,6 +252,7 @@ const CARS = [
 		isAvailable: true,
 		quantityAvailable: 3,
 		isFavorite: true,
+		postDate: "2025-01-06",
 		specs: [
 			{ id: 1, icon: CarGarage, type: "Marca", detail: "Toyota" },
 			{ id: 2, icon: Car, type: "Modelo", detail: "Corolla" },
@@ -276,6 +284,7 @@ const CARS = [
 		isAvailable: true,
 		quantityAvailable: 8,
 		isFavorite: false,
+		postDate: "2025-01-23",
 		specs: [
 			{ id: 1, icon: CarGarage, type: "Marca", detail: "Toyota" },
 			{ id: 2, icon: Car, type: "Modelo", detail: "Corolla" },
@@ -307,6 +316,7 @@ const CARS = [
 		isAvailable: true,
 		quantityAvailable: 5,
 		isFavorite: false,
+		postDate: "2024-12-03",
 		specs: [
 			{ id: 1, icon: CarGarage, type: "Marca", detail: "Toyota" },
 			{ id: 2, icon: Car, type: "Modelo", detail: "Corolla" },
@@ -338,6 +348,7 @@ const CARS = [
 		isAvailable: true,
 		quantityAvailable: 4,
 		isFavorite: false,
+		postDate: "2025-03-31",
 		specs: [
 			{ id: 1, icon: CarGarage, type: "Marca", detail: "Toyota" },
 			{ id: 2, icon: Car, type: "Modelo", detail: "Corolla" },
@@ -369,6 +380,7 @@ const CARS = [
 		isAvailable: true,
 		quantityAvailable: 3,
 		isFavorite: true,
+		postDate: "2024-12-20",
 		specs: [
 			{ id: 1, icon: CarGarage, type: "Marca", detail: "Toyota" },
 			{ id: 2, icon: Car, type: "Modelo", detail: "Corolla" },
@@ -400,6 +412,7 @@ const CARS = [
 		isAvailable: true,
 		quantityAvailable: 2,
 		isFavorite: false,
+		postDate: "2024-10-30",
 		specs: [
 			{ id: 1, icon: CarGarage, type: "Marca", detail: "Toyota" },
 			{ id: 2, icon: Car, type: "Modelo", detail: "Corolla" },
@@ -431,6 +444,7 @@ const CARS = [
 		isAvailable: true,
 		quantityAvailable: 4,
 		isFavorite: true,
+		postDate: "2024-11-16",
 		specs: [
 			{ id: 1, icon: CarGarage, type: "Marca", detail: "Toyota" },
 			{ id: 2, icon: Car, type: "Modelo", detail: "Corolla" },
@@ -462,6 +476,7 @@ const CARS = [
 		isAvailable: true,
 		quantityAvailable: 3,
 		isFavorite: false,
+		postDate: "2024-09-26",
 		specs: [
 			{ id: 1, icon: CarGarage, type: "Marca", detail: "Toyota" },
 			{ id: 2, icon: Car, type: "Modelo", detail: "Corolla" },
@@ -493,6 +508,7 @@ const CARS = [
 		isAvailable: true,
 		quantityAvailable: 1,
 		isFavorite: true,
+		postDate: "2025-02-26",
 		specs: [
 			{ id: 1, icon: CarGarage, type: "Marca", detail: "Toyota" },
 			{ id: 2, icon: Car, type: "Modelo", detail: "Corolla" },
@@ -524,6 +540,7 @@ const CARS = [
 		isAvailable: true,
 		quantityAvailable: 4,
 		isFavorite: false,
+		postDate: "2024-10-13",
 		specs: [
 			{ id: 1, icon: CarGarage, type: "Marca", detail: "Toyota" },
 			{ id: 2, icon: Car, type: "Modelo", detail: "Corolla" },
@@ -555,6 +572,7 @@ const CARS = [
 		isAvailable: true,
 		quantityAvailable: 2,
 		isFavorite: true,
+		postDate: "2024-06-02",
 		specs: [
 			{ id: 1, icon: CarGarage, type: "Marca", detail: "Toyota" },
 			{ id: 2, icon: Car, type: "Modelo", detail: "Corolla" },
@@ -586,6 +604,7 @@ const CARS = [
 		isAvailable: true,
 		quantityAvailable: 6,
 		isFavorite: false,
+		postDate: "2024-08-22",
 		specs: [
 			{ id: 1, icon: CarGarage, type: "Marca", detail: "Toyota" },
 			{ id: 2, icon: Car, type: "Modelo", detail: "Corolla" },
@@ -617,6 +636,7 @@ const CARS = [
 		isAvailable: true,
 		quantityAvailable: 4,
 		isFavorite: false,
+		postDate: "2024-07-18",
 		specs: [
 			{ id: 1, icon: CarGarage, type: "Marca", detail: "Toyota" },
 			{ id: 2, icon: Car, type: "Modelo", detail: "Corolla" },
