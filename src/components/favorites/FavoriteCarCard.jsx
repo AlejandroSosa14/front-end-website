@@ -48,10 +48,10 @@ const FavoriteCarCard = ({ car, onRemoveFavorite }) => {
                             <Star />
                             <span>4.5</span>
                         </div>
-                        <div className="flex-row align-middle">
+                     {/*  <div className="flex-row align-middle">
                             <CarOutline />
                             <span>5</span>
-                        </div>
+                        </div> */}
                     </div>
                     <div className={styles.detailsprice}>
                         <p>Precio: {`$${car.reserveCost} / día`}</p>
