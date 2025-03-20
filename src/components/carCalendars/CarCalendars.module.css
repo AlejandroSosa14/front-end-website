@@ -1,23 +1,23 @@
 .calendarContainer {
+	position: relative;
 	width: 100%;
-	max-width: 400px; /* Ajusta el ancho según sea necesario */
-	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 1.4rem;
 }
 
-/* Fondo gris para días pasados */
 .pastDate {
 	background-color: #d3d3d3 !important; /* Gris */
 	color: #999 !important;
 	pointer-events: none; /* Evitar interacción */
 }
 
-/* Fondo naranja-rojo para fechas no disponibles (solo si no son pasadas) */
 .unavailableDate {
 	background-color: var(--warning) !important;
 	color: white !important;
 }
 
-/* Día actual en negrita */
 .today {
 	font-weight: bold !important;
 	background-color: none !important;

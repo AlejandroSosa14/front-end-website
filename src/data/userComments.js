@@ -149,7 +149,7 @@ const USER_COMMENTS = [
 		user: "Amber Road",
 		comment:
 			"I loved the car, it was clean and the engine sounded great. I would rent it again. I loved the car, it was clean and the engine sounded great. I would rent it again.",
-		date: "2021-06-15",
+		// date: "2021-06-15",
 		rating: 5,
 	},
 	{
