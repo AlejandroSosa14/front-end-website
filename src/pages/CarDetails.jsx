@@ -35,17 +35,40 @@ const CarDetails = () => {
 		const brand = searchParams.get("brand") || "";
 		const locationCity = searchParams.get("locationCity") || "";
 		const carBody = searchParams.get("carBody") || "";
+		const searchTerm = searchParams.get("searchTerm") || "";
+		const startDate = searchParams.get("startDate") || "";
+		const endDate = searchParams.get("endDate") || "";
 
 		const normalizedBrand = normalizeText(brand);
 		const normalizedLocationCity = normalizeText(locationCity);
 		const normalizedCarBody = normalizeText(carBody);
+		const normalizedSearchTerm = normalizeText(searchTerm);
 
-		const results = CARS.filter(
-			(car) =>
-				(normalizedBrand === "" || normalizeText(car.brand) === brand) &&
-				(normalizedLocationCity === "" || normalizeText(car.locationCity) === locationCity) &&
-				(normalizedCarBody === "" || normalizeText(car.carBody) === normalizedCarBody)
-		);
+		const results = CARS.filter((car) => {
+			const matchesBrand = normalizedBrand === "" || normalizeText(car.brand) === normalizedBrand;
+			const matchesLocationCity =
+				normalizedLocationCity === "" || normalizeText(car.locationCity) === normalizedLocationCity;
+			const matchesCarBody =
+				normalizedCarBody === "" || normalizeText(car.carBody) === normalizedCarBody;
+
+			const matchesSearchTerm =
+				normalizedSearchTerm === "" ||
+				Object.values(car).some((value) =>
+					normalizeText(String(value)).includes(normalizedSearchTerm)
+				);
+
+			const matchesStartDate = startDate === "" || new Date(car.postDate) >= new Date(startDate);
+			const matchesEndDate = endDate === "" || new Date(car.postDate) <= new Date(endDate);
+
+			return (
+				matchesBrand &&
+				matchesLocationCity &&
+				matchesCarBody &&
+				matchesSearchTerm &&
+				matchesStartDate &&
+				matchesEndDate
+			);
+		});
 
 		const randomResults = results.sort(() => Math.random() - 0.5);
 		setIsAnimating(true);
@@ -91,9 +114,6 @@ const CarDetails = () => {
 					<div className={styles.carDetailsContainer}>
 						<div className={styles.carDetailsSearch}>
 							<h3>Búsqueda</h3>
-							<p>
-								Puedes buscar por <span>Marca</span>, <span>Ubicación</span> o ambos.
-							</p>
 							<FormSearch />
 						</div>
 						{loading ? (

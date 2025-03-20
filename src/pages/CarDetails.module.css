@@ -48,20 +48,10 @@
 	}
 }
 
-.carDetailsSearch form {
-	flex-direction: column;
-	align-items: center;
-	width: 100%;
-	gap: 1rem;
-
-	@media screen and (min-width: 768px) {
-	}
-}
-
 .carDetailsSearch h3 {
 	font-size: 1.5rem;
 	font-weight: 700;
-	margin-bottom: 0.4rem;
+	margin-bottom: 0.75rem;
 	color: var(--black);
 }
 

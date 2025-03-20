@@ -74,6 +74,8 @@ const CarDetail = () => {
 	} else {
 		const userComments = USER_COMMENTS.filter((comment) => comment.carId === car.id);
 
+		console.log(userComments[0]);
+
 		return (
 			<Layout>
 				<PageTitle title={car.model} />
@@ -165,7 +167,13 @@ const CarDetail = () => {
 							{/* USER RATING */}
 							<div className={styles.carDetail_complementCard}>
 								<CarCard_V3 title={"Opiniones del auto"}>
-									<CarCardComments userComments={userComments} />
+									{userComments[0].user && userComments[0].comment && userComments[0].date ? (
+										<CarCardComments userComments={userComments} />
+									) : (
+										<p className={styles.cardInfo_noSpecs}>
+											Aún no hay comentarios para éste auto.
+										</p>
+									)}
 								</CarCard_V3>
 							</div>
 							{/* SHARE AND CALENDARS */}
@@ -174,8 +182,8 @@ const CarDetail = () => {
 									<ShareSocialMedia />
 								</CarCard_V3>
 								<CarCard_V3 title={"Disponibilidad del auto"}>
-									<div className={styles.carDetail_infoTip}>
-										<p>Seleccionar rango de fechas para ver disponibilidad</p>
+									<div className={styles.carDetail_noAvailableTip}>
+										<p>Sin disponibilidad</p>
 									</div>
 									<CarCalendars unavailableDates={unavailableDates} />
 								</CarCard_V3>
