@@ -20,7 +20,17 @@ import PageTitle from "../components/pageTitle/PageTitle.jsx";
 import ShareSocialMedia from "../components/shareSocialMedia/ShareSocialMedia.jsx";
 
 // Fechas ocupadas (Ejemplo: se obtiene de una API)
-const unavailableDates = ["2025-03-17", "2025-03-25", "2025-04-11"];
+const unavailableDates = [
+	"2025-03-24",
+	"2025-03-25",
+	"2025-03-26",
+	"2025-04-09",
+	"2025-04-18",
+	"2025-04-19",
+	"2025-04-20",
+	"2025-04-29",
+	"2025-04-30",
+];
 
 const CarDetail = () => {
 	const { carId } = useParams();
