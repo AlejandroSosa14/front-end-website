@@ -18,6 +18,9 @@
 	width: 75%;
 	opacity: 0;
 	transform: scale(0.9);
+	grid-column-start: 1;
+	grid-column-end: 4;
+	justify-self: center;
 
 	& b {
 		width: 100%;

@@ -7,7 +7,7 @@
 	background-size: calc(90vw);
 	background-position: center 80%;
 	background-repeat: no-repeat;
-	padding-top: calc(var(--header-height) * 1.5);
+	padding-top: 4rem;
 
 	@media screen and (min-width: 1024px) {
 		background-size: calc(60vw);

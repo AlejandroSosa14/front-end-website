@@ -2,6 +2,7 @@ import { useRef } from "react";
 import LoginForm from "../components/UserForm/LoginForm";
 import Layout from "../components/layout/Layout";
 import styles from "./Login.module.css";
+import PageTitle from "../components/pageTitle/PageTitle";
 
 const Login = () => {
 	const formRef = useRef(null);
@@ -15,7 +16,7 @@ const Login = () => {
 	return (
 		<Layout>
 			<section className={styles.loginContainer}>
-				<h2>Iniciar Sesión</h2>
+				<PageTitle title={"Iniciar Sesión"} />
 				<div className="container">
 					<div className={styles.loginBox}>
 						<div className={styles.loginFormContainer}>

@@ -10,18 +10,7 @@ const EditCarModal = ({ car, onClose, onUpdate }) => {
 	const [selectedFiles, setSelectedFiles] = useState([]);
 	const [removedImages, setRemovedImages] = useState([]);
 
-	// useEffect(() => {
-
-	//     try {
-	//         if (car.images) {
-	//             const parsedImages = JSON.parse(car.images);
-	//             setInitialImages(Array.isArray(parsedImages) ? parsedImages : []);
-	//         }
-	//     } catch (error) {
-	//         console.error("Error al parsear imágenes:", error);
-	//         setInitialImages([]);
-	//     }
-	// }, [car.images]);
+	
 	useEffect(() => {
 		console.log("Datos recibidos del GET:", car);
 
@@ -31,8 +20,8 @@ const EditCarModal = ({ car, onClose, onUpdate }) => {
 			if (car.images && car.images.length > 0) {
 				imagesArray = car.images.flatMap((imageString) => {
 					try {
-						const parsedArray = JSON.parse(imageString); // Convertir el string JSON en array
-						return Array.isArray(parsedArray) ? parsedArray : []; // Asegurar que sea un array
+						const parsedArray = JSON.parse(imageString);
+						return Array.isArray(parsedArray) ? parsedArray : [];
 					} catch (error) {
 						console.error("Error al parsear imagen:", imageString, error);
 						return [];
@@ -250,6 +239,15 @@ const EditCarModal = ({ car, onClose, onUpdate }) => {
 						onChange={handleFileChange}
 						style={{ display: "none" }}
 					/>
+					<label>
+                        Fecha de Publicación:
+                        <input
+                            type="date"
+                            name="postDate"
+                            value={formData.postDate}
+                            onChange={handleChange}
+                        />
+                    </label>
 
 					<div className={styles.buttonContainer}>
 						<button

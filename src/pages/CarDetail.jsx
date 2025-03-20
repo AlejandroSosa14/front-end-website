@@ -16,9 +16,21 @@ import CarCardComments from "../components/carCards/CarCardComments.jsx";
 import CarCalendars from "../components/carCalendars/CarCalendars.jsx";
 
 import styles from "./CarDetail.module.css";
+import PageTitle from "../components/pageTitle/PageTitle.jsx";
+import ShareSocialMedia from "../components/shareSocialMedia/ShareSocialMedia.jsx";
 
 // Fechas ocupadas (Ejemplo: se obtiene de una API)
-const unavailableDates = ["2025-03-17", "2025-03-25", "2025-04-11"];
+const unavailableDates = [
+	"2025-03-24",
+	"2025-03-25",
+	"2025-03-26",
+	"2025-04-09",
+	"2025-04-18",
+	"2025-04-19",
+	"2025-04-20",
+	"2025-04-29",
+	"2025-04-30",
+];
 
 const CarDetail = () => {
 	const { carId } = useParams();
@@ -52,53 +64,53 @@ const CarDetail = () => {
 	if (!car) {
 		return (
 			<Layout>
-				<section className="section">
+				<section className={styles.carDetail}>
 					<div className="container">
-						<h2>Auto no encontrado</h2>
+						<p>Auto no encontrado</p>
 					</div>
 				</section>
 			</Layout>
 		);
-	}
+	} else {
+		const userComments = USER_COMMENTS.filter((comment) => comment.carId === car.id);
 
-	const userComments = USER_COMMENTS.filter((comment) => comment.carId === car.id);
-
-	return (
-		<Layout>
-			<section className={`${styles.carDetail} section`}>
-				<h2 className="sectionTitle">{car.model}</h2>
-				<div className="container">
-					{/* HEADER */}
-					<div className={styles.carDetail_stickyTop}>
-						<header className={styles.carDetail_header}>
+		return (
+			<Layout>
+				<PageTitle title={car.model} />
+				{/* GALLERY AND INFO */}
+				<div className={`container ${styles.carDetail_info}`}>
+					{/* HEADER DETAIL*/}
+					<div className={styles.carDetail_infoSticky}>
+						<header className={styles.carDetail_infoHeader}>
 							<h3>Características</h3>
-							<Link to="/detalle-autos" className={styles.carDetail_backLink}>
+							<Link to="/detalle-autos" className={styles.carDetail_headerBack}>
 								<ArrowLeft />
 								Regresar
 							</Link>
 						</header>
 					</div>
 
-					{/* GALLERY AND DETAILS */}
-					<div className={styles.carDetail_content}>
-						<div className={styles.carGallery}>
-							<div className={styles.carGallery_image}>
-								<button className={styles.carGallery_leftButton} onClick={handlePrevImage}>
+					{/* NFO */}
+					<div className={styles.carDetail_infoWrapper}>
+						{/* GALLERY */}
+						<div className={styles.carInfo_gallery}>
+							<div className={styles.carInfo_galleryImage}>
+								<button className={styles.carInfo_galleryLeft} onClick={handlePrevImage}>
 									<ArrowLeft />
 								</button>
 								<img src={car.images[currentImageIndex]} alt={`${car.brand} ${car.model}`} />
-								<button className={styles.carGallery_rightButton} onClick={handleNextImage}>
+								<button className={styles.carInfo_galleryRight} onClick={handleNextImage}>
 									<ArrowRight />
 								</button>
 							</div>
-							<div className={styles.carGallery_grid}>
-								<div className={styles.carGallery_gridItem}>
+							<div className={styles.carInfo_galleryThumbs}>
+								<div className={styles.carInfo_thumbItem}>
 									{car.images.slice(0, 4).map((image, index) => (
 										<img
 											key={index}
 											src={image}
 											alt={`Miniatura ${car.model} ${index + 1}`}
-											className={`${styles.carGallery_gridImage} ${
+											className={`${styles.carInfo_thumbImage} ${
 												index === currentImageIndex ? styles.active : ""
 											}`}
 											onClick={() => handleThumbnailClick(index)}
@@ -110,7 +122,8 @@ const CarDetail = () => {
 								</button>
 							</div>
 						</div>
-						<div className={styles.carInfo_cards}>
+						{/* DETAILS AND SPECS */}
+						<div className={styles.carInfo_cardsWrapper}>
 							<div className={styles.carInfo_cardContainer}>
 								<CarCard_V2
 									score={car.score}
@@ -134,7 +147,7 @@ const CarDetail = () => {
 												</li>
 											))
 										) : (
-											<p className={styles.cardContent_noData}>
+											<p className={styles.cardInfo_noSpecs}>
 												No hay especificaciones para éste auto.
 											</p>
 										)}
@@ -144,33 +157,36 @@ const CarDetail = () => {
 						</div>
 					</div>
 				</div>
-			</section>
 
-			<section className="section">
-				<div className="container">
-					<div className={styles.carDetail_info}>
-						{/* USER RATING */}
-						<div className={styles.carDetail_infoRating}>
-							<CarCard_V3 title={"Opiniones del auto"}>
-								<CarCardComments userComments={userComments} />
-							</CarCard_V3>
-						</div>
-						{/* AVAILABILITY CALENDAR */}
-						<div className={styles.carDetail_infoDates}>
-							<CarCard_V3 title={"Disponibilidad del auto"}>
-								<div className={styles.carDetail_infoTip}>
-									<span></span>
-									<p>No disponible</p>
-								</div>
-								<CarCalendars unavailableDates={unavailableDates} />
-							</CarCard_V3>
+				{/* COMMENTS, SHARE AND CALENDARS */}
+				<section className="section">
+					<div className="container">
+						<div className={styles.carDetail_complementWrapper}>
+							{/* USER RATING */}
+							<div className={styles.carDetail_complementCard}>
+								<CarCard_V3 title={"Opiniones del auto"}>
+									<CarCardComments userComments={userComments} />
+								</CarCard_V3>
+							</div>
+							{/* SHARE AND CALENDARS */}
+							<div className={styles.carDetail_complementCards}>
+								<CarCard_V3 title={"Compartir en"}>
+									<ShareSocialMedia />
+								</CarCard_V3>
+								<CarCard_V3 title={"Disponibilidad del auto"}>
+									<div className={styles.carDetail_infoTip}>
+										<p>Seleccionar rango de fechas para ver disponibilidad</p>
+									</div>
+									<CarCalendars unavailableDates={unavailableDates} />
+								</CarCard_V3>
+							</div>
 						</div>
 					</div>
-				</div>
-			</section>
-			{showGallery && <GalleryModal images={car.images} onClose={() => setShowGallery(false)} />}
-		</Layout>
-	);
+				</section>
+				{showGallery && <GalleryModal images={car.images} onClose={() => setShowGallery(false)} />}
+			</Layout>
+		);
+	}
 };
 
 export default CarDetail;

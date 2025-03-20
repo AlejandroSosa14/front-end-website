@@ -154,7 +154,7 @@ const CARS = [
 		isFavorite: false,
 		specs: [
 			// { id: 1, icon: CarGarage, type:"Marca", detail: "Toyota" },
-			// { id: 2, icon: Car, type:"Maodelo, detail: "Corolla" },
+			// { id: 2, icon: Car, type:"Modelo, detail: "Corolla" },
 			// { id: 3, icon: PaintBrush, type:"MColor, detail: "Rojo" },
 			// { id: 4, icon: GasPump, type:"MCombustible, detail: "Gasolina" },
 			// { id: 5, icon: Engine, type:"MTransmisión, detail: "Automática" },

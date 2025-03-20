@@ -1,0 +1,144 @@
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.6);
+    /* Fondo oscuro */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    /* Bien por encima */
+    overflow: hidden;
+    /* Para evitar scroll accidental */
+}
+
+.modalContent {
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+    width: 100%;
+    max-width: 80vh;
+    padding: 30px;
+    text-align: center;
+    animation: _fadeIn_qnb1f_1 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+h4 {
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    color: black;
+}
+
+label {
+    display: block;
+    margin-bottom: 15px;
+    text-align: left;
+    font-weight: bold;
+}
+
+.inputT,textarea {
+    border: none;
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 8px;
+    outline: none;
+    background-color: rgba(36, 36, 36, 0.089)
+}
+
+textarea {
+    resize: none;
+    height: 80px;
+}
+
+.imageContainer {
+    margin: 15px 0;
+}
+
+.imageWrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.previewImage {
+    height: 100px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.removeImageBtn {
+    position: absolute;
+    top: -15px;
+    right: -10px;
+    border: none;
+    padding: 2px 4px;
+    cursor: pointer;
+}
+
+.selectImageBtn {
+    padding: 10px 20px;
+    border: 1px solid #ced4da; /* Suave borde gris */
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    background-color: #f8f9fa; /* Fondo gris claro */
+    color: #495057; /* Texto gris oscuro */
+    min-width: 150px;
+    margin-top: 1rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    box-shadow: 6px 4px 6px rgba(51, 49, 49, 0.486); 
+    text-align: center;
+}
+
+.selectImageBtn:hover {
+    background-color: #e2e6ea; /* Efecto al pasar mouse */
+}
+
+
+.buttonContainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 1.5rem;
+    gap: 2rem;
+}
+
+.saveButton,
+.closeButton {
+    padding: 8px 20px;
+    border: none;
+    border-radius: 10px;
+    width: 10rem;
+    cursor: pointer;
+}
+
+.saveButton {
+    background-color: var(--main-color);
+    color: white;
+}
+
+.closeButton {
+    background-color: #d33;
+    /* Red */
+    color: white;
+}
+
+.error {
+    color: red;
+    margin-bottom: 10px;
+    font-weight: bold;
+}

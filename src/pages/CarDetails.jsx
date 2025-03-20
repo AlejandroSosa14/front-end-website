@@ -15,6 +15,7 @@ import { normalizeText } from "../utils/textUtils.js";
 
 import styles from "./CarDetails.module.css";
 import cardGrid from "../components/carDetails/CarDetailsCards.module.css";
+import PageTitle from "../components/pageTitle/PageTitle.jsx";
 
 const CarDetails = () => {
 	const [filteredCars, setFilteredCars] = useState([]);
@@ -55,7 +56,7 @@ const CarDetails = () => {
 			setCurrentPage(1);
 			setIsAnimating(false);
 			setLoading(false);
-		}, 1000);
+		}, 500);
 	}, [searchParams]);
 
 	const handleShowAllCars = () => {
@@ -68,7 +69,7 @@ const CarDetails = () => {
 			setFilteredCars(randomCars);
 			setCurrentPage(1);
 			setIsAnimating(false);
-		}, 1000);
+		}, 500);
 	};
 
 	const changePage = (newPage) => {
@@ -79,13 +80,13 @@ const CarDetails = () => {
 			setCurrentPage(newPage);
 			setIsAnimating(false);
 			setLoading(false);
-		}, 1000);
+		}, 500);
 	};
 
 	return (
 		<Layout>
-			<section className={`section ${styles.carDetails}`}>
-				<h2>Automóviles</h2>
+			<section className={styles.carDetails}>
+				<PageTitle title={"Automóviles"} />
 				<div className="container">
 					<div className={styles.carDetailsContainer}>
 						<div className={styles.carDetailsSearch}>
@@ -102,7 +103,9 @@ const CarDetails = () => {
 								))}
 							</div>
 						) : filteredCars.length === 0 ? (
-							<CarDetailsNoResults handleShowAllCars={handleShowAllCars} />
+							<div className={cardGrid.carDetailsGrid}>
+								<CarDetailsNoResults handleShowAllCars={handleShowAllCars} />
+							</div>
 						) : (
 							<CarDetailsCards
 								cars={filteredCars.slice(indexOfFirstCard, indexOfLastCard)}

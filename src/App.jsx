@@ -8,7 +8,11 @@ import CarDetail from "./pages/CarDetail";
 import Dashboard from "./pages/Dashboard";
 import RegisterPage from "./pages/RegisterPage";
 import RegisterCarPage from "./pages/RegisterCarPage";
+import Categories from "./pages/Categories";
 import Login from "./pages/Login";
+import Terms from "./pages/Terms";
+import ReservedCars from "./pages/ReservedCars";
+import FavoriteCars from "./pages/FavoriteCars";
 
 import "./App.css";
 
@@ -21,9 +25,13 @@ function App() {
 					<Route path="/login" element={<Login />} />
 					<Route path="/detalle-autos" element={<CarDetails />} />
 					<Route path="/dashboard" element={<Dashboard />} />
+					<Route path="/categories" element={<Categories />} />
 					<Route path="/auto/:carId" element={<CarDetail />} />
+					<Route path="/autos-favoritos" element={<FavoriteCars />} />
+					<Route path="/autos-reservados" element={<ReservedCars />} />
 					<Route path="/registro" element={<RegisterPage />} />
 					<Route path="/register-car" element={<RegisterCarPage />} />
+					<Route path="/terms" element={<Terms />} />
 				</Routes>
 			</CarProvider>
 		</BrowserRouter>
