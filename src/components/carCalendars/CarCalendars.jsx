@@ -109,7 +109,6 @@ const CarCalendars = ({ unavailableDates }) => {
 				}
 				navigationLabel={formatMonthYear}
 			/>
-			<input type="date" name="fecha"></input>
 		</div>
 	);
 };
