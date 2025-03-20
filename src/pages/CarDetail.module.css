@@ -1,19 +1,17 @@
-.carDetail {
+/* ########## INFO ########## */
+.carDetail_info {
 	width: 100%;
 	min-height: 100vh;
 	height: 100%;
-
-	& h2 {
-		padding: 2rem 0;
-		text-align: center;
-		width: inherit;
-		background-color: var(--main-color);
-		color: var(--white);
-		margin-bottom: 1rem;
-	}
 }
 
-.carDetail_header {
+.carDetail_infoSticky {
+	position: sticky;
+	top: var(--header-height);
+	z-index: 1;
+}
+
+.carDetail_infoHeader {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: nowrap;
@@ -27,7 +25,7 @@
 	}
 }
 
-.carDetail_backLink {
+.carDetail_headerBack {
 	display: flex;
 	align-items: center;
 	transition: color 0.3s ease-in-out;
@@ -37,8 +35,7 @@
 	}
 }
 
-.carDetail_content,
-.carDetail_info {
+.carDetail_infoWrapper {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -51,15 +48,9 @@
 		align-items: flex-start;
 	}
 }
-.carDetail_info {
-	@media screen and (min-width: 768px) {
-		flex-direction: row;
-		align-items: flex-start;
-	}
-}
 
-/* ########## GALLERY ########## */
-.carGallery {
+/* GALLERY AND THUMBS */
+.carInfo_gallery {
 	width: 100%;
 	display: flex;
 	flex-direction: column;
@@ -70,7 +61,7 @@
 	}
 }
 
-.carGallery_image {
+.carInfo_galleryImage {
 	position: relative;
 	width: 100%;
 	height: auto;
@@ -88,8 +79,8 @@
 	}
 }
 
-.carGallery_leftButton,
-.carGallery_rightButton {
+.carInfo_galleryLeft,
+.carInfo_galleryRight {
 	position: absolute;
 	background-color: rgba(var(--rgb-white), 0.5);
 	color: white;
@@ -115,15 +106,15 @@
 	}
 }
 
-.carGallery_leftButton {
+.carInfo_galleryLeft {
 	left: 0;
 }
 
-.carGallery_rightButton {
+.carInfo_galleryRight {
 	right: 0;
 }
 
-.carGallery_grid {
+.carInfo_galleryThumbs {
 	display: none;
 	opacity: 0;
 	width: 100%;
@@ -136,7 +127,7 @@
 	}
 }
 
-.carGallery_gridItem {
+.carInfo_thumbItem {
 	position: relative;
 	width: 100%;
 	display: grid;
@@ -146,7 +137,7 @@
 	opacity: 1;
 }
 
-.carGallery_gridImage {
+.carInfo_thumbImage {
 	width: 100%;
 	height: 100%;
 	border-radius: 8px;
@@ -158,16 +149,16 @@
 	object-fit: cover;
 }
 
-.carGallery_gridImage.active {
+.carInfo_thumbImage.active {
 	border: 2px solid var(--main-color);
 	filter: brightness(1) grayscale(0);
 	opacity: 1;
 	object-fit: contain;
 }
-/* ########## END GALLERY ########## */
+/* END GALLERY THUMBS */
 
-/* ########## INFO ########## */
-.carInfo_cards {
+/* DETAILS AND SPECS */
+.carInfo_cardsWrapper {
 	display: flex;
 	flex-direction: column;
 	flex-wrap: nowrap;
@@ -215,46 +206,37 @@
 		font-size: 0.95rem;
 	}
 }
+
+.cardInfo_noSpecs {
+	color: var(--warning);
+}
+/* END DETAILS AND SPECS */
 /* ########## END INFO ########## */
 
-/* ########## INFO EXTRA ########## */
-.carDetail_infoRating,
-.carDetail_infoDates {
+/* COMPLEMENT */
+.carDetail_complementWrapper {
+	position: relative;
 	width: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: 1.5rem;
 
+	@media screen and (min-width: 1024px) {
+		flex-direction: row;
+	}
+}
+
+.carDetail_complementCard,
+.carDetail_complementCards {
+	width: 100%;
 	@media screen and (min-width: 480px) {
 		width: 50%;
 	}
 }
-
-.cardContent_header {
-	width: 100%;
+.carDetail_complementCards {
 	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	align-items: center;
-
-	& div {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-
-		& span {
-			margin-right: 1rem;
-			font-weight: 500;
-		}
-
-		& svg {
-			width: 1.5rem;
-			height: 1.5rem;
-			color: var(--golden);
-			fill: var(--golden);
-		}
-	}
-}
-
-.cardContent_noData {
-	color: var(--warning);
+	flex-direction: column;
+	gap: 1.5rem;
 }
 
 .carDetail_infoTip {
@@ -266,21 +248,5 @@
 	margin-bottom: 1rem;
 	color: var(--warning);
 	font-weight: 600;
-
-	& span {
-		width: 3.125rem;
-		height: 2.375rem;
-		background-color: var(--warning);
-		color: var(--white);
-		display: flex;
-		justify-content: center;
-		align-items: center;
-	}
 }
-/* ########## END INFO EXTRA ########## */
-
-.carDetail_stickyTop {
-	position: sticky;
-	top: var(--header-height);
-	z-index: 1;
-}
+/* END INFO EXTRA */

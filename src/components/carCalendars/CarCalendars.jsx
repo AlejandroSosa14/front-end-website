@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Calendar from "react-calendar";
 import dayjs from "dayjs";
 
@@ -7,33 +7,48 @@ import styles from "./CarCalendars.module.css";
 
 const CarCalendars = ({ unavailableDates }) => {
 	const [currentDate, setCurrentDate] = useState(new Date());
+	const [firstCalendarMonth, setFirstCalendarMonth] = useState(
+		dayjs(new Date()).startOf("month").toDate()
+	);
+	const [secondCalendarDate, setSecondCalendarDate] = useState(
+		dayjs(new Date()).add(1, "month").toDate()
+	);
 
-	// Convertir las cadenas de unavailableDates a objetos Date
-	const unavailableDatesTransformed = unavailableDates.map((date) => dayjs(date).toDate());
+	useEffect(() => {
+		setSecondCalendarDate(dayjs(firstCalendarMonth).add(1, "month").toDate());
+	}, [firstCalendarMonth]);
 
-	// Función para verificar si la fecha está deshabilitada
+	const handleFirstCalendarChange = (newDate) => {
+		setCurrentDate(newDate);
+	};
+
+	const handleFirstCalendarViewChange = ({ activeStartDate }) => {
+		setFirstCalendarMonth(activeStartDate);
+		setCurrentDate(activeStartDate);
+	};
+
+	const handleSecondCalendarViewChange = ({ activeStartDate }) => {
+		const expectedFirstMonth = dayjs(secondCalendarDate).subtract(1, "month").startOf("month");
+		if (dayjs(activeStartDate).isSame(dayjs(expectedFirstMonth).add(1, "month"), "month")) {
+			setFirstCalendarMonth(dayjs(activeStartDate).subtract(1, "month").toDate());
+			setCurrentDate(dayjs(activeStartDate).subtract(1, "month").toDate());
+		}
+	};
+
+	const unavailableDatesDayjs = unavailableDates.map((date) => dayjs(date));
+
 	const isDateUnavailable = (date) => {
-		return unavailableDatesTransformed.some((unavailableDate) => {
-			return (
-				unavailableDate.getDate() === date.getDate() &&
-				unavailableDate.getMonth() === date.getMonth() &&
-				unavailableDate.getFullYear() === date.getFullYear()
-			);
-		});
+		return unavailableDatesDayjs.some((unavailableDate) =>
+			dayjs(date).isSame(unavailableDate, "day")
+		);
 	};
 
-	// Función para verificar si el día ya pasó
 	const isPastDate = (date) => {
-		const today = new Date();
-		today.setHours(0, 0, 0, 0);
-		return date < today;
+		return dayjs(date).isBefore(dayjs().startOf("day"));
 	};
 
-	const isSameDay = (date1, date2) => {
-		return dayjs(date1).isSame(dayjs(date2), "day");
-	};
+	const isSameDay = (date1, date2) => dayjs(date1).isSame(dayjs(date2), "day");
 
-	// Definir nombre de clase CSS para  cada día
 	const tileClassName = ({ date, view }) => {
 		if (view === "month") {
 			if (isPastDate(date)) {
@@ -41,47 +56,60 @@ const CarCalendars = ({ unavailableDates }) => {
 			} else if (isDateUnavailable(date)) {
 				return styles.unavailableDate;
 			} else if (isSameDay(date, new Date())) {
-				console.log("Día actual:", date, "Clase aplicada:", styles.today);
 				return styles.today;
 			}
 		}
 		return "";
 	};
 
-	// Deshabilitar navegación al mes anterior
-	const isPrevMonthDisabled = (activeStartDate) => {
-		const currentMonth = new Date().getMonth();
-		const currentYear = new Date().getFullYear();
-		return (
-			activeStartDate.getMonth() === currentMonth && activeStartDate.getFullYear() === currentYear
-		);
+	const formatMonthYear = ({ date }) => {
+		return dayjs(date).format("MMMM YYYY");
 	};
 
-	// Función para formatear el nombre del mes con la primera letra en mayúscula
-	const formatMonthYear = ({ date }) => {
-		const month = date.toLocaleString("es", { month: "long" });
-		const year = date.getFullYear();
-		return `${month.charAt(0).toUpperCase() + month.slice(1)} ${year}`;
+	const isPrevMonthDisabledForFirstCalendar = (activeStartDate) => {
+		return dayjs(activeStartDate).isSame(dayjs().startOf("month"), "month");
+	};
+
+	const isPrevMonthDisabledForSecondCalendar = (activeStartDate) => {
+		return dayjs(activeStartDate).isSame(
+			dayjs(currentDate).add(1, "month").startOf("month"),
+			"month"
+		);
 	};
 
 	return (
 		<div className={styles.calendarContainer}>
 			<Calendar
 				value={currentDate}
-				onChange={setCurrentDate}
+				onChange={handleFirstCalendarChange}
+				onActiveStartDateChange={handleFirstCalendarViewChange}
 				tileClassName={tileClassName}
 				minDate={new Date()}
 				prev2Label={null}
 				next2Label={null}
-				prevLabel={"‹"}
-				nextLabel="›"
 				prevAriaLabel="Mes anterior"
 				nextAriaLabel="Mes siguiente"
-				prev2AriaLabel={null}
-				next2AriaLabel={null}
-				prevButtonDisabled={isPrevMonthDisabled(currentDate)}
+				prevButtonDisabled={({ activeStartDate }) =>
+					isPrevMonthDisabledForFirstCalendar(activeStartDate)
+				}
 				navigationLabel={formatMonthYear}
 			/>
+			<Calendar
+				value={secondCalendarDate}
+				onChange={() => {}}
+				onActiveStartDateChange={handleSecondCalendarViewChange}
+				tileClassName={tileClassName}
+				minDate={new Date()}
+				prev2Label={null}
+				next2Label={null}
+				prevAriaLabel="Mes anterior"
+				nextAriaLabel="Mes siguiente"
+				prevButtonDisabled={({ activeStartDate }) =>
+					isPrevMonthDisabledForSecondCalendar(activeStartDate)
+				}
+				navigationLabel={formatMonthYear}
+			/>
+			<input type="date" name="fecha"></input>
 		</div>
 	);
 };

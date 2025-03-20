@@ -17,6 +17,7 @@ import CarCalendars from "../components/carCalendars/CarCalendars.jsx";
 
 import styles from "./CarDetail.module.css";
 import PageTitle from "../components/pageTitle/PageTitle.jsx";
+import ShareSocialMedia from "../components/shareSocialMedia/ShareSocialMedia.jsx";
 
 // Fechas ocupadas (Ejemplo: se obtiene de una API)
 const unavailableDates = ["2025-03-17", "2025-03-25", "2025-04-11"];
@@ -50,107 +51,121 @@ const CarDetail = () => {
 		setCurrentImageIndex((prevIndex) => (prevIndex === car.images.length - 1 ? 0 : prevIndex + 1));
 	};
 
-	if (car) {
+	if (!car) {
+		return (
+			<Layout>
+				<section className={styles.carDetail}>
+					<div className="container">
+						<p>Auto no encontrado</p>
+					</div>
+				</section>
+			</Layout>
+		);
+	} else {
 		const userComments = USER_COMMENTS.filter((comment) => comment.carId === car.id);
 
 		return (
 			<Layout>
-				<section className={styles.carDetail}>
-					<PageTitle title={car.model} />
-					<div className="container">
-						{/* HEADER */}
-						<div className={styles.carDetail_stickyTop}>
-							<header className={styles.carDetail_header}>
-								<h3>Características</h3>
-								<Link to="/detalle-autos" className={styles.carDetail_backLink}>
-									<ArrowLeft />
-									Regresar
-								</Link>
-							</header>
-						</div>
+				<PageTitle title={car.model} />
+				{/* GALLERY AND INFO */}
+				<div className={`container ${styles.carDetail_info}`}>
+					{/* HEADER DETAIL*/}
+					<div className={styles.carDetail_infoSticky}>
+						<header className={styles.carDetail_infoHeader}>
+							<h3>Características</h3>
+							<Link to="/detalle-autos" className={styles.carDetail_headerBack}>
+								<ArrowLeft />
+								Regresar
+							</Link>
+						</header>
+					</div>
 
-						{/* GALLERY AND DETAILS */}
-						<div className={styles.carDetail_content}>
-							<div className={styles.carGallery}>
-								<div className={styles.carGallery_image}>
-									<button className={styles.carGallery_leftButton} onClick={handlePrevImage}>
-										<ArrowLeft />
-									</button>
-									<img src={car.images[currentImageIndex]} alt={`${car.brand} ${car.model}`} />
-									<button className={styles.carGallery_rightButton} onClick={handleNextImage}>
-										<ArrowRight />
-									</button>
-								</div>
-								<div className={styles.carGallery_grid}>
-									<div className={styles.carGallery_gridItem}>
-										{car.images.slice(0, 4).map((image, index) => (
-											<img
-												key={index}
-												src={image}
-												alt={`Miniatura ${car.model} ${index + 1}`}
-												className={`${styles.carGallery_gridImage} ${
-													index === currentImageIndex ? styles.active : ""
-												}`}
-												onClick={() => handleThumbnailClick(index)}
-											/>
-										))}
-									</div>
-									<button className="main-btn" onClick={() => setShowGallery(true)}>
-										Ver Más
-									</button>
-								</div>
+					{/* NFO */}
+					<div className={styles.carDetail_infoWrapper}>
+						{/* GALLERY */}
+						<div className={styles.carInfo_gallery}>
+							<div className={styles.carInfo_galleryImage}>
+								<button className={styles.carInfo_galleryLeft} onClick={handlePrevImage}>
+									<ArrowLeft />
+								</button>
+								<img src={car.images[currentImageIndex]} alt={`${car.brand} ${car.model}`} />
+								<button className={styles.carInfo_galleryRight} onClick={handleNextImage}>
+									<ArrowRight />
+								</button>
 							</div>
-							<div className={styles.carInfo_cards}>
-								<div className={styles.carInfo_cardContainer}>
-									<CarCard_V2
-										score={car.score}
-										model={car.model}
-										rentalPrice={car.rentalPrice}
-										locationCity={car.locationCity}
-										locationCountry={car.locationCountry}
-										isFavorite={car.isFavorite}
-									/>
+							<div className={styles.carInfo_galleryThumbs}>
+								<div className={styles.carInfo_thumbItem}>
+									{car.images.slice(0, 4).map((image, index) => (
+										<img
+											key={index}
+											src={image}
+											alt={`Miniatura ${car.model} ${index + 1}`}
+											className={`${styles.carInfo_thumbImage} ${
+												index === currentImageIndex ? styles.active : ""
+											}`}
+											onClick={() => handleThumbnailClick(index)}
+										/>
+									))}
 								</div>
-								<div className={styles.carInfo_cardContainer}>
-									<CarCard_V3 title={"Especificaciones"}>
-										<ul className={styles.cardInfo_specsList}>
-											{car.specs.length > 0 ? (
-												car.specs.map((spec) => (
-													<li key={spec.id} className={styles.cardInfo_specsItem}>
-														<img src={spec.icon} alt={spec.detail} />
-														<p>
-															<span>{spec.type}:</span> {spec.detail}
-														</p>
-													</li>
-												))
-											) : (
-												<p className={styles.cardContent_noData}>
-													No hay especificaciones para éste auto.
-												</p>
-											)}
-										</ul>
-									</CarCard_V3>
-								</div>
+								<button className="main-btn" onClick={() => setShowGallery(true)}>
+									Ver Más
+								</button>
+							</div>
+						</div>
+						{/* DETAILS AND SPECS */}
+						<div className={styles.carInfo_cardsWrapper}>
+							<div className={styles.carInfo_cardContainer}>
+								<CarCard_V2
+									score={car.score}
+									model={car.model}
+									rentalPrice={car.rentalPrice}
+									locationCity={car.locationCity}
+									locationCountry={car.locationCountry}
+									isFavorite={car.isFavorite}
+								/>
+							</div>
+							<div className={styles.carInfo_cardContainer}>
+								<CarCard_V3 title={"Especificaciones"}>
+									<ul className={styles.cardInfo_specsList}>
+										{car.specs.length > 0 ? (
+											car.specs.map((spec) => (
+												<li key={spec.id} className={styles.cardInfo_specsItem}>
+													<img src={spec.icon} alt={spec.detail} />
+													<p>
+														<span>{spec.type}:</span> {spec.detail}
+													</p>
+												</li>
+											))
+										) : (
+											<p className={styles.cardInfo_noSpecs}>
+												No hay especificaciones para éste auto.
+											</p>
+										)}
+									</ul>
+								</CarCard_V3>
 							</div>
 						</div>
 					</div>
-				</section>
+				</div>
 
+				{/* COMMENTS, SHARE AND CALENDARS */}
 				<section className="section">
 					<div className="container">
-						<div className={styles.carDetail_info}>
+						<div className={styles.carDetail_complementWrapper}>
 							{/* USER RATING */}
-							<div className={styles.carDetail_infoRating}>
+							<div className={styles.carDetail_complementCard}>
 								<CarCard_V3 title={"Opiniones del auto"}>
 									<CarCardComments userComments={userComments} />
 								</CarCard_V3>
 							</div>
-							{/* AVAILABILITY CALENDAR */}
-							<div className={styles.carDetail_infoDates}>
+							{/* SHARE AND CALENDARS */}
+							<div className={styles.carDetail_complementCards}>
+								<CarCard_V3 title={"Compartir en"}>
+									<ShareSocialMedia />
+								</CarCard_V3>
 								<CarCard_V3 title={"Disponibilidad del auto"}>
 									<div className={styles.carDetail_infoTip}>
-										<span></span>
-										<p>No disponible</p>
+										<p>Seleccionar rango de fechas para ver disponibilidad</p>
 									</div>
 									<CarCalendars unavailableDates={unavailableDates} />
 								</CarCard_V3>
@@ -162,16 +177,6 @@ const CarDetail = () => {
 			</Layout>
 		);
 	}
-
-	return (
-		<Layout>
-			<section className={styles.carDetail}>
-				<div className="container">
-					<p>Auto no encontrado</p>
-				</div>
-			</section>
-		</Layout>
-	);
 };
 
 export default CarDetail;

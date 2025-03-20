@@ -1,9 +1,3 @@
-.react-calendar__navigation__label,
-.react-calendar__navigation__label__labelText {
-	font-size: 1.5rem !important;
-	font-weight: bold !important;
-}
-
 .calendarContainer {
 	width: 100%;
 	max-width: 400px; /* Ajusta el ancho según sea necesario */

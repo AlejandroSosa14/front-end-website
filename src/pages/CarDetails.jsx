@@ -103,7 +103,9 @@ const CarDetails = () => {
 								))}
 							</div>
 						) : filteredCars.length === 0 ? (
-							<CarDetailsNoResults handleShowAllCars={handleShowAllCars} />
+							<div className={cardGrid.carDetailsGrid}>
+								<CarDetailsNoResults handleShowAllCars={handleShowAllCars} />
+							</div>
 						) : (
 							<CarDetailsCards
 								cars={filteredCars.slice(indexOfFirstCard, indexOfLastCard)}
