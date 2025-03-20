@@ -55,3 +55,55 @@ export const createCategory = async (formData) => {
         throw error;
     }
 };
+
+
+export const updateCategory = async (categoryId, formData) => {
+    try {
+        const token = localStorage.getItem("authToken");
+
+        if (!token) {
+            throw new Error("No hay token disponible, el usuario debe iniciar sesión");
+        }
+
+        const response = await fetch(`${API_URL}/${categoryId}`, {
+            method: "PUT",
+            headers: {
+                "Authorization": `Bearer ${token}`,
+            },
+            body: formData,
+        });
+
+        if (!response.ok) {
+            throw new Error("Error al actualizar la categoría");
+        }
+
+        return await response.json();
+    } catch (error) {
+        console.error("Error en updateCategory:", error);
+        throw error;
+    }
+};
+
+export const deleteCategory = async (categoryId) => {
+    try {
+        const token = localStorage.getItem("authToken");
+
+        if (!token) {
+            throw new Error("No hay token disponible, el usuario debe iniciar sesión");
+        }
+
+        const response = await fetch(`${API_URL}/${categoryId}`, {
+            method: "DELETE",
+            headers: {
+                "Authorization": `Bearer ${token}`,
+            },
+        });
+
+        if (!response.ok) {
+            throw new Error("Error al eliminar la categoría");
+        }
+    } catch (error) {
+        console.error("Error en deleteCategory:", error);
+        throw error;
+    }
+};
