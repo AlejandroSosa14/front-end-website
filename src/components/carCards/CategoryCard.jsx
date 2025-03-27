@@ -1,13 +1,13 @@
 import styles from "./CategoryCard.module.css";
 
-const CategoryCard = ({ name, image, total }) => {
+const CategoryCard = ({ name, image, description }) => {
 	return (
 		<div>
 			<div className={styles.categoryCardImage}>
-				<img src={image} alt={`Imagen de ${name}`} />
+				<img src={image} alt={`Imagen de un auto ${name}`} />
 			</div>
 			<h3>{name}</h3>
-			<p>{total} modelos</p>
+			<p>{description}</p>
 		</div>
 	);
 };

@@ -5,66 +5,46 @@ import CategoryCard from "../carCards/CategoryCard";
 
 import { normalizeText } from "../../utils/textUtils";
 
-// Datos de ejemplo (se reemplazarán con datos reales)
-const CATEGORIES = [
-	{
-		id: 1,
-		carBody: "Sedán",
-		total: 10,
-		image: "/src/assets/images/categories/sedan.webp",
-	},
-	{
-		id: 2,
-		carBody: "SUV",
-		total: 15,
-		image: "/src/assets/images/categories/suv.webp",
-	},
-	{
-		id: 3,
-		carBody: "Pickup",
-		total: 5,
-		image: "/src/assets/images/categories/pickup.webp",
-	},
-	{
-		id: 4,
-		carBody: "Coupé",
-		total: 7,
-		image: "/src/assets/images/categories/coupe.webp",
-	},
-	{
-		id: 5,
-		carBody: "Hatchback",
-		total: 12,
-		image: "/src/assets/images/categories/hatchback.webp",
-	},
-	{
-		id: 6,
-		carBody: "Deportivo",
-		total: 3,
-		image: "/src/assets/images/categories/sport.webp",
-	},
-	{
-		id: 7,
-		carBody: "Minivan",
-		total: 4,
-		image: "/src/assets/images/categories/minivan.webp",
-	},
-	{
-		id: 8,
-		carBody: "Familiar",
-		total: 8,
-		image: "/src/assets/images/categories/familiar.webp",
-	},
-];
+import { getCars } from "../../api/cars";
 
 const Categories = () => {
 	const navigate = useNavigate();
+	const [uniqueCategories, setUniqueCategories] = useState([]);
 	const [startCardIndex, setStartCardIndex] = useState(0);
 	const [visibleCards, setVisibleCards] = useState(1);
+	const [loading, setLoading] = useState(true);
+	const [error, setError] = useState(null);
+
 	const [gap, setGap] = useState(15);
 	const gapTranslate = 15;
 
-	// Función para actualizar el número de tarjetas visibles según el ancho de la pantalla
+	const getUniqueCategories = (cars) => {
+		if (!cars || !cars.content) return [];
+
+		const categoriesSet = new Set();
+		cars.content.forEach((car) => {
+			if (car.category && car.category.name) {
+				categoriesSet.add(car.category.name);
+			}
+		});
+
+		return Array.from(categoriesSet)
+			.map((categoryName) => {
+				const foundCar = cars.content.find((car) => car.category.name === categoryName);
+				if (foundCar && foundCar.category) {
+					const category = foundCar.category;
+					return {
+						id: category.id,
+						name: category.name,
+						description: category.description,
+						image: category.image,
+					};
+				}
+				return null; // or handle the error in another way
+			})
+			.filter((category) => category !== null); //remove null from array.
+	};
+
 	const updateVisibleCards = () => {
 		const width = window.innerWidth;
 
@@ -82,25 +62,49 @@ const Categories = () => {
 		}
 	};
 
-	// Actualizar el número de tarjetas visibles al cargar la página
+	// Obtener autos y extraer categorías únicas
 	useEffect(() => {
+		const fetchCarsAndExtractCategories = async () => {
+			setLoading(true);
+			try {
+				const carsData = await getCars();
+				const uniqueCategoriesData = getUniqueCategories(carsData);
+				setUniqueCategories(uniqueCategoriesData);
+			} catch (err) {
+				setError(err.message || "Error al cargar los autos.");
+			} finally {
+				setLoading(false);
+			}
+		};
+
+		fetchCarsAndExtractCategories();
 		updateVisibleCards();
 		window.addEventListener("resize", updateVisibleCards);
-		return () => window.removeEventListener("resize", updateVisibleCards); // Limpiar evento
+		return () => window.removeEventListener("resize", updateVisibleCards);
 	}, []);
 
 	const handleNextBtn = () => {
-		setStartCardIndex((prevIndex) => Math.min(prevIndex + 1, CATEGORIES.length - visibleCards));
+		setStartCardIndex((prevIndex) =>
+			Math.min(prevIndex + 1, uniqueCategories.length - visibleCards)
+		);
 	};
 
 	const handlePrevBtn = () => {
 		setStartCardIndex((prevIndex) => Math.max(prevIndex - 1, 0));
 	};
 
-	const handleCategoryClick = (carBody) => {
-		const normalizedCarBody = normalizeText(carBody);
-		navigate(`/detalle-autos?carBody=${encodeURIComponent(normalizedCarBody)}`);
+	const handleCategoryClick = (categoryName) => {
+		const normalizedCategory = normalizeText(categoryName);
+		navigate(`/detalle-autos?category=${encodeURIComponent(normalizedCategory)}`);
 	};
+
+	if (loading) {
+		return <p>Cargando categorías...</p>;
+	}
+
+	if (error) {
+		return <p>Error: {error}</p>;
+	}
 
 	return (
 		<section className={styles.categories}>
@@ -116,9 +120,9 @@ const Categories = () => {
 
 				{/* Cards Gallery*/}
 				<div className={styles.categoriesCards}>
-					{CATEGORIES.map((car) => (
+					{uniqueCategories.map((category) => (
 						<div
-							key={car.id}
+							key={category.id}
 							className={styles.categoriesCard}
 							style={{
 								transform: `translateX(calc(-${
@@ -126,16 +130,20 @@ const Categories = () => {
 								}% - (${gapTranslate}*${startCardIndex}px)))`,
 								flex: `0 0 calc(${100 / visibleCards}% - (${gap}px - ${visibleCards}px))`,
 							}}
-							onClick={() => handleCategoryClick(car.carBody)}>
-							<CategoryCard name={car.carBody} image={car.image} total={car.total} />
+							onClick={() => handleCategoryClick(category.name)}>
+							<CategoryCard
+								name={category.name}
+								image={category.image}
+								description={category.description}
+							/>
 							<div className={styles.categoriesCardContent}>
 								<button
 									className={styles.categoriesCardLink}
 									onClick={(e) => {
 										e.stopPropagation();
-										handleCategoryClick(car.carBody);
+										handleCategoryClick(category.name);
 									}}>
-									Ver autos {car.carBody}
+									Ver autos {category.name}
 								</button>
 							</div>
 						</div>
@@ -146,7 +154,7 @@ const Categories = () => {
 				<button
 					className={`${styles.categoriesNavButton} ${styles.categoriesNextBtn}`}
 					onClick={handleNextBtn}
-					disabled={startCardIndex + visibleCards >= CATEGORIES.length}>
+					disabled={startCardIndex + visibleCards >= uniqueCategories.length}>
 					&gt;
 				</button>
 			</div>
