@@ -5,7 +5,7 @@ import CategoryCard from "../carCards/CategoryCard";
 
 import { normalizeText } from "../../utils/textUtils";
 
-import { getCars } from "../../api/cars";
+import { getUniqueCategories as fetchUniqueCategories } from "../../api/cars";
 
 const Categories = () => {
 	const navigate = useNavigate();
@@ -17,33 +17,6 @@ const Categories = () => {
 
 	const [gap, setGap] = useState(15);
 	const gapTranslate = 15;
-
-	const getUniqueCategories = (cars) => {
-		if (!cars || !cars.content) return [];
-
-		const categoriesSet = new Set();
-		cars.content.forEach((car) => {
-			if (car.category && car.category.name) {
-				categoriesSet.add(car.category.name);
-			}
-		});
-
-		return Array.from(categoriesSet)
-			.map((categoryName) => {
-				const foundCar = cars.content.find((car) => car.category.name === categoryName);
-				if (foundCar && foundCar.category) {
-					const category = foundCar.category;
-					return {
-						id: category.id,
-						name: category.name,
-						description: category.description,
-						image: category.image,
-					};
-				}
-				return null; // or handle the error in another way
-			})
-			.filter((category) => category !== null); //remove null from array.
-	};
 
 	const updateVisibleCards = () => {
 		const width = window.innerWidth;
@@ -62,21 +35,18 @@ const Categories = () => {
 		}
 	};
 
-	// Obtener autos y extraer categorías únicas
 	useEffect(() => {
 		const fetchCarsAndExtractCategories = async () => {
 			setLoading(true);
 			try {
-				const carsData = await getCars();
-				const uniqueCategoriesData = getUniqueCategories(carsData);
+				const uniqueCategoriesData = await fetchUniqueCategories();
 				setUniqueCategories(uniqueCategoriesData);
 			} catch (err) {
-				setError(err.message || "Error al cargar los autos.");
+				setError(err.message || "Error al cargar las categorías.");
 			} finally {
 				setLoading(false);
 			}
 		};
-
 		fetchCarsAndExtractCategories();
 		updateVisibleCards();
 		window.addEventListener("resize", updateVisibleCards);
@@ -129,8 +99,7 @@ const Categories = () => {
 									startCardIndex * 100
 								}% - (${gapTranslate}*${startCardIndex}px)))`,
 								flex: `0 0 calc(${100 / visibleCards}% - (${gap}px - ${visibleCards}px))`,
-							}}
-							onClick={() => handleCategoryClick(category.name)}>
+							}}>
 							<CategoryCard
 								name={category.name}
 								image={category.image}
@@ -143,7 +112,7 @@ const Categories = () => {
 										e.stopPropagation();
 										handleCategoryClick(category.name);
 									}}>
-									Ver autos {category.name}
+									Ver autos de la categoría {category.name}
 								</button>
 							</div>
 						</div>
