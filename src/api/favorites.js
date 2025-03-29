@@ -5,7 +5,7 @@ export const getFavorites = async (username) => {
         if (!username) throw new Error("No se proporcionó un nombre de usuario.");
         if (!authToken) throw new Error("No se encontró el authToken en localStorage.");
 
-        const url = `http://localhost:8181/api/users/favorites/${username}`;
+        const url = `https://backend-api-production-743a.up.railway.app/api/users/favorites/${username}`;
 
         const response = await fetch(url, {
             method: "GET",
@@ -33,7 +33,7 @@ export const removeFavorite = async (username, carId) => {
         if (!username) throw new Error("No se proporcionó un nombre de usuario.");
         if (!authToken) throw new Error("No se encontró el authToken en localStorage.");
 
-        const url = `http://localhost:8181/api/users/favorites/${username}/${carId}`;
+        const url = `https://backend-api-production-743a.up.railway.app/api/users/favorites/${username}/${carId}`;
 
         const response = await fetch(url, {
             method: "PUT",

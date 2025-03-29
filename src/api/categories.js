@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:8181/api/categories";
+const API_URL = "https://backend-api-production-743a.up.railway.app/api/categories";
 
 export const getCategories = async () => {
     try {

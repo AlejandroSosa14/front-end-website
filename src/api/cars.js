@@ -1,7 +1,7 @@
 // cars
 export const getCars = async (page = 0, size = 10) => {
     try {
-        const response = await fetch(`http://localhost:8181/api/cars?page=${page}&size=${size}`, {
+        const response = await fetch(`https://backend-api-production-743a.up.railway.app/api/cars?page=${page}&size=${size}`, {
             method: "GET",
             headers: { "Content-Type": "application/json" },
             mode: "cors"
@@ -26,7 +26,7 @@ export const deleteCar = async (carId) => {
             throw new Error("No hay token disponible, el usuario debe iniciar sesión");
         }
 
-        const response = await fetch(`http://localhost:8181/api/cars/${carId}`, {
+        const response = await fetch(`https://backend-api-production-743a.up.railway.app/api/cars/${carId}`, {
             method: "DELETE",
             headers: {
                 "Authorization": `Bearer ${token}`,
@@ -59,7 +59,7 @@ export const createCar = async (carData, files = []) => {
 
         files.forEach((file) => formData.append("files", file));
 
-        const response = await fetch("http://localhost:8181/api/cars", {
+        const response = await fetch("https://backend-api-production-743a.up.railway.app/api/cars", {
             method: "POST",
             headers: { Authorization: `Bearer ${token}` }, 
             mode: "cors",
@@ -82,7 +82,7 @@ export const createCar = async (carData, files = []) => {
         const token = localStorage.getItem("authToken");
         if (!token) throw new Error("No hay token disponible, el usuario debe iniciar sesión");
 
-        const response = await fetch(`http://localhost:8181/api/cars/${carId}`, {
+        const response = await fetch(`https://backend-api-production-743a.up.railway.app/api/cars/${carId}`, {
             method: "PUT",
             headers: { "Authorization": `Bearer ${token}` },
             mode: "cors",
@@ -108,7 +108,7 @@ export const updateCar = async (carId, formData) => {
         const token = localStorage.getItem("authToken");
         if (!token) throw new Error("No hay token disponible, el usuario debe iniciar sesión");
 
-        const response = await fetch(`http://localhost:8181/api/cars/${carId}`, {
+        const response = await fetch(`https://backend-api-production-743a.up.railway.app/api/cars/${carId}`, {
             method: "PUT",
             headers: { "Authorization": `Bearer ${token}` },
             mode: "cors",

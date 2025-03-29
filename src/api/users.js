@@ -1,6 +1,6 @@
 export const loginUser = async (username, password) => {
     try {
-        const response = await fetch("http://localhost:8181/api/user/authenticate", {
+        const response = await fetch("https://backend-api-production-743a.up.railway.app/api/user/authenticate", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ name: username, password: password })
@@ -29,7 +29,7 @@ export const getUsers = async () => {
             throw new Error("No hay token disponible, el usuario debe iniciar sesión");
         }
 
-        const response = await fetch("http://localhost:8181/api/users", {
+        const response = await fetch("https://backend-api-production-743a.up.railway.app/api/users", {
             method: "GET",
             headers: {
                 Authorization: `Bearer ${token}`,
@@ -52,7 +52,7 @@ export const getUsers = async () => {
 
 export const createUser = async (userData) => {
     try {
-      const response = await fetch("http://localhost:8181/api/users", {
+      const response = await fetch("https://backend-api-production-743a.up.railway.app/api/users", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -90,7 +90,7 @@ export const deleteUser = async (userId) => {
             throw new Error("No hay token disponible, el usuario debe iniciar sesión");
         }
 
-        const response = await fetch(`http://localhost:8181/api/users/${userId}`, {
+        const response = await fetch(`https://backend-api-production-743a.up.railway.app/api/users/${userId}`, {
             method: "DELETE",
             headers: {
                 Authorization: `Bearer ${token}`,
