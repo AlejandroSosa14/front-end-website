@@ -19,7 +19,8 @@ const CarDetails = () => {
 	const [searchParams, setSearchParams] = useSearchParams();
 	const [loading, setLoading] = useState(true);
 	const [totalPages, setTotalPages] = useState(0);
-	const [response, setResponse] = useState(null);
+	const [allCars, setAllCars] = useState([]); // Estado para almacenar todos los autos
+	const [filteredCars, setFilteredCars] = useState([]);
 
 	const cardsPerPage = 9;
 
@@ -27,18 +28,27 @@ const CarDetails = () => {
 		setLoading(true);
 		window.scrollTo({ top: 0, behavior: "smooth" });
 
-		const fetchData = async () => {
+		const fetchAllCars = async () => {
 			try {
-				const res = await getCars(currentPage - 1, cardsPerPage);
-				setResponse(res);
-				if (res && res.content) {
-					setTotalPages(res.totalPages);
-				} else {
-					setTotalPages(0);
+				let page = 0;
+				let size = 10; // Tamaño de página inicial
+				let fetchedCars = [];
+				let totalPagesFromApi = 1;
+
+				while (page < totalPagesFromApi) {
+					const res = await getCars(page, size);
+					if (res && res.content) {
+						fetchedCars = fetchedCars.concat(res.content);
+						totalPagesFromApi = res.totalPages;
+						page++;
+					} else {
+						totalPagesFromApi = 0;
+					}
 				}
+				setAllCars(fetchedCars);
 			} catch (error) {
-				console.error("Error fetching cars:", error);
-				setTotalPages(0);
+				console.error("Error fetching all cars:", error);
+				setAllCars([]);
 			} finally {
 				setIsAnimating(false);
 				setLoading(false);
@@ -46,8 +56,8 @@ const CarDetails = () => {
 		};
 
 		setIsAnimating(true);
-		fetchData();
-	}, [searchParams, currentPage, cardsPerPage]);
+		fetchAllCars();
+	}, [searchParams]);
 
 	const normalizedBrand = useMemo(
 		() => normalizeText(searchParams.get("brand") || ""),
@@ -68,15 +78,13 @@ const CarDetails = () => {
 	const startDate = useMemo(() => searchParams.get("startDate") || "", [searchParams]);
 	const endDate = useMemo(() => searchParams.get("endDate") || "", [searchParams]);
 
-	const filteredCarsMemo = useMemo(() => {
-		if (!response || !response.content) return [];
-
+	useEffect(() => {
 		const filterByBrand = (car) =>
 			normalizedBrand === "" || normalizeText(car.brand) === normalizedBrand;
 		const filterByLocationCity = (car) =>
 			normalizedLocationCity === "" || normalizeText(car.locationCity) === normalizedLocationCity;
 		const filterByCategory = (car) =>
-			normalizedCategory === "" || normalizeText(car.category.name) === normalizedCategory;
+			normalizedCategory === "" || normalizeText(car.category?.name) === normalizedCategory;
 		const filterBySearchTerm = (car) =>
 			normalizedSearchTerm === "" ||
 			Object.values(car).some((value) =>
@@ -95,38 +103,23 @@ const CarDetails = () => {
 			filterByEndDate,
 		];
 
-		return response.content.filter((car) => filters.every((filter) => filter(car)));
+		const filtered = allCars.filter((car) => filters.every((filter) => filter(car)));
+		setFilteredCars(filtered);
+		setTotalPages(Math.ceil(filtered.length / cardsPerPage)); // Cálculo de totalPages en el frontend
 	}, [
-		response,
+		allCars,
 		normalizedBrand,
 		normalizedLocationCity,
 		normalizedCategory,
 		normalizedSearchTerm,
 		startDate,
 		endDate,
+		cardsPerPage,
 	]);
 
-	const handleShowAllCars = async () => {
-		setIsAnimating(true);
-		setLoading(true);
-
-		try {
-			const res = await getCars(0, cardsPerPage);
-			setResponse(res);
-			if (res && res.content) {
-				setSearchParams({});
-				setCurrentPage(1);
-				setTotalPages(res.totalPages);
-			} else {
-				setTotalPages(0);
-			}
-		} catch (error) {
-			console.error("Error fetching all cars:", error);
-			setTotalPages(0);
-		} finally {
-			setIsAnimating(false);
-			setLoading(false);
-		}
+	const handleShowAllCars = () => {
+		setSearchParams({});
+		setCurrentPage(1);
 	};
 
 	const handlePageChange = (newPage) => {
@@ -154,27 +147,25 @@ const CarDetails = () => {
 									<CardSkeletonV1 key={index} />
 								))}
 							</div>
-						) : filteredCarsMemo.length === 0 ? (
+						) : filteredCars.length === 0 ? (
 							<div className={cardGrid.carDetailsGrid}>
 								<CarDetailsNoResults handleShowAllCars={handleShowAllCars} />
 							</div>
 						) : (
 							<CarDetailsCards
-								cars={filteredCarsMemo}
-								cardsPerPage={cardsPerPage}
-								currentPage={currentPage}
+								cars={filteredCars.slice(
+									(currentPage - 1) * cardsPerPage,
+									currentPage * cardsPerPage
+								)}
 								isAnimating={isAnimating}
 							/>
 						)}
 					</div>
 
-					{!loading && filteredCarsMemo.length > 0 && (
+					{!loading && filteredCars.length > 0 && (
 						<CarDetailsPagination
-							cardsPerPage={cardsPerPage}
 							currentPage={currentPage}
 							changePage={handlePageChange}
-							setIsAnimating={setIsAnimating}
-							setIsLoading={setLoading}
 							totalPages={totalPages}
 						/>
 					)}

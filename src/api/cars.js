@@ -1,7 +1,7 @@
 // cars
-export const getCars = async (page = 0, size = 10) => {
+export const getCars = async (page = 0, size = 9) => {
 	try {
-		const response = await fetch(`http://localhost:8181/api/cars?page=${page}&size=${size}`, {
+		const response = await fetch(`http://localhost:8080/api/cars?page=${page}&size=${size}`, {
 			method: "GET",
 			headers: { "Content-Type": "application/json" },
 			mode: "cors",
