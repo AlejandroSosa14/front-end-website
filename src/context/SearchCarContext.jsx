@@ -1,7 +1,6 @@
 import { createContext, useState, useEffect } from "react";
 
-import CARS from "../data/cars.js"; // Importamos la lista de autos
-// const API_URL = "https://api.example.com/cars"; // URL de la API
+import { getCars, getUniqueCategories } from "../api/cars";
 
 const SearchCarContext = createContext();
 
@@ -10,23 +9,28 @@ export const CarProvider = ({ children }) => {
 	const [filteredCars, setFilteredCars] = useState([]);
 	const [locations, setLocations] = useState([]);
 	const [brands, setBrands] = useState([]);
+	const [loading, setLoading] = useState(true);
+	const [error, setError] = useState(null);
 
 	useEffect(() => {
 		const fetchCars = async () => {
+			setLoading(true);
+			setError(null);
 			try {
-				// Hacer llamada a la API en lugar de usar CARS
-				const data = CARS;
+				const response = await getCars();
+				setCars(response.content);
+				setFilteredCars(response.content);
 
-				setCars(data);
-				setFilteredCars(data);
-
-				const uniqueLocations = [...new Set(data.map((car) => car.locationCity))];
-				const uniqueBrands = [...new Set(data.map((car) => car.brand))];
+				const uniqueLocations = [...new Set(response.content.map((car) => car.locationCity))];
+				const uniqueBrands = [...new Set(response.content.map((car) => car.brand))];
 
 				setLocations(uniqueLocations);
 				setBrands(uniqueBrands);
-			} catch (error) {
-				console.error("Error al cargar los autos:", error);
+			} catch (err) {
+				console.error("Error al cargar los autos:", err);
+				setError(err.message || "Error al cargar los autos.");
+			} finally {
+				setLoading(false); // Finalizamos la carga
 			}
 		};
 
@@ -34,7 +38,7 @@ export const CarProvider = ({ children }) => {
 	}, []);
 
 	const filterCars = ({ locationCity, brand }) => {
-		const results = CARS.filter(
+		const results = cars.filter(
 			(car) =>
 				(locationCity === "" || car.locationCity === locationCity) &&
 				(brand === "" || car.brand === brand)
@@ -42,11 +46,35 @@ export const CarProvider = ({ children }) => {
 		setFilteredCars(results);
 	};
 
-	const resetFilters = () => setFilteredCars(CARS);
+	const resetFilters = () => setFilteredCars(cars);
+
+	const getUniqueCategoriesFromAPI = async () => {
+		setLoading(true);
+		setError(null);
+		try {
+			return await getUniqueCategories();
+		} catch (err) {
+			console.error("Error al obtener las categorías:", err);
+			setError(err.message || "Error al obtener las categorías.");
+			return [];
+		} finally {
+			setLoading(false);
+		}
+	};
 
 	return (
 		<SearchCarContext.Provider
-			value={{ cars, filteredCars, filterCars, resetFilters, locations, brands }}>
+			value={{
+				cars,
+				filteredCars,
+				filterCars,
+				resetFilters,
+				locations,
+				brands,
+				getUniqueCategories: getUniqueCategoriesFromAPI,
+				loading,
+				error,
+			}}>
 			{children}
 		</SearchCarContext.Provider>
 	);

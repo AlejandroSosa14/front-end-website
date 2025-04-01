@@ -5,17 +5,8 @@ import ArrowsRight from "../svgIcons/ArrowsRight";
 
 import styles from "./CarDetailsPagination.module.css";
 
-const CarDetailsPagination = ({
-	cars,
-	cardsPerPage,
-	currentPage,
-	changePage,
-	setIsAnimating,
-	setIsLoading,
-}) => {
+const CarDetailsPagination = ({ currentPage, changePage, totalPages }) => {
 	const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
-
-	const totalPages = Math.ceil(cars.length / cardsPerPage) || 1;
 
 	const handlePrevPage = () => {
 		if (currentPage > 1) changePage(currentPage - 1);
@@ -26,14 +17,7 @@ const CarDetailsPagination = ({
 	};
 
 	const handleChangePage = (newPage) => {
-		scrollToTop();
-		setIsAnimating(true);
-		setIsLoading(true);
-		setTimeout(() => {
-			changePage(newPage);
-			setIsLoading(false);
-			setIsAnimating(false);
-		}, 1000);
+		changePage(newPage);
 	};
 
 	return (

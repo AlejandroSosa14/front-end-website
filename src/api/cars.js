@@ -11,11 +11,35 @@ export const getCars = async (page = 0, size = 10) => {
             throw new Error("Error al obtener los autos");
         }
 
-        return await response.json();
-    } catch (error) {
-        console.error("Error en getCars:", error);
-        return { content: [], totalPages: 0, totalElements: 0, currentPage: 0 };
-    }
+// getUniqueCategories
+export const getUniqueCategories = async () => {
+	try {
+		let allCars = [];
+		let page = 0;
+		let size = 10;
+		let totalPages = 1;
+
+		// Obtener todos los autos de forma paginada
+		while (page < totalPages) {
+			const response = await getCars(page, size);
+			allCars = allCars.concat(response.content);
+			totalPages = response.totalPages;
+			page++;
+		}
+
+		// Extraer y filtrar categorías únicas
+		const uniqueCategories = allCars.reduce((unique, car) => {
+			if (!unique.find((category) => category.name === car.category.name)) {
+				unique.push(car.category);
+			}
+			return unique;
+		}, []);
+
+		return uniqueCategories;
+	} catch (error) {
+		console.error("Error en getUniqueCategories:", error);
+		return [];
+	}
 };
 
 export const deleteCar = async (carId) => {
@@ -46,8 +70,8 @@ export const deleteCar = async (carId) => {
         console.error("Error en deleteCar:", error);
         return false;
     }
-};
 
+};
 
 export const createCar = async (carData, files = []) => {
     try {
@@ -75,7 +99,6 @@ export const createCar = async (carData, files = []) => {
         return null;
     }
 };
-
 
 /*export const updateCar = async (carId, formData) => {
     try {
