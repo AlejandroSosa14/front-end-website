@@ -10,6 +10,12 @@ export const getCars = async (page = 0, size = 10) => {
         if (!response.ok) {
             throw new Error("Error al obtener los autos");
         }
+        return await response.json();
+    } catch (error) {
+        console.error("Error en getCars:", error);
+        return { content: [], totalPages: 0, totalElements: 0, currentPage: 0 };
+    }
+};
 
 // getUniqueCategories
 export const getUniqueCategories = async () => {
