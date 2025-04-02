@@ -1,6 +1,5 @@
-import { useState, useContext, useRef } from "react";
+import { useState, useRef, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-
 import SearchCarContext from "../../context/SearchCarContext";
 
 import Car from "../svgIcons/Car";
@@ -12,8 +11,8 @@ import { normalizeText } from "../../utils/textUtils";
 
 import styles from "./FormSearch.module.css";
 
-const FormSearch = () => {
-	const { locations, brands } = useContext(SearchCarContext);
+const FormSearch = ({ onSearch }) => {
+	const { uniqueBrands, uniqueLocations } = useContext(SearchCarContext);
 	const [searchTerm, setSearchTerm] = useState("");
 	const [startDate, setStartDate] = useState("");
 	const [endDate, setEndDate] = useState("");
@@ -35,7 +34,18 @@ const FormSearch = () => {
 		if (brand) queryParams.append("brand", normalizeText(brand));
 		if (locationCity) queryParams.append("locationCity", normalizeText(locationCity));
 
+		if (onSearch) {
+			onSearch({
+				searchTerm: searchTerm ? normalizeText(searchTerm) : "",
+				startDate: startDate,
+				endDate: endDate,
+				brand: brand ? normalizeText(brand) : "",
+				locationCity: locationCity ? normalizeText(locationCity) : "",
+			});
+		}
+
 		navigate(`/detalle-autos?${queryParams.toString()}`);
+
 		setSearchTerm("");
 		setStartDate("");
 		setEndDate("");
@@ -104,11 +114,17 @@ const FormSearch = () => {
 						<option value="" disabled>
 							Marca
 						</option>
-						{brands.map((brand, index) => (
-							<option key={index} value={brand}>
-								{brand}
+						{uniqueBrands ? (
+							uniqueBrands.map((brand, index) => (
+								<option key={index} value={brand}>
+									{brand}
+								</option>
+							))
+						) : (
+							<option value="" disabled>
+								Cargando...
 							</option>
-						))}
+						)}
 					</select>
 				</div>
 			</div>
@@ -124,11 +140,17 @@ const FormSearch = () => {
 						<option value="" disabled>
 							Ubicación
 						</option>
-						{locations.map((location, index) => (
-							<option key={index} value={location}>
-								{location}
+						{uniqueLocations ? (
+							uniqueLocations.map((location, index) => (
+								<option key={index} value={location}>
+									{location}
+								</option>
+							))
+						) : (
+							<option value="" disabled>
+								Cargando...
 							</option>
-						))}
+						)}
 					</select>
 				</div>
 			</div>

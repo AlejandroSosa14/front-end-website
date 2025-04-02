@@ -1,60 +1,54 @@
-import { useMemo } from "react";
+import { useContext } from "react";
+import SearchCarContext from "../../context/SearchCarContext";
 
 import CarCard_V1 from "../carCards/CarCard_V1";
 
-import { getBestPrices } from "../../utils/getBestPrices";
-
-import CARS from "../../data/cars";
-
 import styles from "./Suggestions.module.css";
 
-// Consumir desde API para generar tarjetas actualizadas
-
 const Suggestions = () => {
-	const bestPrice = useMemo(() => {
-		const rentalPrices = CARS.map((car) => car.rentalPrice);
-		return getBestPrices(rentalPrices, 0.25);
-	}, []);
+	const { getCheapCars } = useContext(SearchCarContext);
 
 	return (
 		<section className="suggestions">
 			<div className="flex-row">
-				<h2 className="sectionTitle">Recomendaciones de automóviles</h2>
+				<h2 className="sectionTitle">Automóviles recomendados</h2>
 			</div>
 			<div className={styles.suggestionsCarrousel}>
 				<div className={styles.suggestionsCardsContainer}>
-					{CARS.map(
-						({
-							id,
-							images,
-							model,
-							locationCity,
-							locationCountry,
-							isAvailable,
-							score,
-							quantityAvailable,
-							rentalPrice,
-							isFavorite,
-						}) => {
-							return (
-								rentalPrice <= bestPrice && (
-									<CarCard_V1
-										key={id}
-										id={id}
-										imageURL={images[0]}
-										model={model}
-										locationCity={locationCity}
-										locationCountry={locationCountry}
-										isAvailable={isAvailable}
-										score={score}
-										quantityAvailable={quantityAvailable}
-										rentalPrice={rentalPrice}
-										isFavorite={isFavorite}
-									/>
-								)
-							);
-						}
-					)}
+					{getCheapCars
+						.slice(0, 8)
+						.map(
+							({
+								id,
+								brand,
+								name,
+								images,
+								model,
+								locationCity,
+								locationCountry,
+								status,
+								score,
+								quantityAvailable,
+								reserveCost,
+								isFavorite,
+							}) => (
+								<CarCard_V1
+									key={id}
+									id={id}
+									brand={brand}
+									name={name}
+									imageURL={images}
+									model={model}
+									locationCity={locationCity}
+									locationCountry={locationCountry}
+									isAvailable={status}
+									score={score}
+									quantityAvailable={quantityAvailable}
+									reserveCost={reserveCost}
+									isFavorite={isFavorite}
+								/>
+							)
+						)}
 				</div>
 			</div>
 		</section>

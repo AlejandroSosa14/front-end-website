@@ -14,28 +14,20 @@ const CarDetailsCards = ({ cars, isAnimating }) => {
 			exit={{ opacity: 0, y: 20 }}
 			transition={{ duration: 0.3 }}>
 			{cars.map((car) => {
-				let imageUrl = "";
-				try {
-					const imagesArray = JSON.parse(car.images || "[]");
-					imageUrl = imagesArray[0] || "";
-				} catch (error) {
-					console.error("Error parsing images:", error);
-				}
-
 				return (
 					<CarCard_V1
 						key={car.id}
 						id={car.id}
-						imageURL={imageUrl}
-						name={car.name}
+						imageURL={car.images}
 						brand={car.brand}
+						name={car.name}
 						locationCity={car.locationCity}
-						locationCountry={car.locationCountry} // Si existe en tu API
-						isAvailable={car.status} //Asumiendo que status representa la disponibilidad
-						score={car.score} // Si existe en tu API
-						quantityAvailable={car.quantityAvailable} // Si existe en tu API
-						rentalPrice={car.reserveCost} // Asumiendo que reserveCost es el precio de alquiler
-						isFavorite={car.isFavorite} // Si existe en tu API
+						locationCountry={car.locationCountry}
+						isAvailable={car.status}
+						score={car.score}
+						quantityAvailable={car.quantityAvailable}
+						reserveCost={car.reserveCost}
+						isFavorite={car.isFavorite}
 					/>
 				);
 			})}
