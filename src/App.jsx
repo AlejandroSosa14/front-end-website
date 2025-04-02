@@ -13,6 +13,7 @@ import Login from "./pages/Login";
 import Terms from "./pages/Terms";
 import ReservedCars from "./pages/ReservedCars";
 import FavoriteCars from "./pages/FavoriteCars";
+import Profile from "./pages/Profile";
 
 import "./App.css";
 import WhatsAppChat from "./components/whatsapp/WhatsAppChat";
@@ -32,6 +33,7 @@ function App() {
 					<Route path="/autos-reservados" element={<ReservedCars />} />
 					<Route path="/registro" element={<RegisterPage />} />
 					<Route path="/register-car" element={<RegisterCarPage />} />
+					<Route path="/profile" element={<Profile />} />
 					<Route path="/terms" element={<Terms />} />
 				</Routes>
 				<WhatsAppChat />

@@ -48,10 +48,16 @@
 	text-align: center;
 	text-transform: capitalize;
 	transition: background-color 0.3s ease-in-out;
+	cursor: pointer;
 
 	&:hover {
 		background-color: var(--main-color-darken);
 	}
+}
+
+.main-btn.cancel {
+    background-color: red; /* Specific red background for cancel button */
+	cursor: pointer;
 }
 
 .favoriteButton {
