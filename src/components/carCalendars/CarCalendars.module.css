@@ -1,25 +1,26 @@
 .calendarContainer {
-	position: relative;
-	width: 100%;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	gap: 1.4rem;
-	margin-bottom: 2rem;
-}
-
-.pastDate {
-	background-color: #d3d3d3 !important; /* Gris */
-	color: #999 !important;
-	pointer-events: none; /* Evitar interacción */
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.4rem;
+    margin-bottom: 2rem;
 }
 
 .unavailableDate {
-	background-color: var(--warning) !important;
-	color: white !important;
+    background-color: var(--warning) !important;
+    color: white !important;
 }
 
-.today {
-	font-weight: bold !important;
-	background-color: none !important;
+.tempSelectedDate {
+    background-color: darkblue !important;
+    color: white !important;
+    font-weight: bold !important;
+}
+
+.confirmedRangeDate {
+    background-color: lightblue !important;
+    color: black !important;
+    font-weight: bold !important;
 }

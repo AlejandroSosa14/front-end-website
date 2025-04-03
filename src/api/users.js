@@ -1,6 +1,6 @@
 export const loginUser = async (username, password) => {
     try {
-        const response = await fetch("https://backend-api-production-743a.up.railway.app/api/user/authenticate", {
+        const response = await fetch("http://localhost:8080/api/user/authenticate", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ name: username, password: password })
