@@ -8,6 +8,12 @@
 .userIconContainer {
     position: relative;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.userIconContainer[aria-expanded="true"] .arrowIcon {
+    transform: rotate(180deg);
 }
 
 .userIcon {
@@ -25,26 +31,40 @@
     position: absolute;
     top: 50px;
     right: 0;
-    background-color: white;
+    background-color: #f8fbff;
     border: 1px solid #ccc;
     border-radius: 8px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     padding: 8px 0;
-    min-width: 150px;
-    text-align: center;
+    min-width: 160px;
+    text-align: left;
     z-index: 100;
 }
 
-.logoutButton {
+.menuItem, .logoutButton {
     background: none;
     border: none;
-    color: red;
     padding: 10px;
     width: 100%;
     cursor: pointer;
     font-size: 14px;
+    text-align: left;
+}
+
+.menuItem:hover {
+    background-color: #e3efff;
+}
+
+.logoutButton {
+    color: red;
 }
 
 .logoutButton:hover {
     background-color: #f8d7da;
+}
+
+.arrowIcon {
+    margin-left: 5px;
+    color: var(--main-color);
+    transition: transform 0.3s ease;
 }

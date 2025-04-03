@@ -50,37 +50,112 @@ export const getUsers = async () => {
     }
 };
 
+export const getUserByName = async () => {
+    try {
+        const token = localStorage.getItem("authToken");
+        const username = localStorage.getItem("username");
+        const userId = localStorage.getItem("userId")
+
+        if (!token) {
+            throw new Error("No hay token disponible, el usuario debe iniciar sesión");
+        }
+
+        if (!username) {
+            throw new Error("No hay nombre de usuario disponible en localStorage");
+        }
+
+        const response = await fetch(`http://localhost:8080/api/users/name/${username}`, {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+            },
+            mode: "cors",
+        });
+
+        if (!response.ok) {
+            throw new Error("Error al obtener el usuario");
+        }
+
+        const userData = await response.json();
+
+        if (userData && userData.id) {
+            localStorage.setItem("userId", userData.id); // Guardamos el ID en localStorage
+        }
+
+        return userData;
+
+    } catch (error) {
+        console.error("Error en getUserByName:", error);
+        return null;
+    }
+};
+
 export const createUser = async (userData) => {
     try {
-      const response = await fetch("https://backend-api-production-743a.up.railway.app/api/users", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(userData),
-      });
-  
-      let errorMessage = "Error al crear el usuario";
-  
-      if (!response.ok) {
-        const contentType = response.headers.get("Content-Type");
-  
-        if (contentType && contentType.includes("application/json")) {
-          const errorData = await response.json();
-          errorMessage = errorData.message || errorMessage;
-        } else {
-          errorMessage = await response.text();
+        const response = await fetch("https://backend-api-production-743a.up.railway.app/api/users", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(userData),
+        });
+
+        let errorMessage = "Error al crear el usuario";
+
+        if (!response.ok) {
+            const contentType = response.headers.get("Content-Type");
+
+            if (contentType && contentType.includes("application/json")) {
+                const errorData = await response.json();
+                errorMessage = errorData.message || errorMessage;
+            } else {
+                errorMessage = await response.text();
+            }
+
+            throw new Error(errorMessage);
         }
-  
-        throw new Error(errorMessage);
-      }
-  
-      return await response.json();
+
+        return await response.json();
     } catch (error) {
-      console.error("Error en createUser:", error);
-      throw error;
+        console.error("Error en createUser:", error);
+        throw error;
     }
-  };
+};
+
+export const updateUser = async (data) => {
+    try {
+        const token = localStorage.getItem("authToken");
+        const userId = localStorage.getItem("userId");
+
+        if (!token) {
+            throw new Error("No hay token disponible, el usuario debe iniciar sesión");
+        }
+
+        if (!userId) {
+            throw new Error("No se encontró el ID del usuario");
+        }
+
+        const response = await fetch(`http://localhost:8080/api/users/${userId}`, {
+            method: "PUT",
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+        });
+
+        if (!response.ok) {
+            throw new Error("Error al actualizar el usuario");
+        }
+
+        return await response.json();
+    } catch (error) {
+        console.error("Error en updateUser:", error);
+        return null;
+    }
+};
+
 
 export const deleteUser = async (userId) => {
     try {

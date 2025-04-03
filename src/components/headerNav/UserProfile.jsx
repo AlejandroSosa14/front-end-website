@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { FaUserCircle } from "react-icons/fa";
+import { FaChevronDown } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import styles from "./UserProfile.module.css";
 
@@ -16,6 +17,10 @@ const UserProfile = ({ username, onLogout }) => {
         localStorage.removeItem("username");
         onLogout(); 
         navigate("/"); 
+    };
+    
+    const handleProfile = () => {
+        navigate("/profile");
     };
     
     useEffect(() => {
@@ -38,9 +43,13 @@ const UserProfile = ({ username, onLogout }) => {
 
             <div className={styles.userIconContainer} onClick={toggleMenu} role="button" tabIndex={0} aria-haspopup="true" aria-expanded={isMenuOpen}>
                 <FaUserCircle className={styles.userIcon} size={40} />
+                <FaChevronDown className={styles.arrowIcon} size={16} />
 
                 {isMenuOpen && (
                     <div className={styles.dropdownMenu}>
+                        <button onClick={handleProfile} className={styles.menuItem}>
+                            Mi Perfil
+                        </button>
                         <button onClick={handleLogout} className={styles.logoutButton}>
                             Cerrar sesión
                         </button>
