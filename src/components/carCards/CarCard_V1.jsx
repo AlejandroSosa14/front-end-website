@@ -17,10 +17,13 @@ const CarCard_V1 = ({
 	isAvailable,
 	score,
 	quantityAvailable,
-	rentalPrice,
+	reserveCost,
 	isFavorite,
 }) => {
 	const navigate = useNavigate();
+
+	const genericImageUrl = "/images/categories/generic_car.webp";
+	const displayImageUrl = imageURL && imageURL.length > 0 ? imageURL[0] : genericImageUrl;
 
 	const scrollToTop = () => {
 		window.scrollTo({
@@ -33,6 +36,7 @@ const CarCard_V1 = ({
 		navigate(`/auto/${id}`);
 		scrollToTop();
 	};
+
 	return (
 		<div className={styles.card}>
 			<div className={styles.card_isFavorite}>
@@ -47,7 +51,7 @@ const CarCard_V1 = ({
 				)}
 			</div>
 			<div className={styles.cardContent}>
-				<img className={styles.cardContent_image} src={imageURL} alt={`Model ${name}`} />
+				<img className={styles.cardContent_image} src={displayImageUrl} alt={`Model ${name}`} />
 				<header className={styles.cardContent_header}>
 					<h3 className={styles.cardContent_title}>
 						{brand} - {name}
@@ -74,7 +78,7 @@ const CarCard_V1 = ({
 						</p>
 					</div>
 					<div className={styles.cardContent_detailsRental}>
-						<p>{`$${rentalPrice} / día`}</p>
+						<p>{`$${reserveCost} / día`}</p>
 						<button className={styles.cardContent_button} onClick={handleViewDetails}>
 							Ver Detalle
 						</button>
