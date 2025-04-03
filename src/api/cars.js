@@ -78,8 +78,19 @@ export const createCar = async (carData, files = []) => {
 		const token = localStorage.getItem("authToken");
 		if (!token) throw new Error("No hay token disponible, el usuario debe iniciar sesión");
 
+		const car = JSON.parse(carData.get("car"));
+
+		const { locationCity, locationCountry, color } = car;
+
+		console.log("carData", carData);
+		console.log(locationCity, locationCountry, color);
+
+		if (!locationCity || !locationCountry || !color) {
+			throw new Error("Faltan datos de ubicación o color");
+		}
+
 		const formData = new FormData();
-		formData.append("car", JSON.stringify(carData));
+		formData.append("car", JSON.stringify(car));
 
 		files.forEach((file) => formData.append("files", file));
 
