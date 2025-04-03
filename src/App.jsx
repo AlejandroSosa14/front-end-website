@@ -14,6 +14,7 @@ import Terms from "./pages/Terms";
 import ReservedCars from "./pages/ReservedCars";
 import FavoriteCars from "./pages/FavoriteCars";
 import Profile from "./pages/Profile";
+import ReservedAdminCars from "./pages/ReservedAdminCars"
 
 import "./App.css";
 import WhatsAppChat from "./components/whatsapp/WhatsAppChat";
@@ -31,6 +32,7 @@ function App() {
 					<Route path="/auto/:carId" element={<CarDetail />} />
 					<Route path="/autos-favoritos" element={<FavoriteCars />} />
 					<Route path="/autos-reservados" element={<ReservedCars />} />
+					<Route path="/reservas" element={<ReservedAdminCars />} />
 					<Route path="/registro" element={<RegisterPage />} />
 					<Route path="/register-car" element={<RegisterCarPage />} />
 					<Route path="/profile" element={<Profile />} />

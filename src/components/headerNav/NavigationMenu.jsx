@@ -44,7 +44,7 @@ const HeaderMenu = () => {
 	const filteredLinks = isAdmin
 		? MENU_LINKS
 		: MENU_LINKS.filter(
-				(link) => link.label !== "Dashboard Automóviles" && link.label !== "Dashboard Categorías"
+				(link) => link.label !== "Dashboard Automóviles" && link.label !== "Dashboard Categorías" && link.label !== "Dashboard Reservas"
 		  );
 
 	return (

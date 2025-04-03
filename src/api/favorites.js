@@ -1,3 +1,5 @@
+const API_URL = import.meta.env.VITE_API_URL;
+
 export const getFavorites = async (username) => {
     try {
         const authToken = localStorage.getItem("authToken");
@@ -5,7 +7,7 @@ export const getFavorites = async (username) => {
         if (!username) throw new Error("No se proporcionó un nombre de usuario.");
         if (!authToken) throw new Error("No se encontró el authToken en localStorage.");
 
-        const url = `https://backend-api-production-743a.up.railway.app/api/users/favorites/${username}`;
+        const url = `${API_URL}users/favorites/${username}`;
 
         const response = await fetch(url, {
             method: "GET",
@@ -33,7 +35,7 @@ export const removeFavorite = async (username, carId) => {
         if (!username) throw new Error("No se proporcionó un nombre de usuario.");
         if (!authToken) throw new Error("No se encontró el authToken en localStorage.");
 
-        const url = `https://backend-api-production-743a.up.railway.app/api/users/favorites/${username}/${carId}`;
+        const url = `${API_URL}users/favorites/${username}/${carId}`;
 
         const response = await fetch(url, {
             method: "PUT",

@@ -1,3 +1,4 @@
+
 const MENU_LINKS = [
 	{
 		id: 1,
@@ -24,6 +25,16 @@ const MENU_LINKS = [
 		label: "Dashboard Categorías",
 		path: "/categories",
 	},
+	{
+		id: 6,
+		label: "Dashboard Reservas",
+		path: "/reservas"
+	},
+	{
+		id: 7,
+		label: "Mis Autos Favoritos",
+		path: "/autos-favoritos"
+	}
 ];
 
 export default MENU_LINKS;
