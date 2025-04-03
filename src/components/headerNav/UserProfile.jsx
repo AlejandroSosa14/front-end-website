@@ -8,21 +8,26 @@ const UserProfile = ({ username, onLogout }) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const navigate = useNavigate();
 
-    const toggleMenu = useCallback(() => {
+    const toggleMenu = useCallback((event) => {
+        event.stopPropagation(); 
         setIsMenuOpen((prev) => !prev);
     }, []);
+
 
     const handleLogout = () => {
         localStorage.removeItem("authToken");
         localStorage.removeItem("username");
-        onLogout(); 
-        navigate("/"); 
+        localStorage.removeItem("userId");
+        onLogout();
+        setIsMenuOpen(false); 
+        navigate("/");
     };
-    
+
     const handleProfile = () => {
+        setIsMenuOpen(false); 
         navigate("/profile");
     };
-    
+
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (!event.target.closest(`.${styles.userProfile}`)) {

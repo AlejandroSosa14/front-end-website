@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import Layout from "../components/layout/Layout";
 import CarCard_V2 from "../components/carCards/CarCard_V2";
@@ -14,6 +15,9 @@ import USER_COMMENTS from "../data/userComments.js";
 import GalleryModal from "../components/galleryModal/GalleryModal.jsx";
 import CarCardComments from "../components/carCards/CarCardComments.jsx";
 import CarCalendars from "../components/carCalendars/CarCalendars.jsx";
+
+import CarReservation from "../components/modal/CarReservation.jsx";
+import Swal from "sweetalert2"
 
 import styles from "./CarDetail.module.css";
 import PageTitle from "../components/pageTitle/PageTitle.jsx";
@@ -37,10 +41,13 @@ const CarDetail = () => {
 	const [car, setCar] = useState(null);
 	const [currentImageIndex, setCurrentImageIndex] = useState(0);
 	const [showGallery, setShowGallery] = useState(false);
+	const [showReservationModal, setShowReservationModal] = useState(false); // Estado para mostrar el modal
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		const foundCar = CARS.find((car) => car.id === parseInt(carId));
 		setCar(foundCar);
+		localStorage.setItem("CarId", carId);
 	}, [carId]);
 
 	// Ejemplo de llamada a la API (sustituir en lugar del useEffect anterior)
@@ -60,6 +67,25 @@ const CarDetail = () => {
 	const handleNextImage = () => {
 		setCurrentImageIndex((prevIndex) => (prevIndex === car.images.length - 1 ? 0 : prevIndex + 1));
 	};
+
+	const handleReservationClick = () => {
+		const userId = localStorage.getItem("userId");
+	
+		if (!userId) {
+		  Swal.fire({
+			title: "Inicia sesión primero",
+			text: "Debes iniciar sesión para reservar un auto.",
+			icon: "warning",
+			confirmButtonText: "Ir a Login",
+		  }).then((result) => {
+			if (result.isConfirmed) {
+			  navigate("/login"); // Redirige al login después del SweetAlert
+			}
+		  });
+		} else {
+		  setShowReservationModal(true); // Muestra el modal si el usuario está autenticado
+		}
+	  };
 
 	if (!car) {
 		return (
@@ -112,9 +138,8 @@ const CarDetail = () => {
 											key={index}
 											src={image}
 											alt={`Miniatura ${car.model} ${index + 1}`}
-											className={`${styles.carInfo_thumbImage} ${
-												index === currentImageIndex ? styles.active : ""
-											}`}
+											className={`${styles.carInfo_thumbImage} ${index === currentImageIndex ? styles.active : ""
+												}`}
 											onClick={() => handleThumbnailClick(index)}
 										/>
 									))}
@@ -186,13 +211,19 @@ const CarDetail = () => {
 										<p>Sin disponibilidad</p>
 									</div>
 									<CarCalendars unavailableDates={unavailableDates} />
+									<button className="main-btn" onClick={handleReservationClick}>
+										Reservar
+									</button>
 								</CarCard_V3>
 							</div>
 						</div>
 					</div>
 				</section>
 				{showGallery && <GalleryModal images={car.images} onClose={() => setShowGallery(false)} />}
+				{showReservationModal && car && <CarReservation car={car} onClose={() => setShowReservationModal(false)} />}
+
 			</Layout>
+
 		);
 	}
 };

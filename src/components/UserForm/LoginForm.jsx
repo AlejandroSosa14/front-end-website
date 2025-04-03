@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { FaUser, FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
 import Swal from "sweetalert2";
 import styles from "./UserForm.module.css";
-import { loginUser } from "../../api/users";
+import { loginUser, getUserByName } from "../../api/users";
 
 const LoginForm = ({ formRef }) => {
     const [formData, setFormData] = useState({
@@ -45,14 +45,22 @@ const LoginForm = ({ formRef }) => {
                 newErrors[key] = validateField(key, formData[key]);
             }
         });
-
+    
         setErrors(newErrors);
         if (Object.values(newErrors).some((error) => error)) return;
-
+    
         const result = await loginUser(formData.username, formData.password);
-
+    
         if (result.success) {
-            navigate("/");
+            try {
+                const userProfile = await getUserByName(formData.username); // Asegúrate de que esta función usa el username
+                if (userProfile) {
+                    localStorage.setItem("userId", userProfile.id); // Guardar en localStorage
+                }
+                navigate("/");
+            } catch (error) {
+                console.error("Error al obtener el perfil después del login:", error);
+            }
         } else {
             Swal.fire({
                 title: "Error de autenticación",
@@ -61,7 +69,7 @@ const LoginForm = ({ formRef }) => {
                 confirmButtonText: "Aceptar",
             });
         }
-    };
+    };    
 
     return (
         <form ref={formRef} className={styles.container} onSubmit={handleLogin}>

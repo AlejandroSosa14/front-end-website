@@ -11,9 +11,13 @@ const HeaderNav = () => {
 	const handleToggleMenu = () => {
 		setIsMenuOpen(!isMenuOpen);
 	};
-	const handleCloseMenu = () => {
-		setIsMenuOpen(false);
+	const handleCloseMenu = (event) => {
+		const isClickInsideProfile = event.target.closest(`.${styles.userProfile}`);
+		if (!isClickInsideProfile) {
+			setIsMenuOpen(false);
+		}
 	};
+
 
 	return (
 		<header className={styles.header}>
@@ -30,12 +34,14 @@ const HeaderNav = () => {
 
 				{/* NAVIGATION */}
 				<nav
-					className={`${styles.navigationMenu} ${
-						isMenuOpen ? styles.navigationMenuMobileOpen : ""
-					}`}
-					onClick={handleCloseMenu}>
+					className={`${styles.navigationMenu} ${isMenuOpen ? styles.navigationMenuMobileOpen : ""
+						}`}
+					onClick={handleCloseMenu}
+				>
 					<NavigationMenu />
 				</nav>
+
+
 			</div>
 		</header>
 	);
