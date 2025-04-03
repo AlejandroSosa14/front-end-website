@@ -1,4 +1,5 @@
-const API_URL = "https://backend-api-production-743a.up.railway.app/api/categories";
+// const API_URL = "https://backend-api-production-743a.up.railway.app/api/categories";
+const API_URL = import.meta.env.VITE_API_URL + "categories";
 
 export const getCategories = async () => {
     try {

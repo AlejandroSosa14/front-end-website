@@ -1,4 +1,6 @@
-const API_BASE_URL = "http://localhost:8080/api/";
+
+const API_BASE_URL = import.meta.env.VITE_API_URL;
+
 
 // cars
 export const getCars = async (page = 1, size = 9) => {
@@ -47,7 +49,7 @@ export const deleteCar = async (carId) => {
 		}
 
 		const response = await fetch(
-			`https://backend-api-production-743a.up.railway.app/api/cars/${carId}`,
+			`${API_BASE_URL}cars/${carId}`,
 			{
 				method: "DELETE",
 				headers: {
@@ -81,7 +83,7 @@ export const createCar = async (carData, files = []) => {
 
 		files.forEach((file) => formData.append("files", file));
 
-		const response = await fetch("https://backend-api-production-743a.up.railway.app/api/cars", {
+		const response = await fetch("${API_BASE_URL}cars", {
 			method: "POST",
 			headers: { Authorization: `Bearer ${token}` },
 			mode: "cors",
@@ -103,7 +105,7 @@ export const createCar = async (carData, files = []) => {
         const token = localStorage.getItem("authToken");
         if (!token) throw new Error("No hay token disponible, el usuario debe iniciar sesión");
 
-        const response = await fetch(`https://backend-api-production-743a.up.railway.app/api/cars/${carId}`, {
+        const response = await fetch(`${API_BASE_URL}cars/${carId}`, {
             method: "PUT",
             headers: { "Authorization": `Bearer ${token}` },
             mode: "cors",
@@ -130,7 +132,7 @@ export const updateCar = async (carId, formData) => {
 		if (!token) throw new Error("No hay token disponible, el usuario debe iniciar sesión");
 
 		const response = await fetch(
-			`https://backend-api-production-743a.up.railway.app/api/cars/${carId}`,
+			`${API_BASE_URL}cars/${carId}`,
 			{
 				method: "PUT",
 				headers: { Authorization: `Bearer ${token}` },
@@ -151,3 +153,86 @@ export const updateCar = async (carId, formData) => {
 		return null;
 	}
 };
+
+export const getAllReserves = async () => {
+	try {
+		const token = localStorage.getItem("authToken");
+		if (!token) throw new Error("No hay token disponible, el usuario debe iniciar sesión");
+
+		const response = await fetch(
+			`${API_BASE_URL}reserves`,
+			{
+				method: "GET",
+				headers: { Authorization: `Bearer ${token}` },
+				mode: "cors",
+				credentials: "include",
+			}
+		);
+
+		if (!response.ok) {
+			const errorText = await response.text();
+			throw new Error(`Error ${response.status}: ${errorText}`);
+		}
+
+		return await response.json();
+	} catch (error) {
+		console.error("Error en Obtener todas las reservas:", error);
+		return null;
+	}
+}
+
+export const getReserveByUser = async(user) => {
+	try {
+		const token = localStorage.getItem("authToken");
+		if (!token) throw new Error("No hay token disponible, el usuario debe iniciar sesión");
+		const response = await fetch(
+			`${API_BASE_URL}reserves/user/${user}`,
+			{
+				method: "GET",
+				headers: { Authorization: `Bearer ${token}` },
+				mode: "cors",
+				credentials: "include",
+			}
+		);
+
+		if (!response.ok) {
+			const errorText = await response.text();
+			throw new Error(`Error ${response.status}: ${errorText}`);
+		}
+
+		return await response.json();
+	} catch (error) {
+		console.error("Error en Obtener todas las reservas:", error);
+		return null;
+	}
+}
+
+export const reserveCar = async(reserveData) => {
+	try {
+		const token = localStorage.getItem("authToken");
+		if (!token) throw new Error("No hay token disponible, el usuario debe iniciar sesión");
+		console.log(reserveData);
+		const formData = new FormData();
+		formData.append("car", JSON.stringify(reserveData));
+		const response = await fetch(
+			`${API_BASE_URL}/reserves`,
+			{
+				method: "POST",
+				headers: { Authorization: `Bearer ${token}` },
+				mode: "cors",
+				credentials: "include",
+				body: formData,
+			}
+		);
+
+		if (!response.ok) {
+			const errorText = await response.text();
+			throw new Error(`Error ${response.status}: ${errorText}`);
+		}
+
+		return await response.json();
+	} catch (error) {
+		console.error("Error en Obtener todas las reservas:", error);
+		return null;
+	}
+}

@@ -1,62 +1,43 @@
 import Layout from "../components/layout/Layout";
 import { useState, useEffect, useCallback } from "react";
 import PageTitle from "../components/pageTitle/PageTitle";
-import styles from "./ReservedCars.module.css"
+import { getAllReserves } from "../api/cars";
 import ReservedCarCard from "../components/reservedCars/ReservedCarCard";
-import { getReserveByUser } from "../api/cars";
-import { getUserByName } from "../api/users";
+import styles from "./ReservedCars.module.css"
 
-const ReservedCars = () => {
+const ReservedAdminCars = () => {
 
 	const [reserveCars, setReserveCars] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
-	const [userId, setUserId] = useState(null);
-	// const username = localStorage.getItem("username");
+	const username = localStorage.getItem("username");
 
-	useEffect(() => {
-		const fetchUserProfile = async () => {
-			try {
-				const profile = await getUserByName();
-				if (profile) {
-					setUserId(profile.id);
-				}
-			} catch (error) {
-				console.error("Error al obtener el perfil:", error);
-			}
-		};
-	
-		fetchUserProfile();
-	}, []); // Se ejecuta solo una vez al montar el componente
-	
 	const fetchReserveCars = useCallback(async () => {
-		if (!userId) {
+		if (!username) {
 			setError("No se encontró un usuario autenticado.");
 			setLoading(false);
 			return;
 		}
-	
+
 		setLoading(true);
 		setError(null);
 		try {
-			const data = await getReserveByUser(userId);
+			const data = await getAllReserves();
 			setReserveCars(data || []);
 		} catch (err) {
 			setError(err.message);
 		} finally {
 			setLoading(false);
 		}
-	}, [userId]); // Depende de `userId`
-	
+	}, [username]);
+
 	useEffect(() => {
-		if (userId) {
-			fetchReserveCars();
-		}
-	}, [userId, fetchReserveCars]); 
+		fetchReserveCars();
+	}, [fetchReserveCars]);
 
 	return (
 		<Layout>
-			<PageTitle title={"Mis autos reservados"} />
+			<PageTitle title={"Lista de autos reservados"} />
 			<div className={styles.favoriteContainer}>
 				{loading && <p>Cargando favoritos...</p>}
 				{error && <p className={styles.error}>{error}</p>}
@@ -76,4 +57,4 @@ const ReservedCars = () => {
 	);
 };
 
-export default ReservedCars;
+export default ReservedAdminCars;
