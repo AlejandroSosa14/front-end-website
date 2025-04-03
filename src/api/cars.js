@@ -1,4 +1,4 @@
-const API_BASE_URL = "/api/";
+const API_BASE_URL = "http://localhost:8080/api/";
 
 // cars
 export const getCars = async (page = 1, size = 9) => {
@@ -18,6 +18,25 @@ export const getCars = async (page = 1, size = 9) => {
 		return { content: [], totalPages: 0, totalElements: 0, currentPage: 0 };
 	}
 };
+
+export const getCarById = async (carId) => {
+	try {
+		const response = await fetch(`${API_BASE_URL}cars/${carId}`, {
+			method: "GET",
+			headers: { "Content-Type": "application/json" },
+			mode: "cors",
+		});
+
+		if (!response.ok) {
+			throw new Error(`Error al obtener el auto con ID ${carId}`);
+		}
+		return await response.json();
+	} catch (error) {
+		console.error("Error en getCarById:", error);
+		return null;
+	}
+};
+
 
 export const deleteCar = async (carId) => {
 	try {

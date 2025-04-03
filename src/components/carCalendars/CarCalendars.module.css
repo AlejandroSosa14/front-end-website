@@ -5,6 +5,7 @@
 	flex-direction: column;
 	align-items: center;
 	gap: 1.4rem;
+	margin-bottom: 2rem;
 }
 
 .pastDate {

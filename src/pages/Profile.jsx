@@ -17,20 +17,35 @@ const Profile = () => {
     useEffect(() => {
         const fetchUserProfile = async () => {
             try {
-                const profile = await getUserByName();
-                if (profile) {
-                    setUserId(profile.id);
-                    setProfileData({ name: profile.name, email: profile.email });
-                    setEditedData({ name: profile.name, email: profile.email });
-                    setIsDataLoaded(true);
+                const storedUserId = localStorage.getItem("userId");
+                if (storedUserId) {
+                    setUserId(storedUserId);
+                    const profile = await getUserByName();
+                    if (profile) {
+                        setProfileData({ name: profile.name, email: profile.email });
+                        setEditedData({ name: profile.name, email: profile.email });
+                        setIsDataLoaded(true);
+                    }
                 }
             } catch (error) {
                 console.error("Error al obtener el perfil:", error);
             }
         };
-
+    
+        // Escuchar el evento pageshow para manejar BFCache
+        const handlePageShow = () => {
+            fetchUserProfile();
+        };
+    
+        window.addEventListener("pageshow", handlePageShow);
+    
         fetchUserProfile();
+    
+        return () => {
+            window.removeEventListener("pageshow", handlePageShow);
+        };
     }, []);
+    
 
     const handleEdit = () => {
         setIsEditing(true);

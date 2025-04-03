@@ -1,0 +1,51 @@
+.customPopup {
+    width: 90% !important;
+    max-width: 80vh !important;
+    font-size: 17px !important;
+    padding: 10px !important;
+    padding-bottom: 2rem !important;
+}
+
+@media screen and (min-width: 712px) {
+    .customPopup {
+        width: 80% !important;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .customPopup {
+        width: 70% !important;
+    }
+}
+
+.modalContent {
+    display: flex;
+    flex-direction: column;
+}
+
+.date-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    width: 100%;
+}
+
+.date-input {
+    width: 48% !important;
+}
+
+.confirmButton {
+    background-color: var(--main-color) !important;
+    color: white !important;
+    font-size: 16px !important;
+    padding: 10px 20px !important;
+    border-radius: 5px !important;
+}
+
+.cancelButton {
+    background-color: #dc3545 !important;
+    color: white !important;
+    font-size: 16px !important;
+    padding: 10px 20px !important;
+    border-radius: 5px !important;
+}
