@@ -34,6 +34,11 @@ const MENU_LINKS = [
 		id: 7,
 		label: "Mis Autos Favoritos",
 		path: "/autos-favoritos"
+	},
+	{
+		id:8,
+		label: "Mis Reservas",
+		path: "/autos-reservados"
 	}
 ];
 
