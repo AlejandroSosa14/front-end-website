@@ -31,7 +31,7 @@ const RegisterCarForm = ({ onCarCreated }) => {
         const data = await getCategories();
         setCategories(data);
       } catch (err) {
-        setError("Error al obtener categorías. Intente nuevamente.");
+        setError("Error al obtener categorías. Intente nuevamente.", err);
       } finally {
         setLoading(false);
       }
@@ -80,7 +80,7 @@ const RegisterCarForm = ({ onCarCreated }) => {
 		});
 
 		// Llamar a la API para crear el carro
-		const result = await createCar(formData);
+		const result = await createCar(formData, selectedFiles);
 		if (result) {
 			setSuccessMessage("Auto registrado exitosamente");
 			setTimeout(() => setSuccessMessage(""), 3000);

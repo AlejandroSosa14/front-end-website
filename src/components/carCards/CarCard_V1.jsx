@@ -6,6 +6,9 @@ import HeartOutline from "../svgIcons/HeartOutline";
 import Star from "../svgIcons/Star";
 
 import styles from "./CarCard_V1V2V3.module.css";
+import { getFavorites, removeFavorite, setFavorite } from "../../api/favorites";
+import { useEffect } from "react";
+import { useState } from "react";
 
 const CarCard_V1 = ({
 	id,
@@ -22,8 +25,30 @@ const CarCard_V1 = ({
 }) => {
 	const navigate = useNavigate();
 
+	// const [favorite, setFavorite] = useState(null);
+	const [favoriteCars, setFavoriteCars] = useState([]);
+	const username = localStorage.getItem("username");
+	const [loading, setLoading] = useState(true);
 	const genericImageUrl = "/images/categories/generic_car.webp";
 	const displayImageUrl = imageURL && imageURL.length > 0 ? imageURL[0] : genericImageUrl;
+
+	useEffect(() => {
+		const fetchFavoriteCarsByUser = async () => {
+			try {
+			setLoading(true)
+			let fetchedCars = [];
+
+			fetchedCars = await getFavorites(username);
+			setFavoriteCars(fetchedCars);
+			}catch(e) {
+				console.error(e)
+			} finally {
+				setLoading(false);
+			}
+		}
+
+		fetchFavoriteCarsByUser();
+	}, [])
 
 	const scrollToTop = () => {
 		window.scrollTo({
@@ -37,15 +62,23 @@ const CarCard_V1 = ({
 		scrollToTop();
 	};
 
+	const handleUpdateFavoriteCar = (idCar, favorite) => {
+		if (favorite) {
+			setFavorite(idCar, username);
+		} else if (!favorite) {
+			removeFavorite(username, idCar)
+		}
+	}
+
 	return (
 		<div className={styles.card}>
 			<div className={styles.card_isFavorite}>
-				{!isFavorite ? (
-					<button className="favoriteButton">
+				{!favoriteCars.find(car => car.id == id) ? (
+					<button className="favoriteButton" onClick={() => handleUpdateFavoriteCar(id, true)}>
 						<HeartOutline />
 					</button>
 				) : (
-					<button className="favoriteButton isFavoriteButton">
+					<button className="favoriteButton isFavoriteButton" onClick={() => handleUpdateFavoriteCar(id, false)}>
 						<HeartOutline />
 					</button>
 				)}

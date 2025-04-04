@@ -82,7 +82,6 @@ const CarReservation = ({ onClose }) => {
             },
         }).then((result) => {
             if (result.isConfirmed) {
-                console.log("Reserva confirmada");
                 let reserveArray = {
                     "cars": [
                         {

@@ -100,8 +100,6 @@ const CarDetail = () => {
 	} else {
 		const userComments = USER_COMMENTS.filter((comment) => comment.carId === car.id);
 
-		console.log(userComments[0]);
-
 		return (
 			<Layout>
 				<PageTitle title={car.model} />
