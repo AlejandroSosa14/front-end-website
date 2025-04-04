@@ -82,16 +82,12 @@ export const createCar = async (carData, files = []) => {
 
 		const { locationCity, locationCountry, color } = car;
 
-		console.log("carData", carData);
-		console.log(locationCity, locationCountry, color);
-
 		if (!locationCity || !locationCountry || !color) {
 			throw new Error("Faltan datos de ubicación o color");
 		}
 
 		const formData = new FormData();
 		formData.append("car", JSON.stringify(car));
-
 		files.forEach((file) => formData.append("files", file));
 
 		const response = await fetch(`${API_BASE_URL}cars`, {
@@ -195,7 +191,6 @@ export const getAllReserves = async () => {
 export const getReserveByUser = async(user) => {
 	try {
 		const token = localStorage.getItem("authToken");
-		console.log(token)
 
 		if (!token) throw new Error("No hay token disponible, el usuario debe iniciar sesión");
 		const response = await fetch(
@@ -223,12 +218,8 @@ export const getReserveByUser = async(user) => {
 export const reserveCar = async(reserveData) => {
 	try {
 		const token = localStorage.getItem("authToken");
-		console.log(token)
 		if (!token) throw new Error("No hay token disponible, el usuario debe iniciar sesión");
-		console.log(reserveData);
-		
-		// const formData = new FormData();
-		// formData.append("car", JSON.stringify(reserveData));
+
 		const response = await fetch(
 			`${API_BASE_URL}reserves`,
 			{
