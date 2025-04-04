@@ -94,7 +94,7 @@ export const createCar = async (carData, files = []) => {
 
 		files.forEach((file) => formData.append("files", file));
 
-		const response = await fetch("${API_BASE_URL}cars", {
+		const response = await fetch(`${API_BASE_URL}cars`, {
 			method: "POST",
 			headers: { Authorization: `Bearer ${token}` },
 			mode: "cors",
@@ -195,6 +195,8 @@ export const getAllReserves = async () => {
 export const getReserveByUser = async(user) => {
 	try {
 		const token = localStorage.getItem("authToken");
+		console.log(token)
+
 		if (!token) throw new Error("No hay token disponible, el usuario debe iniciar sesión");
 		const response = await fetch(
 			`${API_BASE_URL}reserves/user/${user}`,
@@ -221,18 +223,23 @@ export const getReserveByUser = async(user) => {
 export const reserveCar = async(reserveData) => {
 	try {
 		const token = localStorage.getItem("authToken");
+		console.log(token)
 		if (!token) throw new Error("No hay token disponible, el usuario debe iniciar sesión");
 		console.log(reserveData);
-		const formData = new FormData();
-		formData.append("car", JSON.stringify(reserveData));
+		
+		// const formData = new FormData();
+		// formData.append("car", JSON.stringify(reserveData));
 		const response = await fetch(
-			`${API_BASE_URL}/reserves`,
+			`${API_BASE_URL}reserves`,
 			{
 				method: "POST",
-				headers: { Authorization: `Bearer ${token}` },
+				headers: { 
+					"Authorization": `Bearer ${token}`, 
+					"Content-Type": "application/json" 
+				},
 				mode: "cors",
 				credentials: "include",
-				body: formData,
+				body: JSON.stringify(reserveData),
 			}
 		);
 
@@ -243,7 +250,7 @@ export const reserveCar = async(reserveData) => {
 
 		return await response.json();
 	} catch (error) {
-		console.error("Error en Obtener todas las reservas:", error);
+		console.error("Error en al realizar reserva:", error);
 		return null;
 	}
 }

@@ -7,12 +7,13 @@ import styles from "./ReservedCarCard.module.css";
 const ReservedCarCard = ({ car }) => {
     const navigate = useNavigate();
     let imageUrl = "/default-car.jpg";
-
+    console.log(car)
     if (car.cars[0].images?.length > 0) {
         try {
-            const parsedImages = JSON.parse(car.images[0]);
+            const parsedImages = JSON.parse(car.cars[0].images[0]);
             if (Array.isArray(parsedImages) && parsedImages.length > 0) {
                 imageUrl = parsedImages[0];
+                console.log(imageUrl)
             }
         } catch (error) {
             console.warn("Error al parsear imágenes:", error);

@@ -3,7 +3,9 @@ import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
 import { getCarById } from "../../api/cars";
 import { getUserByName } from "../../api/users";
+import { reserveCar } from "../../api/cars";
 import styles from "./CarReservation.module.css";
+
 
 const CarReservation = ({ onClose }) => {
     const [car, setCar] = useState(null);
@@ -39,8 +41,8 @@ const CarReservation = ({ onClose }) => {
         if (!car || !user) return;
 
         Swal.fire({
-          title: "Información de Reserva",
-          html: `
+            title: "Información de Reserva",
+            html: `
               <div class="${styles.modalContent}">
                   <label for='model'>Vehículo:</label>
                   <input type='text' id='model' class='swal2-input' readonly />
@@ -81,6 +83,21 @@ const CarReservation = ({ onClose }) => {
         }).then((result) => {
             if (result.isConfirmed) {
                 console.log("Reserva confirmada");
+                let reserveArray = {
+                    "cars": [
+                        {
+                            "id": Number(localStorage.getItem("CarId"))
+                        }
+                    ],
+                    "user":
+                    {
+                        "name": localStorage.getItem("username")
+                    },
+                    // date.split("-").reverse().join("-");
+                    "startDate": localStorage.getItem("selectedStartDate").split("/").reverse().join("-"),
+                    "endDate": localStorage.getItem("selectedEndDate").split("/").reverse().join("-"),
+                }
+                reserveCar(reserveArray);
             }
             onClose();
         });
