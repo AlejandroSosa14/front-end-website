@@ -127,9 +127,14 @@ const CategoriesDashboard = () => {
 										if (category.image) {
 											try {
 												const parsedImage = JSON.parse(category.image);
-												if (Array.isArray(parsedImage) && parsedImage.length > 0) {
-													imageUrl = parsedImage[0]; // Tomamos la primera imagen
-												}
+												imageUrl = parsedImage.replace("[", "")
+												imageUrl = imageUrl.replace("]", "")
+												imageUrl = imageUrl.replace("\"", "")
+												imageUrl = imageUrl.replace("\"", "")
+												// if (Array.isArray(parsedImage) && parsedImage.length > 0) {
+												// 	imageUrl = parsedImage[0]; // Tomamos la primera imagen
+												// 	console.log(imageUrl)
+												// }
 											} catch (error) {
 												console.error("Error al parsear la imagen:", error);
 											}
