@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect, useContext, useMemo } from "react";
+import { Link, useParams, useNavigate } from "react-router-dom";
+import SearchCarContext from "../context/SearchCarContext.jsx";
 
 import Layout from "../components/layout/Layout";
 import CarCard_V2 from "../components/carCards/CarCard_V2";
@@ -8,20 +8,23 @@ import CarCard_V3 from "../components/carCards/CarCard_V3";
 
 import ArrowLeft from "../components/svgIcons/ArrowLeft.jsx";
 import ArrowRight from "../components/svgIcons/ArrowRight.jsx";
-
-import CARS from "../data/cars.js";
-import USER_COMMENTS from "../data/userComments.js";
+import CarOutline from "../components/svgIcons/CarOutline.jsx";
+import CarGarageOutline from "../components/svgIcons/CarGarageOutline.jsx";
+import PaintBrushOutline from "../components/svgIcons/PaintBrushOutline.jsx";
+import GasStationOutline from "../components/svgIcons/GasStationOutline.jsx";
+import MotorOutline from "../components/svgIcons/MotorOutline.jsx";
 
 import GalleryModal from "../components/galleryModal/GalleryModal.jsx";
 import CarCardComments from "../components/carCards/CarCardComments.jsx";
 import CarCalendars from "../components/carCalendars/CarCalendars.jsx";
 
 import CarReservation from "../components/modal/CarReservation.jsx";
-import Swal from "sweetalert2"
+import Swal from "sweetalert2";
 
 import styles from "./CarDetail.module.css";
 import PageTitle from "../components/pageTitle/PageTitle.jsx";
 import ShareSocialMedia from "../components/shareSocialMedia/ShareSocialMedia.jsx";
+import SpecsDetail from "../components/carDetails/SpecsDetail.jsx";
 
 // Fechas ocupadas (Ejemplo: se obtiene de una API)
 const unavailableDates = [
@@ -38,54 +41,87 @@ const unavailableDates = [
 
 const CarDetail = () => {
 	const { carId } = useParams();
+	const { allCars, loading, error } = useContext(SearchCarContext);
 	const [car, setCar] = useState(null);
+	const [areGenericCarImages, setIsGenericCarImages] = useState(false);
 	const [currentImageIndex, setCurrentImageIndex] = useState(0);
 	const [showGallery, setShowGallery] = useState(false);
-	const [showReservationModal, setShowReservationModal] = useState(false); // Estado para mostrar el modal
+	const [showReservationModal, setShowReservationModal] = useState(false);
 	const navigate = useNavigate();
+	const genericCarImage = "/images/categories/generic_car.webp";
+
+	const galleryImages = useMemo(() => {
+		if (car?.images?.length > 0) return car.images;
+		else {
+			setIsGenericCarImages(true);
+			return Array(5).fill(genericCarImage);
+		}
+	}, [car?.images, genericCarImage]);
 
 	useEffect(() => {
-		const foundCar = CARS.find((car) => car.id === parseInt(carId));
-		setCar(foundCar);
-		localStorage.setItem("CarId", carId);
-	}, [carId]);
-
-	// Ejemplo de llamada a la API (sustituir en lugar del useEffect anterior)
-	// useEffect(() => {
-	// 	fetch(`https://tu-api.com/autos/${carId}`)
-	// 		.then((res) => res.json())
-	// 		.then((data) => setCar(data))
-	// 		.catch((err) => console.error(err));
-	// }, [carId]);
+		if (allCars.length > 0 && carId) {
+			const foundCar = allCars.find((car) => car.id === parseInt(carId));
+			setCar(foundCar);
+		}
+	}, [allCars, carId]);
 
 	const handleThumbnailClick = (index) => setCurrentImageIndex(index);
 
 	const handlePrevImage = () => {
-		setCurrentImageIndex((prevIndex) => (prevIndex === 0 ? car.images.length - 1 : prevIndex - 1));
+		if (car && (car.images?.length > 0 || galleryImages.length === 5)) {
+			const length = car.images?.length || galleryImages.length;
+			setCurrentImageIndex((prevIndex) => (prevIndex === 0 ? length - 1 : prevIndex - 1));
+		}
 	};
 
 	const handleNextImage = () => {
-		setCurrentImageIndex((prevIndex) => (prevIndex === car.images.length - 1 ? 0 : prevIndex + 1));
+		if (car && (car.images?.length > 0 || galleryImages.length === 5)) {
+			const length = car.images?.length || galleryImages.length;
+			setCurrentImageIndex((prevIndex) => (prevIndex === length - 1 ? 0 : prevIndex + 1));
+		}
 	};
-
 	const handleReservationClick = () => {
 		const userId = localStorage.getItem("userId");
-	
+
 		if (!userId) {
-		  Swal.fire({
-			title: "Inicia sesión primero",
-			text: "Debes iniciar sesión para reservar un auto.",
-			icon: "warning",
-			confirmButtonText: "Ir a Login",
-		  }).then((result) => {
-			if (result.isConfirmed) {
-			  navigate("/login"); // Redirige al login después del SweetAlert
-			}
-		  });
+			Swal.fire({
+				title: "Inicia sesión primero",
+				text: "Debes iniciar sesión para reservar un auto.",
+				icon: "warning",
+				confirmButtonText: "Ir a Login",
+			}).then((result) => {
+				if (result.isConfirmed) {
+					navigate("/login");
+				}
+			});
 		} else {
-		  setShowReservationModal(true); // Muestra el modal si el usuario está autenticado
+			setShowReservationModal(true);
 		}
-	  };
+	};
+
+	if (loading) {
+		return (
+			<Layout>
+				<section className={styles.carDetail}>
+					<div className="container">
+						<p>Cargando detalles del auto...</p>
+					</div>
+				</section>
+			</Layout>
+		);
+	}
+
+	if (error) {
+		return (
+			<Layout>
+				<section className={styles.carDetail}>
+					<div className="container">
+						<p>Error al cargar los detalles del auto: {error}</p>
+					</div>
+				</section>
+			</Layout>
+		);
+	}
 
 	if (!car) {
 		return (
@@ -98,11 +134,10 @@ const CarDetail = () => {
 			</Layout>
 		);
 	} else {
-		const userComments = USER_COMMENTS.filter((comment) => comment.carId === car.id);
-
+		console.log(Object.keys(car.scores).length !== 0);
 		return (
 			<Layout>
-				<PageTitle title={car.model} />
+				<PageTitle title={`${car.brand.toUpperCase()} - ${car.name.toUpperCase()}`} />
 				{/* GALLERY AND INFO */}
 				<div className={`container ${styles.carDetail_info}`}>
 					{/* HEADER DETAIL*/}
@@ -118,29 +153,51 @@ const CarDetail = () => {
 
 					{/* NFO */}
 					<div className={styles.carDetail_infoWrapper}>
-						{/* GALLERY */}
+						{/* ********** GALLERY ********** */}
 						<div className={styles.carInfo_gallery}>
 							<div className={styles.carInfo_galleryImage}>
 								<button className={styles.carInfo_galleryLeft} onClick={handlePrevImage}>
 									<ArrowLeft />
 								</button>
-								<img src={car.images[currentImageIndex]} alt={`${car.brand} ${car.model}`} />
+								{/* Main Image */}
+								{!areGenericCarImages ? (
+									<img src={galleryImages[currentImageIndex]} alt={`${car.brand} ${car.model}`} />
+								) : (
+									<img
+										src={galleryImages[currentImageIndex]}
+										alt={`GenericImage_${currentImageIndex + 1}`}
+									/>
+								)}
 								<button className={styles.carInfo_galleryRight} onClick={handleNextImage}>
 									<ArrowRight />
 								</button>
 							</div>
 							<div className={styles.carInfo_galleryThumbs}>
+								{/* Thumbs */}
 								<div className={styles.carInfo_thumbItem}>
-									{car.images.slice(0, 4).map((image, index) => (
-										<img
-											key={index}
-											src={image}
-											alt={`Miniatura ${car.model} ${index + 1}`}
-											className={`${styles.carInfo_thumbImage} ${index === currentImageIndex ? styles.active : ""
+									{galleryImages.map((image, index) =>
+										!areGenericCarImages ? (
+											<img
+												key={index}
+												src={image}
+												alt={`Miniatura ${car.brand} ${index + 1}`}
+												className={`${styles.carInfo_thumbImage} ${
+													index === currentImageIndex ? styles.active : ""
 												}`}
-											onClick={() => handleThumbnailClick(index)}
-										/>
-									))}
+												onClick={() => handleThumbnailClick(index)}
+											/>
+										) : (
+											<img
+												key={index}
+												src={image}
+												alt={`GenericImage_${index + 1}`}
+												className={`${styles.carInfo_thumbImage} ${
+													index === currentImageIndex ? styles.active : ""
+												}`}
+												onClick={() => handleThumbnailClick(index)}
+											/>
+										)
+									)}
 								</div>
 								<button className="main-btn" onClick={() => setShowGallery(true)}>
 									Ver Más
@@ -152,8 +209,9 @@ const CarDetail = () => {
 							<div className={styles.carInfo_cardContainer}>
 								<CarCard_V2
 									score={car.score}
-									model={car.model}
-									rentalPrice={car.rentalPrice}
+									brand={car.brand}
+									name={car.name}
+									reserveCost={car.reserveCost}
 									locationCity={car.locationCity}
 									locationCountry={car.locationCountry}
 									isFavorite={car.isFavorite}
@@ -162,20 +220,37 @@ const CarDetail = () => {
 							<div className={styles.carInfo_cardContainer}>
 								<CarCard_V3 title={"Especificaciones"}>
 									<ul className={styles.cardInfo_specsList}>
-										{car.specs.length > 0 ? (
-											car.specs.map((spec) => (
-												<li key={spec.id} className={styles.cardInfo_specsItem}>
-													<img src={spec.icon} alt={spec.detail} />
-													<p>
-														<span>{spec.type}:</span> {spec.detail}
-													</p>
-												</li>
-											))
-										) : (
-											<p className={styles.cardInfo_noSpecs}>
-												No hay especificaciones para éste auto.
-											</p>
-										)}
+										<li className={styles.cardInfo_specsItem}>
+											<SpecsDetail content={car.brand} icon={<CarOutline />} title={"Marca"} />
+										</li>
+										<li className={styles.cardInfo_specsItem}>
+											<SpecsDetail
+												content={car.name}
+												icon={<CarGarageOutline />}
+												title={"Nombre"}
+											/>
+										</li>
+										<li className={styles.cardInfo_specsItem}>
+											<SpecsDetail
+												content={car.color}
+												icon={<PaintBrushOutline />}
+												title={"Color"}
+											/>
+										</li>
+										<li className={styles.cardInfo_specsItem}>
+											<SpecsDetail
+												content={car.fuelType}
+												icon={<GasStationOutline />}
+												title={"Combustible"}
+											/>
+										</li>
+										<li className={styles.cardInfo_specsItem}>
+											<SpecsDetail
+												content={car.transmissionType}
+												icon={<MotorOutline />}
+												title={"Transmisión"}
+											/>
+										</li>
 									</ul>
 								</CarCard_V3>
 							</div>
@@ -189,15 +264,21 @@ const CarDetail = () => {
 						<div className={styles.carDetail_complementWrapper}>
 							{/* USER RATING */}
 							<div className={styles.carDetail_complementCard}>
-								<CarCard_V3 title={"Opiniones del auto"}>
-									{userComments[0].user && userComments[0].comment && userComments[0].date ? (
-										<CarCardComments userComments={userComments} />
-									) : (
+								{/* Cuando la BD proporcione un array de comentarios válido, descomentar la línea de abajo y eliminar la siguiente línea de código: {Object.keys(car.scores).length <= 0 ? ( */}
+								{/* {!car?.scores?.length > 0 ? ( */}
+								{Object.keys(car.scores).length <= 0 ? (
+									<CarCard_V3 title={"Opiniones del auto"}>
 										<p className={styles.cardInfo_noSpecs}>
 											Aún no hay comentarios para éste auto.
 										</p>
-									)}
-								</CarCard_V3>
+									</CarCard_V3>
+								) : (
+									<CarCard_V3 title={"Opiniones del auto"}>
+										{/* Cuando la BD proporcione un array de comentarios válido, descomentar la línea de abajo y eliminar la siguiente línea de código: <CarCardComments userScores={[]} /> */}
+										{/* <CarCardComments userScores={car.scores} /> */}
+										<CarCardComments userScores={[]} />
+									</CarCard_V3>
+								)}
 							</div>
 							{/* SHARE AND CALENDARS */}
 							<div className={styles.carDetail_complementCards}>
@@ -217,11 +298,19 @@ const CarDetail = () => {
 						</div>
 					</div>
 				</section>
-				{showGallery && <GalleryModal images={car.images} onClose={() => setShowGallery(false)} />}
-				{showReservationModal && car && <CarReservation car={car} onClose={() => setShowReservationModal(false)} />}
-
+				{showGallery && (
+					<GalleryModal
+						brand={car.brand}
+						name={car.name}
+						galleryImages={galleryImages}
+						areGenericCarImages={areGenericCarImages}
+						onClose={() => setShowGallery(false)}
+					/>
+				)}
+				{showReservationModal && car && (
+					<CarReservation car={car} onClose={() => setShowReservationModal(false)} />
+				)}
 			</Layout>
-
 		);
 	}
 };

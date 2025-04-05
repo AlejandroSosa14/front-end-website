@@ -35,6 +35,11 @@
 	height: auto;
 }
 
+.image[alt="GenericImage_2"],
+.image[alt="GenericImage_4"] {
+	filter: contrast(50%);
+}
+
 .closeButton {
 	display: flex;
 	position: absolute;

@@ -35,20 +35,20 @@ const CarCard_V1 = ({
 	useEffect(() => {
 		const fetchFavoriteCarsByUser = async () => {
 			try {
-			setLoading(true)
-			let fetchedCars = [];
+				setLoading(true);
+				let fetchedCars = [];
 
-			fetchedCars = await getFavorites(username);
-			setFavoriteCars(fetchedCars);
-			}catch(e) {
-				console.error(e)
+				fetchedCars = await getFavorites(username);
+				setFavoriteCars(fetchedCars);
+			} catch (e) {
+				console.error(e);
 			} finally {
 				setLoading(false);
 			}
-		}
+		};
 
 		fetchFavoriteCarsByUser();
-	}, [])
+	}, []);
 
 	const scrollToTop = () => {
 		window.scrollTo({
@@ -66,19 +66,21 @@ const CarCard_V1 = ({
 		if (favorite) {
 			setFavorite(idCar, username);
 		} else if (!favorite) {
-			removeFavorite(username, idCar)
+			removeFavorite(username, idCar);
 		}
-	}
+	};
 
 	return (
 		<div className={styles.card}>
 			<div className={styles.card_isFavorite}>
-				{!favoriteCars.find(car => car.id == id) ? (
+				{!favoriteCars.find((car) => car.id == id) ? (
 					<button className="favoriteButton" onClick={() => handleUpdateFavoriteCar(id, true)}>
 						<HeartOutline />
 					</button>
 				) : (
-					<button className="favoriteButton isFavoriteButton" onClick={() => handleUpdateFavoriteCar(id, false)}>
+					<button
+						className="favoriteButton isFavoriteButton"
+						onClick={() => handleUpdateFavoriteCar(id, false)}>
 						<HeartOutline />
 					</button>
 				)}

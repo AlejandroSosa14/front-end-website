@@ -6,11 +6,11 @@ import Close from "../svgIcons/Close";
 
 import styles from "./GalleryModal.module.css";
 
-const GalleryModal = ({ images, onClose }) => {
+const GalleryModal = ({ brand, name, galleryImages, areGenericCarImages, onClose }) => {
 	const [currentIndex, setCurrentIndex] = useState(0);
 	const [isClosing, setIsClosing] = useState(false);
 
-	const imagesLength = images.length;
+	const imagesLength = galleryImages.length;
 
 	const handlePrev = useCallback(() => {
 		setCurrentIndex((prev) => (prev === 0 ? imagesLength - 1 : prev - 1));
@@ -47,11 +47,19 @@ const GalleryModal = ({ images, onClose }) => {
 				<button className={`${styles.navButton} ${styles.prevButton}`} onClick={handlePrev}>
 					<ArrowLeft />
 				</button>
-				<img
-					src={images[currentIndex]}
-					alt={`Imagen ${currentIndex + 1}`}
-					className={styles.image}
-				/>
+				{!areGenericCarImages ? (
+					<img
+						src={galleryImages[currentIndex]}
+						alt={`Imagen ${brand} ${name}`}
+						className={styles.image}
+					/>
+				) : (
+					<img
+						src={galleryImages[currentIndex]}
+						alt={`GenericImage_${currentIndex + 1}`}
+						className={styles.image}
+					/>
+				)}
 				<button className={`${styles.navButton} ${styles.nextButton}`} onClick={handleNext}>
 					<ArrowRight />
 				</button>
