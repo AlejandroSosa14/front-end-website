@@ -73,11 +73,11 @@ export const deleteCar = async (carId) => {
 	}
 };
 
-export const createCar = async (carData, files = []) => {
+export const createCar = async (carData) => {
 	try {
 		const token = localStorage.getItem("authToken");
 		if (!token) throw new Error("No hay token disponible, el usuario debe iniciar sesión");
-
+		
 		const car = JSON.parse(carData.get("car"));
 
 		const { locationCity, locationCountry, color } = car;
@@ -86,16 +86,12 @@ export const createCar = async (carData, files = []) => {
 			throw new Error("Faltan datos de ubicación o color");
 		}
 
-		const formData = new FormData();
-		formData.append("car", JSON.stringify(car));
-		files.forEach((file) => formData.append("files", file));
-
 		const response = await fetch(`${API_BASE_URL}cars`, {
 			method: "POST",
 			headers: { Authorization: `Bearer ${token}` },
 			mode: "cors",
 			credentials: "include",
-			body: formData,
+			body: carData,
 		});
 
 		if (!response.ok) throw new Error("Error al crear el auto");

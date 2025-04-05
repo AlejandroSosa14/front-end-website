@@ -21,7 +21,6 @@ const CarCard_V1 = ({
 	score,
 	quantityAvailable,
 	reserveCost,
-	isFavorite,
 }) => {
 	const navigate = useNavigate();
 
@@ -46,9 +45,10 @@ const CarCard_V1 = ({
 				setLoading(false);
 			}
 		};
-
-		fetchFavoriteCarsByUser();
-	}, []);
+		if (username) {
+			fetchFavoriteCarsByUser();
+		}
+	}, [username]);
 
 	const scrollToTop = () => {
 		window.scrollTo({
@@ -63,17 +63,21 @@ const CarCard_V1 = ({
 	};
 
 	const handleUpdateFavoriteCar = (idCar, favorite) => {
-		if (favorite) {
-			setFavorite(idCar, username);
-		} else if (!favorite) {
-			removeFavorite(username, idCar);
+		if (username) {
+			if (favorite) {
+				setFavorite(idCar, username);
+			} else if (!favorite) {
+				removeFavorite(username, idCar);
+			}
+		} else {
+			console.log("Se ocupa estar loggeado");
 		}
 	};
 
 	return (
 		<div className={styles.card}>
 			<div className={styles.card_isFavorite}>
-				{!favoriteCars.find((car) => car.id == id) ? (
+				{favoriteCars && !favoriteCars.find((car) => car.id == id) ? (
 					<button className="favoriteButton" onClick={() => handleUpdateFavoriteCar(id, true)}>
 						<HeartOutline />
 					</button>

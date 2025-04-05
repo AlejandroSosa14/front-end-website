@@ -76,11 +76,11 @@ const RegisterCarForm = ({ onCarCreated }) => {
 		
 		// Agregar imágenes al FormData
 		selectedFiles.forEach((file) => {
-			formData.append("files", file);
-		});
+      formData.append("files", file);
+    });
 
 		// Llamar a la API para crear el carro
-		const result = await createCar(formData, selectedFiles);
+		const result = await createCar(formData);
 		if (result) {
 			setSuccessMessage("Auto registrado exitosamente");
 			setTimeout(() => setSuccessMessage(""), 3000);
