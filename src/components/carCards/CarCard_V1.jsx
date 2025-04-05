@@ -35,19 +35,20 @@ const CarCard_V1 = ({
 	useEffect(() => {
 		const fetchFavoriteCarsByUser = async () => {
 			try {
-			setLoading(true)
-			let fetchedCars = [];
+				setLoading(true)
+				let fetchedCars = [];
 
-			fetchedCars = await getFavorites(username);
-			setFavoriteCars(fetchedCars);
-			}catch(e) {
+				fetchedCars = await getFavorites(username);
+				setFavoriteCars(fetchedCars);
+			} catch (e) {
 				console.error(e)
 			} finally {
 				setLoading(false);
 			}
 		}
-
-		fetchFavoriteCarsByUser();
+		if (username) {
+			fetchFavoriteCarsByUser();
+		}
 	}, [])
 
 	const scrollToTop = () => {
@@ -63,17 +64,21 @@ const CarCard_V1 = ({
 	};
 
 	const handleUpdateFavoriteCar = (idCar, favorite) => {
-		if (favorite) {
-			setFavorite(idCar, username);
-		} else if (!favorite) {
-			removeFavorite(username, idCar)
+		if (username) {
+			if (favorite) {
+				setFavorite(idCar, username);
+			} else if (!favorite) {
+				removeFavorite(username, idCar)
+			}
+		} else {
+			console.log("Se ocupa estar loggeado")
 		}
 	}
 
 	return (
 		<div className={styles.card}>
 			<div className={styles.card_isFavorite}>
-				{!favoriteCars.find(car => car.id == id) ? (
+				{favoriteCars && !favoriteCars.find(car => car.id == id) ? (
 					<button className="favoriteButton" onClick={() => handleUpdateFavoriteCar(id, true)}>
 						<HeartOutline />
 					</button>
