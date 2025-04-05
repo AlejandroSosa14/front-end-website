@@ -18,6 +18,8 @@ const UserProfile = ({ username, onLogout }) => {
         localStorage.removeItem("authToken");
         localStorage.removeItem("username");
         localStorage.removeItem("userId");
+        localStorage.removeItem("selectedStartDate");
+        localStorage.removeItem("selectedEndDate");
         onLogout();
         setIsMenuOpen(false); 
         navigate("/");
