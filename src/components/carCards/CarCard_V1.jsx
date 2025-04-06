@@ -12,7 +12,7 @@ import { useState } from "react";
 
 const CarCard_V1 = ({
 	id,
-	imageURL,
+	imagesURL,
 	brand,
 	name,
 	locationCity,
@@ -24,12 +24,15 @@ const CarCard_V1 = ({
 }) => {
 	const navigate = useNavigate();
 
+	const parsedImagesURL = JSON.parse(imagesURL);
+
 	// const [favorite, setFavorite] = useState(null);
 	const [favoriteCars, setFavoriteCars] = useState([]);
 	const username = localStorage.getItem("username");
 	const [loading, setLoading] = useState(true);
 	const genericImageUrl = "/images/categories/generic_car.webp";
-	const displayImageUrl = imageURL && imageURL.length > 0 ? imageURL[0] : genericImageUrl;
+	const displayImageUrl =
+		parsedImagesURL && parsedImagesURL.length > 0 ? parsedImagesURL[0] : genericImageUrl;
 
 	useEffect(() => {
 		const fetchFavoriteCarsByUser = async () => {
