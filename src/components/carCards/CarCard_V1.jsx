@@ -24,15 +24,17 @@ const CarCard_V1 = ({
 }) => {
 	const navigate = useNavigate();
 
-	const parsedImagesURL = JSON.parse(imagesURL);
+	let parsedImagesURL = [];
+	if (imagesURL) {
+		parsedImagesURL = JSON.parse(imagesURL);
+	}
 
 	// const [favorite, setFavorite] = useState(null);
 	const [favoriteCars, setFavoriteCars] = useState([]);
 	const username = localStorage.getItem("username");
 	const [loading, setLoading] = useState(true);
 	const genericImageUrl = "/images/categories/generic_car.webp";
-	const displayImageUrl =
-		parsedImagesURL && parsedImagesURL.length > 0 ? parsedImagesURL[0] : genericImageUrl;
+	const displayImageUrl = parsedImagesURL.length > 0 ? parsedImagesURL[0] : genericImageUrl;
 
 	useEffect(() => {
 		const fetchFavoriteCarsByUser = async () => {
