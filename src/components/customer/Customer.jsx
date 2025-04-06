@@ -4,11 +4,13 @@ import Savings from "../svgIcons/Savings";
 import Shield from "../svgIcons/Shield";
 import styles from "./Customer.module.css";
 
+import genericHomeImage from "../../assets/images/home-customer-car.png";
+
 const Customer = () => {
 	return (
 		<div className={`${styles.customer}`}>
 			<div className={styles.customerBanner}>
-				<img src="/src/assets/images/home-customer-car.png" alt="Generic car" />
+				<img src={genericHomeImage} alt="Generic car" />
 			</div>
 			<div className={styles.customerContent}>
 				<h2 className="sectionTitle">Disfruta de tus aventuras sin contratiempos</h2>
