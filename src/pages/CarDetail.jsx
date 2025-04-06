@@ -27,17 +27,7 @@ import ShareSocialMedia from "../components/shareSocialMedia/ShareSocialMedia.js
 import SpecsDetail from "../components/carDetails/SpecsDetail.jsx";
 
 // Fechas ocupadas (Ejemplo: se obtiene de una API)
-const unavailableDates = [
-	"2025-03-24",
-	"2025-03-25",
-	"2025-03-26",
-	"2025-04-09",
-	"2025-04-18",
-	"2025-04-19",
-	"2025-04-20",
-	"2025-04-29",
-	"2025-04-30",
-];
+import { getRandomUnavailableDates } from "../utils/getRandomUnavailableDates.js";
 
 const CarDetail = () => {
 	const { carId } = useParams();
@@ -99,6 +89,8 @@ const CarDetail = () => {
 		}
 	};
 
+	let randomDates = [];
+
 	if (loading) {
 		return (
 			<Layout>
@@ -134,7 +126,13 @@ const CarDetail = () => {
 			</Layout>
 		);
 	} else {
-		console.log(Object.keys(car.scores).length !== 0);
+		{
+			if (car.reserves.length > 0) randomDates = car.reserves;
+			else {
+				let firstRange = getRandomUnavailableDates();
+				randomDates = [...firstRange, ...getRandomUnavailableDates()];
+			}
+		}
 		return (
 			<Layout>
 				<PageTitle title={`${car.brand.toUpperCase()} - ${car.name.toUpperCase()}`} />
@@ -289,7 +287,7 @@ const CarDetail = () => {
 									<div className={styles.carDetail_noAvailableTip}>
 										<p>Sin disponibilidad</p>
 									</div>
-									<CarCalendars unavailableDates={unavailableDates} />
+									<CarCalendars unavailableDates={randomDates} />
 									<button className="main-btn" onClick={handleReservationClick}>
 										Reservar
 									</button>
