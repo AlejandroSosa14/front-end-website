@@ -18,7 +18,7 @@ const CarDetailsCards = ({ cars, isAnimating }) => {
 					<CarCard_V1
 						key={car.id}
 						id={car.id}
-						imageURL={car.images}
+						imagesURL={car.images}
 						brand={car.brand}
 						name={car.name}
 						locationCity={car.locationCity}
