@@ -52,6 +52,7 @@ const CarDetail = () => {
 		if (allCars.length > 0 && carId) {
 			const foundCar = allCars.find((car) => car.id === parseInt(carId));
 			setCar(foundCar);
+			localStorage.setItem("CarId", carId);
 		}
 	}, [allCars, carId]);
 
@@ -126,13 +127,13 @@ const CarDetail = () => {
 			</Layout>
 		);
 	} else {
-		{
-			if (car.reserves.length > 0) randomDates = car.reserves;
-			else {
-				let firstRange = getRandomUnavailableDates();
-				randomDates = [...firstRange, ...getRandomUnavailableDates()];
-			}
-		}
+		// {
+		// 	if (car.reserves.length > 0) randomDates = car.reserves;
+		// 	else {
+		// 		let firstRange = getRandomUnavailableDates();
+		// 		randomDates = [...firstRange, ...getRandomUnavailableDates()];
+		// 	}
+		// }
 		return (
 			<Layout>
 				<PageTitle title={`${car.brand.toUpperCase()} - ${car.name.toUpperCase()}`} />

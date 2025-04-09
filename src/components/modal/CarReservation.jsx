@@ -82,12 +82,12 @@ const CarReservation = ({ onClose }) => {
             },
         }).then((result) => {
             if (result.isConfirmed) {
+                console.log(localStorage.getItem("CarId"))
                 let reserveArray = {
-                    "cars": [
-                        {
-                            "id": Number(localStorage.getItem("CarId"))
-                        }
-                    ],
+                    "car":
+                    {
+                        "id": Number(localStorage.getItem("CarId"))
+                    },
                     "user":
                     {
                         "name": localStorage.getItem("username")
