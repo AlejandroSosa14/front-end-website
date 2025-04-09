@@ -8,9 +8,9 @@ const ReservedCarCard = ({ car }) => {
     const navigate = useNavigate();
     let imageUrl = "/default-car.jpg";
     console.log(car)
-    if (car.cars[0].images?.length > 0) {
+    if (car.car.images?.length > 0) {
         try {
-            const parsedImages = JSON.parse(car.cars[0].images[0]);
+            const parsedImages = JSON.parse(car.car.images[0]);
             if (Array.isArray(parsedImages) && parsedImages.length > 0) {
                 imageUrl = parsedImages[0];
                 console.log(imageUrl)
@@ -31,9 +31,9 @@ const ReservedCarCard = ({ car }) => {
         <div className={styles.card}>
             {/* Sección Izquierda */}
             <div className={styles.cardContent}>
-                <img className={styles.cardContent_image} src={imageUrl} alt={car.cars[0].name} />
+                <img className={styles.cardContent_image} src={imageUrl} alt={car.car.name} />
                 <header className={styles.cardContent_header}>
-                    <h3 className={styles.cardContent_title}>{car.cars[0].brand} {car.cars[0].name}</h3>
+                    <h3 className={styles.cardContent_title}>{car.car.brand} {car.car.name}</h3>
                     <h4 className={styles.cardContent_subtitle}>
                         {isAvailable ? "Disponible" : `No disponible - Reservado por ${car.user.name}`}
                     </h4>
@@ -48,7 +48,7 @@ const ReservedCarCard = ({ car }) => {
                         </div> */}
                     </div>
                     <div className={styles.detailsprice}>
-                        <p>Precio: {`$${car.cars[0].reserveCost} / día`}</p>
+                        <p>Precio: {`$${car.car.reserveCost} / día`}</p>
                     </div>
                 </header>
             </div>
